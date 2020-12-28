@@ -1,0 +1,2 @@
+module MasterManagementsHelper
+end
