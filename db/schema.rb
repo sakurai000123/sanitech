@@ -17,11 +17,22 @@ ActiveRecord::Schema.define(version: 2020_12_28_114416) do
 
   create_table "users", force: :cascade do |t|
     t.string "name", limit: 255, null: false
+    t.string "name_ruby", limit: 255
+    t.string "master_key", limit: 255
     t.string "password_digest", limit: 255, null: false
-    t.string "in_charge_no", limit: 255, null: false
+    t.string "employee_no", limit: 255, null: false
+    t.date "joined_company_date"
+    t.string "company_phone", limit: 20
+    t.string "company_car_no", limit: 255
+    t.string "emergency_contact_phone", limit: 20
+    t.string "emergency_contact_name", limit: 255
+    t.string "email", limit: 255
+    t.string "blood_type", limit: 2
+    t.date "health_check_date"
+    t.text "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["in_charge_no"], name: "index_users_on_in_charge_no", unique: true
+    t.index ["employee_no"], name: "index_users_on_employee_no", unique: true
   end
 
 end
