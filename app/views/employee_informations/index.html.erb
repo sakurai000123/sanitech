@@ -1,0 +1,84 @@
+<h1>従業員情報入力</h1>
+</br>
+<%= form_for @user, url: employee_informations_path do |f| %>
+  <%= f.label 'パスワード（※受領資料にない）' %><br>
+  <%= f.password_field :password %><br>
+
+  <%= f.label '入社日' %><br>
+  <%= f.date_field :joined_company_date %><br>
+
+  <%= f.label '社員No' %><br>
+  <%= f.text_field :employee_no %><br>
+
+  <%= f.label '氏名' %><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label '読み' %><br>
+  <%= f.text_field :name_ruby %><br>
+
+  <%= f.label 'マスターキー' %><br>
+  <%= f.text_field :master_key %><br>
+
+  <%= f.label '社用携帯番号' %><br>
+  <%= f.text_field :company_phone %><br>
+
+  <%= f.label '社用車No' %><br>
+  <%= f.text_field :company_car_no %><br>
+
+  <%= f.label '緊急連絡先' %><br>
+  <%= f.text_field :emergency_contact_phone %><br>
+  <%= f.text_field :emergency_contact_name %><br>
+
+  <%= f.label 'MAIL' %><br>
+  <%= f.text_field :email %><br>
+
+  <%= f.label '血液型' %><br>
+  <%= f.text_field :blood_type %><br>
+
+  <%= f.label '健康診断実施日' %><br>
+  <%= f.date_field :health_check_date %><br>
+
+  <%= f.label '備考欄' %><br>
+  <%= f.text_area :remarks %><br>
+
+  <%= f.submit '新規登録', :name => 'create' %>
+  <%= f.submit '保存', :name => 'update' %>
+
+<% end %>
+
+</br>
+★★★一覧★★★</br>
+
+
+<table border="1">
+  <tr>
+    <th>No.</th>
+    <th>部門コード</th>
+    <th>担当コード</th>
+    <th>部門コード</th>
+    <th>氏名</th>
+    <th>所属部署</th>
+    <th>役職</th>
+    <th>社用携帯番号</th>
+    <th>MAIL</th>
+    <th>緊急連絡先</th>
+    <th>血液型</th>
+    <th>健康診断実施日</th>
+  </tr>
+  <% @users.each.with_index(1) do |user, i| %>
+    <tr>
+      <td><%= i %></td>
+      <td>部門コード</td>
+      <td><%= user.employee_no %></td>
+      <td>部門コード</td>
+      <td><%= user.name %></td>
+      <td>所属部署</td>
+      <td>役職</td>
+      <td><%= user.company_phone %></td>
+      <td><%= user.email %></td>
+      <td><%= user.emergency_contact_phone %></td>
+      <td><%= user.blood_type %></td>
+      <td><%= user.health_check_date %></td>
+    </tr>
+  <% end %>
+</table>

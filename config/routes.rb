@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   resources :menus
   resources :master_managements
+  resources :employee_informations
 end
