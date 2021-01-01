@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   # メニュー
   resources :menus
+  # 見積
+  resources :estimates
+  # 受注
+  resources :orders
   # マスタマネジメント
   resources :master_managements
   # 従業員入力
