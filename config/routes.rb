@@ -8,10 +8,9 @@ Rails.application.routes.draw do
   # マスタマネジメント
   resources :master_managements
   # 従業員入力
-  resources :employee_informations do
-    post 'employee_informations/upsert', to: 'employee_informations#upsert'
-    patch 'employee_informations/upsert/:id', to: 'employee_informations#upsert'
-  end
+  resources :employee_informations
+  post 'employee_informations/upsert', to: 'employee_informations#upsert'
+  patch 'employee_informations/upsert/:id', to: 'employee_informations#upsert'
   # 得意先入力
   resources :customer_masters
   post 'customer_masters/upsert', to: 'customer_masters#upsert'
