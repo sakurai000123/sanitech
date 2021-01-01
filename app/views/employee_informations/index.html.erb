@@ -36,7 +36,7 @@
   <%= f.text_field :email %><br>
 
   <%= f.label '血液型' %><br>
-  <%= f.text_field :blood_type %><br>
+  <%= f.select :blood_type, [["A", "A"], ["B", "B"], ["O", "O"], ["AB", "AB"]], include_blank: "選択して下さい" %><br>
 
   <%= f.label '健康診断実施日' %><br>
   <%= f.date_field :health_check_date %><br>

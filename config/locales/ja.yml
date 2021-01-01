@@ -2,4 +2,4 @@ ja:
   activerecord:
     attributes:
       user:
-        name: 氏名
+        password: パスワード
