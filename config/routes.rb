@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   resources :estimates
   # 受注
   resources :orders
+  # 売掛
+  resources :receivables
+  # 買掛
+  resources :payables
   # マスタマネジメント
   resources :master_managements
   # 従業員入力
