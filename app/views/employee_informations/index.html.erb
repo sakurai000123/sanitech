@@ -1,6 +1,9 @@
 <h1>従業員情報入力</h1>
 </br>
-<%= form_for @user, url: employee_informations_path do |f| %>
+<% #エラーメッセージ呼び出し %>
+<%= render "layouts/errors", errors: @user.errors %>
+
+<%= form_for @user, url: {:controller => :employee_informations, :action => :upsert, :id => @user.id } do |f| %>
   <%= f.label 'パスワード（※受領資料にない）' %><br>
   <%= f.password_field :password %><br>
 
@@ -66,7 +69,7 @@
     <th>健康診断実施日</th>
   </tr>
   <% @users.each.with_index(1) do |user, i| %>
-    <tr>
+    <tr data-link="<%= edit_employee_information_path(user.id) %>">
       <td><%= i %></td>
       <td>部門コード</td>
       <td><%= user.employee_no %></td>
@@ -82,3 +85,15 @@
     </tr>
   <% end %>
 </table>
+
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>
+
+<style>
+  tr:hover {
+    background: gray;
+  }
+</style>

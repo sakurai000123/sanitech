@@ -1,23 +1,41 @@
 class EmployeeInformationsController < ApplicationController
   def index
-    @users = User.all
-    @user = User.new
+    get_user
+    if params[:employee_no].present?
+      @user = User.find_by(employee_no: params[:employee_no])
+    else
+      @user = User.new
+    end
   end
 
-  def create
+  def edit
+    @user = User.find(params[:id])
+    get_user
+    redirect_to employee_informations_path(employee_no: @user.employee_no)
+  end
+
+  def upsert
     if params[:create]
       @user = User.new(user_params)
-      @user.save!
+      get_user
+      if @user.save
+        redirect_to employee_informations_path
+      else
+        render :index
+      end
     else
-      logger.debug("employee_no")
-      logger.debug(user_params[:employee_no])
       @user = User.find_by(employee_no: user_params[:employee_no])
-      @user.update(user_params)
+      get_user
+      if @user.update(user_params)
+        redirect_to employee_informations_path
+      else
+        render :index
+      end
     end
-    @users = User.all
-    redirect_to employee_informations_path
+    
   end
   
+
   private
   def user_params
     params.require(:user).permit(
@@ -36,6 +54,10 @@ class EmployeeInformationsController < ApplicationController
       :health_check_date,
       :remarks
     )
+  end
+
+  def get_user
+    @users = User.all.order(employee_no: 'ASC')
   end
 end
 
