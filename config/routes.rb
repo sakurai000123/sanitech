@@ -27,5 +27,7 @@ Rails.application.routes.draw do
   resources :supplier_masters
   post 'supplier_masters/upsert', to: 'supplier_masters#upsert'
   patch 'supplier_masters/upsert/:id', to: 'supplier_masters#upsert'
-  
+
+  # PDFテスト
+  get '/test_pdf', to: 'estimates#test_pdf'   
 end
