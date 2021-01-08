@@ -27,6 +27,11 @@ Rails.application.routes.draw do
   resources :supplier_masters
   post 'supplier_masters/upsert', to: 'supplier_masters#upsert'
   patch 'supplier_masters/upsert/:id', to: 'supplier_masters#upsert'
+  # 受取手形台帳
+  resources :bills_receivables
+  # 現金出納帳入力
+  resources :cashbooks
+  
   # 照会種別一覧
   resources :inquiry_managements
   # 担当別推移
