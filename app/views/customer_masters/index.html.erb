@@ -1,4 +1,204 @@
-<h1>得意先入力</h1>
-</br>
-<% #エラーメッセージ呼び出し %>
-<%#= render "layouts/errors", errors: @???.errors %>
+<div class="contents-wrap">
+  <div class="contents-inner">
+    <% #エラーメッセージ呼び出し %>
+    <%#= render "layouts/errors", errors: @???.errors %>
+    <div class="gray-wrap">
+      <h1>得意先入力</h1>
+      <div class="top-edit">
+        <dl class="edit-wrap small">
+          <dt>得意先番号</dt>
+          <dd>
+            <span class="input w50 not-edit">108</span>
+            <span class="hyphen">−</span>
+            <span class="input w50 not-edit">100 </span>
+          </dd>
+          <dt>登録日</dt>
+          <dd>
+            <span class="input w200"
+              ><input type="text" name="" id="" value="2020年11月18日"
+            /></span>
+          </dd>
+          <dt>部門</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="001"
+            /></span>
+            <span class="input w100 not-edit"> 本社 </span>
+          </dd>
+          <dt>担当者</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="0001"
+            /></span>
+            <span class="input w100 not-edit"> 長塚友和 </span>
+          </dd>
+          <dt>発行者</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="0005"
+            /></span>
+            <span class="input w100 not-edit"> 太田夕里子 </span>
+          </dd>
+          <dt>マスタキー</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="" />
+            </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x2">
+          <dt>得意先名</dt>
+          <dd>
+            <span class="input w100per">
+              <input
+                type="text"
+                name=""
+                id=""
+                value="（株）サンアイテック"
+              />
+            </span>
+          </dd>
+          <dt>得意先担当者</dt>
+          <dd>
+            <span class="input w100per">
+              <input
+                type="text"
+                name=""
+                id=""
+                value="代表取締役　長塚友和"
+              />
+            </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x4">
+          <dt>得意先住所</dt>
+          <dd class="x2">
+            <span class="input w100per">
+              <input
+                type="text"
+                name=""
+                id=""
+                value="〒302-0034 茨城県取手市戸頭4-21-24"
+              />
+            </span>
+          </dd>
+          <dt>電話番号</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="0297-70-2030" />
+            </span>
+          </dd>
+          <dt>FAX番号</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="0297-70-2031" />
+            </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x4">
+          <dt>支払条件</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="1"
+            /></span>
+            <span class="input w-flex">
+              <input type="text" name="" id="" value="現金" />
+            </span>
+          </dd>
+          <dt>締日</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="1"
+            /></span>
+            <span class="input w-flex">
+              <input type="text" name="" id="" value="末日" />
+            </span>
+          </dd>
+          <dt>支払日</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="1"
+            /></span>
+            <span class="input w-flex">
+              <input type="text" name="" id="" value="翌末日" />
+            </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x2">
+          <dt>振込先</dt>
+          <dd>
+            <span class="input w100per">
+              <input
+                type="text"
+                name=""
+                id=""
+                value="常陽銀行　戸頭支店　普通　１４３４８７３"
+              />
+            </span>
+          </dd>
+        </dl>
+        <div class="top-edit-flex">
+          <dl class="edit-wrap small">
+            <dt class="w120">備考欄</dt>
+            <dd class="w-flex ml0">
+              <div class="w100per">
+                <span class="input w100per upper">
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    value="10万円以上手形 請求書送り先 茨城県取手市戸頭4-21-27"
+                  />
+                </span>
+                <span class="input w100per lower">
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    value="長塚メール　101tn@sannaitekku.co.jp"
+                  />
+                </span>
+              </div>
+            </dd>
+          </dl>
+          <ul class="top-button-list">
+            <li><button>新規登録</button></li>
+            <li><button>保存</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contents-inner">
+    <table>
+      <thead>
+        <tr>
+          <th>得意先コード</th>
+          <th>部門コード</th>
+          <th>仕入先名</th>
+          <th>住所</th>
+          <th>電話番号</th>
+          <th>FAX番号</th>
+          <th>担当コード</th>
+          <th>担当名</th>
+          <th>詳細</th>
+          <th>選択</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>00001</th>
+          <th>001</th>
+          <th>三ツ星ベルト販賣㈱東日本支社</th>
+          <th>〒103-0027 東京都中央区日本橋２－３－４</th>
+          <th>03-5202-2515</th>
+          <th>03-5202-2516</th>
+          <th>0001</th>
+          <th>長塚友和</th>
+          <td><button>詳細</button></td>
+          <td><button>選択</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
