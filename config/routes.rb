@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   resources :bills_receivables
   # 現金出納帳入力
   resources :cashbooks
+  # 請求書発行
+  resources :invoices
+  
   
   # 照会種別一覧
   resources :inquiry_managements
