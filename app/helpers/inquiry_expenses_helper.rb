@@ -1,0 +1,2 @@
+module InquiryExpensesHelper
+end
