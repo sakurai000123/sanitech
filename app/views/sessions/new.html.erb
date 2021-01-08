@@ -1,11 +1,25 @@
-<h1>ログイン</h1>
-<% flash.each do |key, value| %>
-  <%= value %>
-<% end %>
-<%= form_for(:session, url: login_path) do |f| %>
-  <%= f.label :employee_no %>
-  <%= f.text_field :employee_no %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.submit "Log in" %>
-<% end %>
+<div class="contents-wrap small-size">
+  <div class="contents-inner">
+    <div class="gray-wrap">
+      <h1>ログイン画面</h1>
+      <% flash.each do |key, value| %>
+        <%= value %>
+      <% end %>
+      <%= form_for(:session, url: login_path) do |f| %>
+        <div class="top-edit">
+          <dl class="edit-wrap x1">
+            <dt>ログインID</dt>
+            <dd>
+              <span class="input w100per"><%= f.text_field :employee_no %></span>
+            </dd>
+            <dt>パスワード</dt>
+            <dd>
+              <span class="input w100per"><%= f.password_field :password %></span>
+            </dd>
+          </dl>
+        </div>
+        <div class="login-button"><button>ログイン</button></div>
+      </div>
+    <% end %>
+  </div>
+</div>
