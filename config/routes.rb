@@ -29,5 +29,8 @@ Rails.application.routes.draw do
   patch 'supplier_masters/upsert/:id', to: 'supplier_masters#upsert'
 
   # PDFテスト
-  get '/test_pdf', to: 'estimates#test_pdf'   
+  get '/test_pdf', to: 'estimates#test_pdf' 
+  # チャートテスト
+  get '/test_chart', to: 'estimates#test_chart'
+
 end
