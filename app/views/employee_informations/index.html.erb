@@ -12,7 +12,7 @@
             
             <dt>入社日</dt>
             <dd>
-              <span class="input w100">
+              <span class="input w200">
                 <%= f.date_field :joined_company_date %>
               </span>
             </dd>
@@ -97,13 +97,13 @@
             </dd>
             <dt>血液型</dt>
             <dd>
-              <span class="input w100">
+              <span class="input w120">
                 <%= f.select :blood_type, [["A", "A"], ["B", "B"], ["O", "O"], ["AB", "AB"]], include_blank: "選択して下さい" %>
               </span>
             </dd>
             <dt>健康診断実施日</dt>
             <dd>
-              <span class="input w100">
+              <span class="input w200">
                 <%= f.date_field :health_check_date %>
               </span>
             </dd>
