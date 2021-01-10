@@ -1,4 +1,389 @@
-<h1>サンアイテック推移</h1>
-</br>
-<% #エラーメッセージ呼び出し %>
-<%#= render "layouts/errors", errors: @???.errors %>
+<div class="contents-wrap">
+    <div class="contents-inner">
+        <% #エラーメッセージ呼び出し %>
+        <%#= render "layouts/errors", errors: @???.errors %>
+        <div class="gray-wrap">
+            <h1>サンアイテック推移</h1>
+            <div class="top-edit">
+                <dl class="edit-wrap x4 mb-medium">
+                    <dt>期間</dt>
+                    <dd>
+                        <span class="input w100"><input type="text" name="" id="" value="2020年"></span><span class="hyphen">~</span>
+                        <span class="input w100"><input type="text" name="" id="" value=""></span>
+                    </dd>
+                    <dt>部門</dt>
+                    <dd>
+                        <span class="input w100per"><input type="text" name="" id="" value="本社"></span>
+                    </dd>
+                    <dt>担当者</dt>
+                    <dd>
+                        <span class="input w100per"><input type="text" name="" id="" value="三愛　太郎"></span>
+                    </dd>
+                    <dt>適用</dt>
+                    <dd>
+                        <span class="input w100per"><input type="text" name="" id="" value="全て"></span>
+                    </dd>
+                </dl>
+                <div class="top-edit-flex">
+                    <dl class="edit-wrap x2">
+                        <dt></dt>
+                        <dd>
+                        </dd>
+                    </dl>
+                    <ul class="top-button-list">
+                        <li><button>検索</button></li>
+                        <li><button>クリア</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contents-inner">
+        <h2 class="mb-small">収益の部</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="60">期間</th>
+                    <th>部門</th>
+                    <th width="60">適用</th>
+                    <th>4月</th>
+                    <th>5月</th>
+                    <th>6月</th>
+                    <th>7月</th>
+                    <th>8月</th>
+                    <th>9月</th>
+                    <th>10月</th>
+                    <th>11月</th>
+                    <th>12月</th>
+                    <th>1月</th>
+                    <th>2月</th>
+                    <th>3月</th>
+                    <th width="100">合計</th>
+                    <th width="100">平均額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--ここから１セット-->
+                <tr class="upper-row">
+                    <td rowspan="6">2020年</td>
+                    <td rowspan="6">本社</td>
+                    <td>売上</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>仕入</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>利益</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>経費</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>純利益</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="lower-row">
+                    <td>利益率</td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                </tr>
+                <!--ここまでで１セット-->
+
+                <!--ここから合計セット-->
+                <tr class="upper-row">
+                    <td rowspan="6" colspan="2">合計</td>
+                    <td>売上</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>仕入</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>利益</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>経費</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>純利益</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="lower-row">
+                    <td>利益率</td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                </tr>
+                <!--ここまで合計セット-->
+            </tbody>
+        </table>
+    </div>
+    <div class="contents-inner">
+        <div class="gray-wrap">
+            <h2>総括</h2>
+            <div class="flex-wrap">
+                <div class="bottom-left-wrap page203_bottom-left-wrap">
+                    <div class="graph-wrap">
+                        <div class="graph-inner"></div>
+                        <h3>売上・仕入・利益の折れ線グラフ</h2>
+                    </div>
+                    <div class="graph-wrap">
+                        <div class="graph-inner"></div>
+                        <h3>売上・仕入・利益の折れ線グラフ</h2>
+                    </div>
+                </div>
+                <div class="bottom-right-wrap">
+                    <div class="yellow-wrap mb-medium">
+                        <dl class="edit-wrap x2">
+                            <dt>期間</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>〜</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>売上合計</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>期間内平均売上</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>仕入合計</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>期間内平均仕入</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>利益合計</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="6,000">
+                                </span>
+                            </dd>
+                            <dt>期間内平均利益</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>経費合計</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>期間内平均経費</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>差引純利益</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>平均純利益</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>部門</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>平均利益率</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                        </dl>
+                        <div class="login-button"><button class="w200">プレビュー</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

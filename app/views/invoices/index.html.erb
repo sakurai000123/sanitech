@@ -1,4 +1,177 @@
-<h1>請求書発行</h1>
-</br>
-<% #エラーメッセージ呼び出し %>
-<%#= render "layouts/errors", errors: @???.errors %>
+<div class="contents-wrap">
+    <div class="contents-inner">
+        <% #エラーメッセージ呼び出し %>
+        <%#= render "layouts/errors", errors: @???.errors %>
+        <div class="gray-wrap">
+            <h1>請求書発行</h1>
+            <div class="top-edit">
+
+                <dl class="edit-wrap small">
+                    <dt>請求番号</dt>
+                    <dd>
+                        <span class="input w100 not-edit"></span>
+                    </dd>
+                    <dt>発効日</dt>
+                    <dd>
+                        <span class="input w100"><input type="text" name="" id="" value=""></span>
+                    </dd>
+                    <dt>区分</dt>
+                    <dd>
+                        <span class="input w100"><input type="text" name="" id="" value="10月分"></span>
+                    </dd>
+                    <dt>お客様No.</dt>
+                    <dd>
+                        <span class="input w100"><input type="text" name="" id="" value=""></span>
+                    </dd>
+                    <dt>担当者</dt>
+                    <dd>
+                        <span class="input contents-label"><input type="text" name="" id="" value="0005"></span>
+                        <span class="input w100 not-edit">
+                            広瀬愛未
+                        </span>
+                    </dd>
+                    <dt>マスタキー</dt>
+                    <dd>
+                        <span class="input w100per">
+                            <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x4">
+                    <dt>お客様名</dt>
+                    <dd>
+                        <span class="input w100per not-edit">
+                        </span>
+                    </dd>
+                    <dt>担当者名</dt>
+                    <dd>
+                        <span class="input w100per">
+                            <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                    <dt>住所</dt>
+                    <dd class="x2">
+                        <span class="input w100per not-edit">
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x4 mb-medium">
+                    <dt>お支払い日</dt>
+                    <dd>
+                        <span class="input w100per not-edit">
+                        </span>
+                    </dd>
+                    <dt>調整額</dt>
+                    <dd>
+                        <span class="input w100per">
+                            <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                    <dt>御支払方法</dt>
+                    <dd>
+                        <span class="input w100per">
+                            <input type="text" name="" id="" value="手形">
+                        </span>
+                    </dd>
+                </dl>
+                <div class="top-edit-flex">
+                    <dl class="edit-wrap small">
+                        <dt></dt>
+                        <dd>
+                        </dd>
+                    </dl>
+                    <ul class="top-button-list">
+                        <li><button>検索</button></li>
+                        <li><button>発行</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contents-inner">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">請求番号</th>
+                    <th rowspan="2">お客様名</th>
+                    <th rowspan="2">区分</th>
+                    <th rowspan="2">前回御請求額</th>
+                    <th rowspan="2">御入金額</th>
+                    <th rowspan="2">調整額</th>
+                    <th rowspan="2">繰越金額</th>
+                    <th rowspan="2">御買上額</th>
+                    <th rowspan="2">今回御請求金額</th>
+                    <th rowspan="2">入金処理</th>
+                    <th rowspan="2">次回繰越金額</th>
+                    <th>締日</th>
+                    <th rowspan="2">プレビュー画面</th>
+                </tr>
+                <tr>
+                    <th>御支払日</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="upper-row">
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">済</td>
+                    <td rowspan="2"></td>
+                    <td>末締</td>
+                    <td rowspan="2"><button>選択</button></td>
+                </tr>
+                <tr class="lower-row">
+                    <td>翌々10</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="contents-inner">
+        <div class="gray-wrap">
+            <h2 class="mb-small">入金処理</h2>
+            <dl class="edit-wrap x2">
+                <dt>お客様No</dt>
+                <dd>
+                    <span class="input w100per">
+                        <input type="text" name="" id="" value="">
+                    </span>
+                </dd>
+                <dt>お客様名</dt>
+                <dd>
+                    <span class="input w100per not-edit">
+
+                    </span>
+                </dd>
+                <dt>入金金額</dt>
+                <dd>
+                    <span class="input w100per">
+                        <input type="text" name="" id="" value="">
+                    </span>
+                </dd>
+                <dt>振込日</dt>
+                <dd>
+                    <span class="input w100per">
+                        <input type="text" name="" id="" value="">
+                    </span>
+                </dd>
+                <dt>支払手数料</dt>
+                <dd>
+                    <span class="input w100per">
+                        <input type="text" name="" id="" value="ベルト">
+                    </span>
+                </dd>
+                <dt></dt>
+                <dd><ul class="top-button-list">
+                    <li><button>処理</button></li>
+                </ul>
+            </dd>
+            </dl>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,310 @@
-<h1>受注入力</h1>
-</br>
-<% #エラーメッセージ呼び出し %>
-<%#= render "layouts/errors", errors: @???.errors %>
+<div class="contents-wrap">
+    <div class="contents-inner">
+        <% #エラーメッセージ呼び出し %>
+        <%#= render "layouts/errors", errors: @???.errors %>
+        <div class="gray-wrap">
+            <h1>受注入力</h1>
+            <div class="top-edit">
+
+                <dl class="edit-wrap x4">
+                    <dt>受注番号</dt>
+                    <dd>
+                        <span class="input w100per">
+                            <input type="text" name="" id="" value="1">
+                        </span>
+                    </dd>
+                    <dt>受注日</dt>
+                    <dd>
+                        <span class="input w100per">
+                            <input type="text" name="" id="" value="10/9/20">
+                        </span>
+                    </dd>
+                    <dt>受注日</dt>
+                    <dd class="x2">
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="">
+                        </span><span class="hyphen">　−　</span>
+                        <span class="input w100">
+                        <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                </dl>
+
+                <dl class="edit-wrap x4">
+                    <dt>部門</dt>
+                    <dd>
+                        <span class="input contents-label"><input type="text" name="" id="" value="001"></span>
+                        <span class="input w-flex not-edit">
+                            本社
+                        </span>
+                    </dd>
+                    <dt>担当者</dt>
+                    <dd>
+                        <span class="input contents-label"><input type="text" name="" id="" value="0005"></span>
+                        <span class="input w-flex not-edit">
+                            広瀬愛未
+                        </span>
+                    </dd>
+                    <dt>アシスタント</dt>
+                    <dd>
+                        <span class="input contents-label"><input type="text" name="" id="" value=""></span>
+                        <span class="input w-flex not-edit">
+
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x4">
+                    <dt>得意先</dt>
+                    <dd class="x2">
+                        <span class="input contents-label"><input type="text" name="" id="" value="000023"></span>
+                        <span class="input w-flex">
+                            <input type="text" name="" id="" value="株式会社サンテック">
+                        </span>
+                    </dd>
+                    <dt>得意先部署名</dt>
+                    <dd>
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="工務課">
+                        </span>
+                    </dd>
+                    <dt>得意先担当者</dt>
+                    <dd>
+                        <span class="input w-200">
+                            <input type="text" name="" id="" value="係長　福田">
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x4">
+                    <dt>請求先</dt>
+                    <dd class="x2">
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                    <dt>請求先名</dt>
+                    <dd>
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="株式会社スギヨ">
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x4">
+                    <dt>出荷先</dt>
+                    <dd class="x2">
+                        <span class="input contents-label"><input type="text" name="" id="" value="000023"></span>
+                        <span class="input w-flex">
+                            <input type="text" name="" id="" value="株式会社サンテック">
+                        </span>
+                    </dd>
+                    <dt>得意先担当者</dt>
+                    <dd>
+                        <span class="input w-200">
+                            <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x4">
+                    <dt>出荷先郵便番号</dt>
+                    <dd>
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="306-0608">
+                        </span>
+                    </dd>
+                    <dt>出荷先都道府県</dt>
+                    <dd>
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="茨城県">
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x2">
+                    <dt>出荷先住所１</dt>
+                    <dd>
+                        <span class="input w100per">
+                            <input type="text" name="" id="" value="茨城県板東市幸神平27−1">
+                        </span>
+                    </dd>
+                    <dt>出荷先住所２</dt>
+                    <dd>
+                        <span class="input w100per">
+                            <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x2">
+                    <dt>タイトル</dt>
+                    <dd>
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="0297-20-8550">
+                        </span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x4">
+                    <dt>出荷先TEL</dt>
+                    <dd>
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="0297-20-8550">
+                        </span>
+                    </dd>
+                    <dt>出荷先FAX</dt>
+                    <dd>
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                    <dt>客先注文番号</dt>
+                    <dd>
+                        <span class="input w200">
+                            <input type="text" name="" id="" value="">
+                        </span>
+                    </dd>
+                </dl>
+                <div class="top-edit-flex">
+                    <dl class="edit-wrap small">
+                        <dt class="w120">集計分類</dt>
+                        <dd class="ml0">
+                            <span class="input w200">
+                                <input type="text" name="" id="" value="ベルト">
+                            </span>
+                        </dd>
+                        </dd>
+                    </dl>
+                    <ul class="top-button-list">
+                        <li><button>保存</button></li>
+                        <li><button>読込</button></li>
+                        <li><button>加工依頼</button></li>
+                        <li><button>ソート</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contents-inner">
+        <table>
+            <thead>
+                <tr>
+                    <th>式</th>
+                    <th>区</th>
+                    <th>区分</th>
+                    <th>メーカー</th>
+                    <th>メーカー名</th>
+                    <th>商品</th>
+                    <th>商品名</th>
+                    <th>型番</th>
+                    <th>数量</th>
+                    <th>単位</th>
+                    <th>単価</th>
+                    <th>掛率％</th>
+                    <th>見積金額</th>
+                    <th>定価</th>
+                    <th>原単価</th>
+                    <th>原価金額</th>
+                    <th>粗利率％</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>0001</td>
+                    <td>発注</td>
+                    <td>1</td>
+                    <td>三ツ星</td>
+                    <td>00000000</td>
+                    <td>ベルト（裏面センター）</td>
+                    <td>NS82UG0/0W 100×2215E</td>
+                    <td>2</td>
+                    <td>本</td>
+                    <td class="right">8,000</td>
+                    <td>50%</td>
+                    <td class="right">16,000</td>
+                    <td></td>
+                    <td class="right">4,000</td>
+                    <td class="right">8,000</td>
+                    <td>50%</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>0001</td>
+                    <td>発注</td>
+                    <td>1</td>
+                    <td>三ツ星</td>
+                    <td>00000000</td>
+                    <td>ベルト（裏面センター）</td>
+                    <td>NS82UG0/0W 100×2215E</td>
+                    <td>2</td>
+                    <td>本</td>
+                    <td class="right">8,000</td>
+                    <td>50%</td>
+                    <td class="right">16,000</td>
+                    <td></td>
+                    <td class="right">4,000</td>
+                    <td class="right">8,000</td>
+                    <td>50%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="contents-inner">
+        <div class="gray-wrap">
+            <div class="flex-wrap">
+                <div class="bottom-left-wrap">
+                    <dl class="edit-wrap x1">
+                        <dt>仕様詳細</dt>
+                        <dd>
+                            <span class="input w100per">
+                                <input type="text" name="" id="" value="裏面センター付き">
+                            </span>
+                        </dd>
+                        <dt>備考</dt>
+                        <dd>
+                            <span class="input w100per">
+                                <input type="text" name="" id="" value="エンドレス品">
+                            </span>
+                        </dd>
+                        <dt>明細メモ</dt>
+                        <dd>
+                            <span class="input w100per">
+                                <input type="text" name="" id="" value="※次回より値上げ">
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="bottom-right-wrap">
+                    <div class="yellow-wrap mb-medium">
+                        <dl class="edit-wrap x2">
+                            <dt>受注合計金額</dt>
+                            <dd>
+                                <span class="input w200">
+                                    <input class="right" type="text" name="" id="" value="60,000">
+                                </span>
+                            </dd>
+                            <dt>消費税金額</dt>
+                            <dd>
+                                <span class="input w200">
+                                    <input class="right" type="text" name="" id="" value="6,000">
+                                </span>
+                            </dd>
+                            <dt>仕入価/定価</dt>
+                            <dd>
+                                <span class="input w200">
+                                    <input class="right" type="text" name="" id="" value="30,000">
+                                </span>
+                            </dd>
+
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+            <ul class="bottom-button-list">
+                <li><button class="small">↑</button><button class="small ml-small">↓</button></li>
+                <li><button>前行追加</button></li>
+                <li><button>後行追加</button></li>
+                <li><button>行削除</button></li>
+                <li><button>行複写</button></li>
+                <li><button>登録</button></li>
+                <li><button class="small">戻る</button></li>
+            </ul>
+        </div>
+    </div>
+</div>

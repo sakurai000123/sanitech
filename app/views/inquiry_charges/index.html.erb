@@ -1,4 +1,601 @@
-<h1>担当別推移</h1>
-</br>
-<% #エラーメッセージ呼び出し %>
-<%#= render "layouts/errors", errors: @???.errors %>
+<div class="contents-wrap">
+    <div class="contents-inner">
+        <% #エラーメッセージ呼び出し %>
+        <%#= render "layouts/errors", errors: @???.errors %>
+        <div class="gray-wrap">
+            <h1>担当別推移</h1>
+            <div class="top-edit">
+                <dl class="edit-wrap x4">
+                    <dt>期間</dt>
+                    <dd>
+                        <span class="input w100"><input type="text" name="" id="" value="2020年"></span><span class="hyphen">~</span>
+                        <span class="input w100"><input type="text" name="" id="" value=""></span>
+                    </dd>
+                    <dt>部門</dt>
+                    <dd>
+                        <span class="input w100per"><input type="text" name="" id="" value="本社"></span>
+                    </dd>
+                    <dt>担当者</dt>
+                    <dd>
+                        <span class="input w100per"><input type="text" name="" id="" value="三愛　太郎"></span>
+                    </dd>
+                    <dt>適用</dt>
+                    <dd>
+                        <span class="input w100per"><input type="text" name="" id="" value="全て"></span>
+                    </dd>
+                </dl>
+                <dl class="edit-wrap x4">
+                    <dt>顧客名</dt>
+                    <dd>
+                        <span class="input w100per"><input type="text" name="" id="" value="戸頭商店"></span>
+                    </dd>
+                    <dt>経費科目</dt>
+                    <dd>
+                        <span class="input w100per"><input type="text" name="" id="" value="全て"></span>
+                    </dd>
+                </dl>
+                <div class="top-edit-flex">
+                    <dl class="edit-wrap x2">
+                        <dt></dt>
+                        <dd>
+                        </dd>
+                    </dl>
+                    <ul class="top-button-list">
+                        <li><button>検索</button></li>
+                        <li><button>クリア</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contents-inner">
+        <h2 class="mb-small">収益の部</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="60">期間</th>
+                    <th>顧客名</th>
+                    <th width="60">適用</th>
+                    <th>4月</th>
+                    <th>5月</th>
+                    <th>6月</th>
+                    <th>7月</th>
+                    <th>8月</th>
+                    <th>9月</th>
+                    <th>10月</th>
+                    <th>11月</th>
+                    <th>12月</th>
+                    <th>1月</th>
+                    <th>2月</th>
+                    <th>3月</th>
+                    <th width="100">合計</th>
+                    <th width="100">平均額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--ここから１セット-->
+                <tr class="upper-row">
+                    <td rowspan="4">2020年</td>
+                    <td rowspan="4">戸頭商店</td>
+                    <td>売上</td>
+                    <td class="right">100,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>仕入</td>
+                    <td class="right">100,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>利益</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="lower-row">
+                    <td>利益率</td>
+                    <td class="center">20%</td>
+                    <td class="center">20%</td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center">26%</td>
+                    <td class="center"></td>
+                </tr>
+                <!--ここまでで１セット-->
+
+
+                <!--ここから１セット-->
+                <tr class="upper-row">
+                    <td rowspan="4">2020年</td>
+                    <td rowspan="4">戸頭商店</td>
+                    <td>売上</td>
+                    <td class="right">100,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>仕入</td>
+                    <td class="right">100,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>利益</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="lower-row">
+                    <td>利益率</td>
+                    <td class="center">20%</td>
+                    <td class="center">20%</td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center">26%</td>
+                    <td class="center"></td>
+                </tr>
+                <!--ここまでで１セット-->
+
+                <!--ここから１セット-->
+                <tr class="upper-row">
+                    <td rowspan="4">2020年</td>
+                    <td rowspan="4">戸頭商店</td>
+                    <td>売上</td>
+                    <td class="right">100,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>仕入</td>
+                    <td class="right">100,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>利益</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="lower-row">
+                    <td>利益率</td>
+                    <td class="center">20%</td>
+                    <td class="center">20%</td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center"></td>
+                    <td class="center">26%</td>
+                    <td class="center"></td>
+                </tr>
+                <!--ここまでで１セット-->
+            </tbody>
+        </table>
+    </div>
+    <div class="contents-inner">
+        <h2 class="mb-small">経費の部</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="60">期間</th>
+                    <th>担当者名</th>
+                    <th width="100">適用</th>
+                    <th>4月</th>
+                    <th>5月</th>
+                    <th>6月</th>
+                    <th>7月</th>
+                    <th>8月</th>
+                    <th>9月</th>
+                    <th>10月</th>
+                    <th>11月</th>
+                    <th>12月</th>
+                    <th>1月</th>
+                    <th>2月</th>
+                    <th>3月</th>
+                    <th width="100">合計</th>
+                    <th width="100">平均額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--ここから１セット-->
+                <tr class="upper-row">
+                    <td rowspan="9">2020年</td>
+                    <td rowspan="9">戸頭商店</td>
+                    <td>給与手当</td>
+                    <td class="right">100,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>福利厚生費</td>
+                    <td class="right">100,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>車両費</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>旅費交通費</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>通信費</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>消耗品費</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>事務用品費</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="upper-row lower-row">
+                    <td>接待費</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <tr class="lower-row">
+                    <td>宣伝広告費</td>
+                    <td class="right">80,000</td>
+                    <td class="right">120,000</td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right"></td>
+                    <td class="right">1,300,000</td>
+                    <td class="right"></td>
+                </tr>
+                <!--ここまでで１セット-->
+            </tbody>
+        </table>
+    </div>
+    <div class="contents-inner">
+        <div class="gray-wrap">
+            <h2>総括</h2>
+            <div class="flex-wrap">
+                <div class="bottom-left-wrap page203_bottom-left-wrap">
+                    <div class="graph-wrap">
+                        <div class="graph-inner"></div>
+                        <h3>売上・仕入・利益の折れ線グラフ</h2>
+                        <%= line_chart [['4', 300000], ['5', 360000], ['6', 330000], ['7', 330000], ['8', 330000], ['9', 330000], ['10', 330000], ['11', 330000], ['12', 330000], ['1', 330000], ['2', 330000], ['3', 330000]], xtitle: "［月］", ytitle: "［円］", width: "380px" %>
+                    </div>
+                    <div class="graph-wrap">
+                        <div class="graph-inner"></div>
+                        <h3>売上・仕入・利益の折れ線グラフ</h2>
+                        <%= line_chart [['4', 300000], ['5', 360000], ['6', 330000], ['7', 330000], ['8', 330000], ['9', 330000], ['10', 330000], ['11', 330000], ['12', 330000], ['1', 330000], ['2', 330000], ['3', 330000]], xtitle: "［月］", ytitle: "［円］", width: "380px" %>
+                    </div>
+                </div>
+                <div class="bottom-right-wrap">
+                    <div class="yellow-wrap mb-medium">
+                        <dl class="edit-wrap x2">
+                            <dt>期間</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>〜</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>売上合計</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>期間内平均売上</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>仕入合計</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>期間内平均仕入</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>利益合計</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="right" type="text" name="" id="" value="6,000">
+                                </span>
+                            </dd>
+                            <dt>期間内平均利益</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>経費合計</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>期間内平均経費</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>差引純利益</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>平均純利益</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>部門</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>平均利益率</dt>
+                            <dd>
+                                <span class="input w100per">
+                                    <input class="center" type="text" name="" id="" value="">
+                                </span>
+                            </dd>
+                            <dt>担当</dt>
+                            <dd class="w200">
+                                <span class="input contents-label w50"><input type="text" name="" id="" value="110
+                                    "></span>
+                                <span class="input w-flex">
+                                    <input type="text" name="" id="" value="三愛　太郎">
+                                </span>
+                            </dd>
+                        </dl>
+                        <div class="login-button"><button class="w200">プレビュー</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

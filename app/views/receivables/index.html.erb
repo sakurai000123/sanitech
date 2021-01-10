@@ -1,4 +1,253 @@
-<h1>売掛帳</h1>
-</br>
-<% #エラーメッセージ呼び出し %>
-<%#= render "layouts/errors", errors: @???.errors %>
+<div class="contents-wrap">
+    <div class="contents-inner">
+        <% #エラーメッセージ呼び出し %>
+        <%#= render "layouts/errors", errors: @???.errors %>
+        <div class="gray-wrap">
+            <h1>売掛帳</h1>
+            <div class="top-edit">
+                <dl class="edit-wrap x4 mb-medium">
+                    <dt>請求日</dt>
+                    <dd>
+                        <span class="input w100per not-edit">
+                            　
+                        </span>
+                    </dd>
+                    <dt>販売先</dt>
+                    <dd>
+                        <span class="input w100per not-edit">
+                            　
+                        </span>
+                    </dd>
+                    <dt>適用</dt>
+                    <dd>
+                        <span class="input w100per not-edit">
+                            　
+                        </span>
+                    </dd>
+                    <dt>未入金</dt>
+                    <dd>
+                        <span class="input w100per not-edit">
+                            　
+                        </span>
+                    </dd>
+                </dl>
+
+                <div class="top-edit-flex">
+                    <dl class="edit-wrap small">
+                        <dt></dt>
+                        <dd>
+                        </dd>
+                    </dl>
+                    <ul class="top-button-list">
+                        <li><button>ソート</button></li>
+                        <li><button>印刷</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contents-inner">
+        <table>
+            <thead>
+                <tr>
+                    <th>請求日</th>
+                    <th>仕入先</th>
+                    <th>No</th>
+                    <th>適用</th>
+                    <th>支払方法</th>
+                    <th>支払日<br>
+                    予定日</th>
+                    <th>金額</th>
+                    <th>消費税</th>
+                    <th>合計</th>
+                    <th>相殺額</th>
+                    <th>差引合計</th>
+                    <th>支払日</th>
+                    <th>支払額</th>
+                    <th>支払手数料</th>
+                    <th>残高</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>　</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>　</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>　</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>　</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>　</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>　</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>　</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>　</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="contents-inner">
+        <div class="gray-wrap">
+            <h2 class="mb-small">相殺処理</h2>
+            <div class="flex-wrap">
+                <div class="bottom-left-wrap">
+                    <dl class="edit-wrap x1">
+                        <dt>請求No</dt>
+                        <dd>
+                            <span class="input w100per">
+                                <input type="text" name="" id="" value="">
+                            </span>
+                        </dd>
+                        <dt>販売額</dt>
+                        <dd>
+                            <span class="input w100per">
+                                <input type="text" name="" id="" value="">
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="bottom-right-wrap page008_bottom-right">
+                    <div class="w100per page008_bottom-right">
+                        <div class="mb-medium">
+                            <dl class="edit-wrap x1">
+                                <dt>マスターキー</dt>
+                                <dd>
+                                    <span class="input w200">
+                                        <input class="right" type="text" name="" id="" value="">
+                                    </span>
+                                </dd>
+
+                            </dl>
+                        </div>
+                    </div>
+                    <ul class="bottom-button-list">
+                        <li><button>入力</button></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
