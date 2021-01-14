@@ -1,31 +1,34 @@
 class EmployeeInformationsController < ApplicationController
   def index
     get_user
-    if params[:employee_no].present?
-      @user = User.find_by(employee_no: params[:employee_no])
+    if params[:user_code].present?
+      @user = MUser.find_by(user_code: params[:user_code])
     else
-      @user = User.new
+      @user = MUser.new
     end
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = MUser.find_by(params[:user_code])
     get_user
-    redirect_to employee_informations_path(employee_no: @user.employee_no)
+    redirect_to employee_informations_path(user_code: @user.user_code)
   end
 
   def upsert
     if params[:create]
-      @user = User.new(user_params)
+      @user = MUser.new(user_params)
       get_user
+      @user.create_user_name = session[:user_name]
+      @user.update_user_name = session[:user_name]
       if @user.save
         redirect_to employee_informations_path
       else
         render :index
       end
     else
-      @user = User.find_by(employee_no: user_params[:employee_no])
+      @user = MUser.find_by(user_code: user_params[:user_code])
       get_user
+      @user.update_user_name = session[:user_name]
       if @user.update(user_params)
         redirect_to employee_informations_path
       else
@@ -38,26 +41,31 @@ class EmployeeInformationsController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(
+    params.require(:m_user).permit(
       :password,
-      :joined_company_date,
-      :employee_no,
-      :name,
-      :name_ruby, 
+      :hire_date,
+      :user_code,
+      :family_name,
+      :given_name, 
+      :family_name_kana,
+      :given_name_kana,
       :master_key,
-      :company_phone,
-      :company_car_no,
-      :emergency_contact_phone,
-      :emergency_contact_name,
-      :email,
+      :position,
+      :mobile_phone_number,
+      :company_car_No,
+      :emergency_phone_number,
+      :mail_address,
       :blood_type,
-      :health_check_date,
-      :remarks
+      :medical_examination_date,
+      :note,
+      :login_id,
+      :authority_code,
+      :department_code
     )
   end
 
   def get_user
-    @users = User.all.order(employee_no: 'ASC')
+    @users = MUser.all.order(user_code: 'ASC')
   end
 end
 

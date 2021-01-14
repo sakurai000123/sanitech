@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(employee_no: params[:session][:employee_no])
+    user = MUser.find_by(login_id: params[:session][:login_id])
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to menus_path

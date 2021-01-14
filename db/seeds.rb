@@ -10,11 +10,23 @@
 # rails db:seed
 
 # ユーザ作成
-User.create(
-  name: 'test1',
-  name_ruby: 'テストイチ',
-  master_key: '0001',
+MUser.create(
+  user_code: '0001',
+  create_user_name: 'test1',
+  update_user_name: 'test1',
+  authority_code: '001',
+  department_code: '001',
+  family_name: 'テスト',
+  family_name_kana: 'テスト',
+  given_name: '太郎',
+  given_name_kana: 'タロウ',
+  mail_address: 'test1@test.test',
+  login_id: '0001',
   password: 'test1',
   password_confirmation: 'test1',
-  employee_no: '0001'
+  hire_date: DateTime.strptime("09/01/2009 17:00", "%m/%d/%Y %H:%M"),
+  master_key: '0001',
+  position: 'test',
+  emergency_phone_number: '09012341234',
+  blood_type: 'A'
 )

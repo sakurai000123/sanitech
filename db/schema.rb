@@ -10,29 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_28_114416) do
+ActiveRecord::Schema.define(version: 2021_01_14_111056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
-    t.string "name", limit: 255, null: false
-    t.string "name_ruby", limit: 255
-    t.string "master_key", limit: 255
+  create_table "m_users", primary_key: "user_code", id: :string, limit: 4, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.string "authority_code", limit: 3, null: false
+    t.string "department_code", limit: 3, null: false
+    t.integer "company_car_No", limit: 2
+    t.text "family_name", null: false
+    t.text "family_name_kana", null: false
+    t.text "given_name", null: false
+    t.text "given_name_kana", null: false
+    t.string "mobile_phone_number", limit: 11
+    t.text "mail_address", null: false
+    t.string "login_id", limit: 20, null: false
     t.string "password_digest", limit: 255, null: false
-    t.string "employee_no", limit: 255, null: false
-    t.date "joined_company_date"
-    t.string "company_phone", limit: 20
-    t.string "company_car_no", limit: 255
-    t.string "emergency_contact_phone", limit: 20
-    t.string "emergency_contact_name", limit: 255
-    t.string "email", limit: 255
-    t.string "blood_type", limit: 2
-    t.date "health_check_date"
-    t.text "remarks"
+    t.date "hire_date", null: false
+    t.text "master_key", null: false
+    t.text "position", null: false
+    t.string "emergency_phone_number", limit: 11, null: false
+    t.string "blood_type", null: false
+    t.date "medical_examination_date"
+    t.text "note"
+    t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_no"], name: "index_users_on_employee_no", unique: true
   end
 
 end

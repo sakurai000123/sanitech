@@ -13,33 +13,35 @@
             <dt>入社日</dt>
             <dd>
               <span class="input w200">
-                <%= f.date_field :joined_company_date %>
+                <%= f.date_field :hire_date %>
               </span>
             </dd>
 
             <dt>部門</dt>
             <dd>
               <span class="input contents-label">
-                <input type="text" name="" id="" value="001"/>
+                <%= f.text_field :department_code %>
               </span>
               <span class="input w100 not-edit"> 本社 </span>
             </dd>
             <dt>社員No</dt>
             <dd>
               <span class="input w100">
-                <%= f.text_field :employee_no %>
+                <%= f.text_field :user_code %>
               </span>
             </dd>
             <dt>氏名</dt>
             <dd>
               <span class="input w100per">
-                <%= f.text_field :name %>
+                <%= f.text_field :family_name %>
+                <%= f.text_field :given_name %>
               </span>
             </dd>
             <dt>振り仮名</dt>
             <dd>
               <span class="input w100per">
-                <%= f.text_field :name_ruby %>
+                <%= f.text_field :family_name_kana %>
+                <%= f.text_field :given_name_kana %>
               </span>
             </dd>
             <dt>マスタキー</dt>
@@ -59,7 +61,7 @@
             <dt>役職</dt>
             <dd>
               <span class="input w200">
-                <input type="text" name="" id="" value="代表取締役"/>
+                <%= f.text_field :position %>
               </span>
             </dd>
           </dl>
@@ -67,23 +69,24 @@
             <dt>社用携帯番号</dt>
             <dd>
               <span class="input w120">
-                <%= f.text_field :company_phone %>
+                <%= f.text_field :mobile_phone_number %>
               </span>
             </dd>
             <dt>社用車No</dt>
             <dd>
               <span class="input w120">
-                <%= f.text_field :company_car_no %>
+                <%= f.text_field :company_car_No %>
               </span>
             </dd>
             <dt>緊急連絡先</dt>
             <dd class="w-flex ml0">
               <div class="w100per">
                 <span class="input w100per upper">
-                  <%= f.text_field :emergency_contact_phone %>
+                  <%= f.text_field :emergency_phone_number %>
                 </span>
                 <span class="input w100per lower">
-                  <%= f.text_field :emergency_contact_name %>
+                  <input type="text" name="" id="" value="田中"/>
+                  <input type="text" name="" id="" value="太郎"/>
                 </span>
               </div>
             </dd>
@@ -92,7 +95,7 @@
             <dt>MAIL</dt>
             <dd>
               <span class="input w100per">
-                <%= f.text_field :email %>
+                <%= f.text_field :mail_address %>
               </span>
             </dd>
             <dt>血液型</dt>
@@ -104,7 +107,7 @@
             <dt>健康診断実施日</dt>
             <dd>
               <span class="input w200">
-                <%= f.date_field :health_check_date %>
+                <%= f.date_field :medical_examination_date %>
               </span>
             </dd>
           </dl>
@@ -115,7 +118,7 @@
               <dd class="w-flex ml0">
                 <div class="w100per">
                   <span class="input w100per upper">
-                    <%= f.text_area :remarks %>
+                    <%= f.text_area :note %>
                   </span>
                   <span class="input w100per lower">
                     <input type="text" name="" id="" value="" />
@@ -128,12 +131,25 @@
               <li><button name="update">保存</button></li>
             </ul>
           </div>
+          <dt>ログインID</dt>
+          <dd>
+            <span class="input w100">
+              <%= f.text_field :login_id %>
+            </span>
+          </dd>
           <dt>パスワード</dt>
-            <dd>
-              <span class="input w100">
-                <%= f.password_field :password %>
-              </span>
-            </dd>
+          <dd>
+            <span class="input w100">
+              <%= f.password_field :password %>
+            </span>
+          </dd>
+          <dt>権限</dt>
+          <dd>
+            <span class="input w100">
+              <%= f.text_field :authority_code %>
+            </span>
+          </dd>
+          
         </div>
       <% end %>
     </div>
@@ -157,18 +173,18 @@
       </thead>
       <tbody>
         <% @users.each.with_index(1) do |user, i| %>
-          <tr data-link="<%= edit_employee_information_path(user.id) %>">
+          <tr data-link="<%= edit_employee_information_path(user.user_code) %>">
             <td><%= i %></td>
-            <td>部門コード</td>
-            <td><%= user.employee_no %></td>
-            <td><%= user.name %></td>
+            <td><%= user.department_code %></td>
+            <td><%= user.user_code %></td>
+            <td><%= user.family_name %><%= user.given_name %></td>
             <td>所属部署</td>
-            <td>役職</td>
-            <td><%= user.company_phone %></td>
-            <td><%= user.email %></td>
-            <td><%= user.emergency_contact_phone %></td>
+            <td><%= user.position %></td>
+            <td><%= user.mobile_phone_number %></td>
+            <td><%= user.mail_address %></td>
+            <td><%= user.emergency_phone_number %></td>
             <td><%= user.blood_type %></td>
-            <td><%= user.health_check_date %></td>
+            <td><%= user.medical_examination_date %></td>
           </tr>
         <% end %>
       </tbody>
