@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_14_111056) do
+ActiveRecord::Schema.define(version: 2021_01_14_143153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "m_departments", primary_key: "department_code", id: :string, limit: 3, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "department_name", null: false
+    t.text "department_name_kana", null: false
+    t.integer "depth", limit: 2, null: false
+    t.string "parent_department_code", limit: 3, null: false
+    t.string "post_code", limit: 7, null: false
+    t.text "prefecture", null: false
+    t.text "address1", null: false
+    t.text "address2", null: false
+    t.string "phone_number", limit: 11, null: false
+    t.string "fax_number", limit: 10
+    t.boolean "delete_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "m_users", primary_key: "user_code", id: :string, limit: 4, force: :cascade do |t|
     t.text "create_user_name", null: false
