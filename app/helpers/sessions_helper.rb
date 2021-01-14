@@ -8,8 +8,8 @@ module SessionsHelper
   # 現在ログイン中のユーザーを返す (いる場合)
   def current_user
     if session[:user_code]
-     #@current_user = @current_user || MUser.find_by(id: session[:user_code])と同じ意味
-      @current_user ||= MUser.find_by(id: session[:user_code])
+     #@current_user = @current_user || MUser.find_by(user_code: session[:user_code])と同じ意味
+      @current_user ||= MUser.find_by(user_code: session[:user_code])
     end
   end
 
@@ -25,7 +25,8 @@ module SessionsHelper
 
   # 現在のユーザーをログアウトする
   def log_out
-    session.delete(:user_code)
+    session[:user_code] = nil
+    session[:user_name] = nil
     @current_user = nil
   end
 end

@@ -1,4 +1,5 @@
 class EmployeeInformationsController < ApplicationController
+  before_action :logged_in_user
   def index
     get_user
     if params[:user_code].present?

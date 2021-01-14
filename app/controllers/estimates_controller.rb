@@ -1,5 +1,6 @@
 class EstimatesController < ApplicationController
-    def index
+		before_action :logged_in_user
+		def index
         
     end
 
