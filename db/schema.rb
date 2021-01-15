@@ -15,32 +15,33 @@ ActiveRecord::Schema.define(version: 2021_01_15_045750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "m_customers", id: false, force: :cascade do |t|
-    t.string "customer_code"
-    t.text "create_user_name"
-    t.text "update_user_name"
-    t.text "customer_number"
-    t.text "customer_name"
-    t.text "customer_name_kana"
-    t.string "department_code"
-    t.string "user_code"
-    t.text "charge_name"
-    t.text "charge_name_kana"
-    t.text "charge_position"
-    t.string "cus_post_code"
-    t.text "cus_prefecture"
-    t.text "cus_address1"
-    t.text "cus_address2"
-    t.string "phone_number"
-    t.string "fax_number"
+  create_table "m_customers", primary_key: "customer_code", id: :string, limit: 6, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "customer_number", null: false
+    t.text "customer_name", null: false
+    t.text "customer_name_kana", null: false
+    t.string "department_code_id", limit: 3, null: false
+    t.string "user_code_id", limit: 4, null: false
+    t.text "charge_name", null: false
+    t.text "charge_name_kana", null: false
+    t.text "charge_position", null: false
+    t.string "cus_post_code", limit: 7, null: false
+    t.text "cus_prefecture", null: false
+    t.text "cus_address1", null: false
+    t.text "cus_address2", null: false
+    t.string "phone_number", limit: 11, null: false
+    t.string "fax_number", limit: 10
     t.text "mail_address"
-    t.string "payment_category"
-    t.string "close_date"
-    t.string "payment_date"
-    t.string "deposit_account_code"
+    t.string "payment_category", null: false
+    t.string "close_date", null: false
+    t.string "payment_date", null: false
+    t.string "deposit_account_code", limit: 3, null: false
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_code_id"], name: "index_m_customers_on_department_code_id"
+    t.index ["user_code_id"], name: "index_m_customers_on_user_code_id"
   end
 
   create_table "m_departments", primary_key: "department_code", id: :string, limit: 3, force: :cascade do |t|
@@ -61,13 +62,52 @@ ActiveRecord::Schema.define(version: 2021_01_15_045750) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "m_makers", primary_key: "maker_code", id: :string, limit: 4, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "maker_name", null: false
+    t.boolean "delete_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "m_order_categories", primary_key: "order_category_code", id: :string, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "order_category_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "m_products", primary_key: "product_code", id: :string, limit: 8, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "product_name", null: false
+    t.text "product_name_kana", null: false
+    t.string "product_category", null: false
+    t.text "model_number", null: false
+    t.text "unit", null: false
+    t.bigint "unit_price", null: false
+    t.bigint "original_unit_price", null: false
+    t.bigint "cost", null: false
+    t.bigint "sale_unit_price", null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.string "maker_code_id", limit: 4, null: false
+    t.boolean "delete_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["maker_code_id"], name: "index_m_products_on_maker_code_id"
+    t.index ["supplier_code_id"], name: "index_m_products_on_supplier_code_id"
+  end
+
   create_table "m_suppliers", primary_key: "supplier_code", id: :string, limit: 5, force: :cascade do |t|
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
     t.text "supplier_number", null: false
     t.date "start_date", null: false
-    t.string "department_code", null: false
-    t.string "user_code", null: false
+    t.string "department_code_id", limit: 3, null: false
+    t.string "user_code_id", limit: 4, null: false
+    t.string "user_code2_id", limit: 4, null: false
     t.text "supplier_name", null: false
     t.text "charge_name", null: false
     t.text "charge_position", null: false
@@ -85,13 +125,16 @@ ActiveRecord::Schema.define(version: 2021_01_15_045750) do
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_code_id"], name: "index_m_suppliers_on_department_code_id"
+    t.index ["user_code2_id"], name: "index_m_suppliers_on_user_code2_id"
+    t.index ["user_code_id"], name: "index_m_suppliers_on_user_code_id"
   end
 
   create_table "m_users", primary_key: "user_code", id: :string, limit: 4, force: :cascade do |t|
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
     t.string "authority_code", limit: 3, null: false
-    t.string "department_code", limit: 3, null: false
+    t.string "department_code_id", limit: 3, null: false
     t.integer "company_car_No", limit: 2
     t.text "family_name", null: false
     t.text "family_name_kana", null: false
@@ -108,6 +151,21 @@ ActiveRecord::Schema.define(version: 2021_01_15_045750) do
     t.string "blood_type", null: false
     t.date "medical_examination_date"
     t.text "note"
+    t.boolean "delete_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_code_id"], name: "index_m_users_on_department_code_id"
+  end
+
+  create_table "m_warehouses", primary_key: "warehouse_code", id: :string, limit: 4, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "warehouse_name", null: false
+    t.string "warehouse_category", null: false
+    t.string "post_code", limit: 7, null: false
+    t.text "prefecture", null: false
+    t.text "address1", null: false
+    t.text "address2", null: false
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -168,5 +226,13 @@ ActiveRecord::Schema.define(version: 2021_01_15_045750) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "m_customers", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "m_customers", "m_users", column: "user_code_id", primary_key: "user_code"
+  add_foreign_key "m_products", "m_makers", column: "maker_code_id", primary_key: "maker_code"
+  add_foreign_key "m_products", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
+  add_foreign_key "m_suppliers", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "m_suppliers", "m_users", column: "user_code2_id", primary_key: "user_code"
+  add_foreign_key "m_suppliers", "m_users", column: "user_code_id", primary_key: "user_code"
+  add_foreign_key "m_users", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "t_estimate_details", "t_estimates"
 end

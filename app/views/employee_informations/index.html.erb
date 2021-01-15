@@ -20,9 +20,9 @@
             <dt>部門</dt>
             <dd>
               <span class="input contents-label">
-                <%= f.text_field :department_code %>
+                <%= f.text_field :department_code_id %>
               </span>
-              <span class="input w100 not-edit"> 本社 </span>
+              <span class="input w100 not-edit"><%= @department_name %></span>
             </dd>
             <dt>社員No</dt>
             <dd>
@@ -175,7 +175,7 @@
         <% @users.each.with_index(1) do |user, i| %>
           <tr data-link="<%= edit_employee_information_path(user.user_code) %>">
             <td><%= i %></td>
-            <td><%= user.department_code %></td>
+            <td><%= user.department_code_id %></td>
             <td><%= user.user_code %></td>
             <td><%= user.family_name %><%= user.given_name %></td>
             <td>所属部署</td>

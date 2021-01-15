@@ -2,8 +2,10 @@ class EmployeeInformationsController < ApplicationController
   before_action :logged_in_user
   def index
     get_user
+    @department_name = nil
     if params[:user_code].present?
       @user = MUser.find_by(user_code: params[:user_code])
+      @department_name = MDepartment.find_by(department_code: @user.department_code_id).department_name
     else
       @user = MUser.new
     end
@@ -61,7 +63,7 @@ class EmployeeInformationsController < ApplicationController
       :note,
       :login_id,
       :authority_code,
-      :department_code
+      :department_code_id
     )
   end
 

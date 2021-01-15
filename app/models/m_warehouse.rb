@@ -1,0 +1,2 @@
+class MWarehouse < ApplicationRecord
+end
