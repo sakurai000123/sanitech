@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_043156) do
+ActiveRecord::Schema.define(version: 2021_01_15_045750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,4 +113,60 @@ ActiveRecord::Schema.define(version: 2021_01_15_043156) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "t_estimate_details", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.bigint "t_estimate_id", null: false
+    t.integer "line_number", limit: 2, null: false
+    t.integer "sort_number", limit: 2, null: false
+    t.string "maker_code", limit: 4, null: false
+    t.text "maker_name", null: false
+    t.string "supplier_code", limit: 5, null: false
+    t.string "product_code", limit: 8, null: false
+    t.text "product_name", null: false
+    t.text "product_model_number", null: false
+    t.integer "estimate_quantity", limit: 2, null: false
+    t.text "product_unit", null: false
+    t.bigint "sale_unit_price", null: false
+    t.integer "multiplication_rate", limit: 2, null: false
+    t.bigint "detail_estimate_amount", null: false
+    t.bigint "list_price", null: false
+    t.bigint "original_unit_price", null: false
+    t.bigint "cost_price", null: false
+    t.integer "gross_profit_margin", limit: 2, null: false
+    t.bigint "detail_tax_amount", null: false
+    t.text "detail_note"
+    t.text "details_memo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["t_estimate_id"], name: "index_t_estimate_details_on_t_estimate_id"
+  end
+
+  create_table "t_estimates", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "estimate_number", null: false
+    t.integer "estimate_branch_number", limit: 2, null: false
+    t.date "estimate_date", null: false
+    t.string "department_code", limit: 3, null: false
+    t.string "charge_code", limit: 4, null: false
+    t.string "issuer_code", limit: 4, null: false
+    t.string "authorizer_code", limit: 4, null: false
+    t.string "customer_code", limit: 6, null: false
+    t.text "cus_department_name", null: false
+    t.text "cus_charge_name", null: false
+    t.string "delivery_date_category", null: false
+    t.string "payment_category", null: false
+    t.string "delivery_place", null: false
+    t.string "estimate_expiration_date", null: false
+    t.text "estimate_name", null: false
+    t.text "note"
+    t.bigint "estimate_amount", null: false
+    t.bigint "tax_amount", null: false
+    t.boolean "delete_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "t_estimate_details", "t_estimates"
 end
