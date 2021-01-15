@@ -1,0 +1,2 @@
+class MSupplier < ApplicationRecord
+end
