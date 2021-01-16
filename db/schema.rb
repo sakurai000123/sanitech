@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_045750) do
+ActiveRecord::Schema.define(version: 2021_01_16_015606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,6 +226,91 @@ ActiveRecord::Schema.define(version: 2021_01_15_045750) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "t_receive_order_details", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.bigint "receive_order_id", null: false
+    t.integer "line_number", limit: 2, null: false
+    t.integer "sort_number", limit: 2, null: false
+    t.string "order_category_code_id", null: false
+    t.text "order_category_name", null: false
+    t.boolean "invalid_flag"
+    t.string "maker_code_id", limit: 4, null: false
+    t.text "maker_name", null: false
+    t.string "product_code_id", limit: 8, null: false
+    t.text "product_name", null: false
+    t.text "product_model_number", null: false
+    t.string "warehouse_code_id", limit: 4, null: false
+    t.text "warehouse_name", null: false
+    t.integer "receive_order_quantity", limit: 2, null: false
+    t.text "product_unit", null: false
+    t.boolean "unit_price_pending_flag"
+    t.boolean "cost_pending_flag"
+    t.bigint "sale_unit_price", null: false
+    t.integer "multiplication_rate", limit: 2, null: false
+    t.bigint "receive_order_detail_amount", null: false
+    t.integer "profit_rate", limit: 2, null: false
+    t.bigint "list_price", null: false
+    t.date "stock_date", null: false
+    t.bigint "original_unit_price", null: false
+    t.bigint "cost_price", null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.text "supplier_name", null: false
+    t.date "delivery_date", null: false
+    t.text "note"
+    t.boolean "spec_detail_flag"
+    t.text "detail_note"
+    t.text "detail_memo"
+    t.bigint "pre_recorded"
+    t.integer "list_price_rate", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["maker_code_id"], name: "index_t_receive_order_details_on_maker_code_id"
+    t.index ["order_category_code_id"], name: "index_t_receive_order_details_on_order_category_code_id"
+    t.index ["product_code_id"], name: "index_t_receive_order_details_on_product_code_id"
+    t.index ["receive_order_id"], name: "index_t_receive_order_details_on_receive_order_id"
+    t.index ["supplier_code_id"], name: "index_t_receive_order_details_on_supplier_code_id"
+    t.index ["warehouse_code_id"], name: "index_t_receive_order_details_on_warehouse_code_id"
+  end
+
+  create_table "t_receive_orders", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "receive_order_number", null: false
+    t.date "receive_order_date", null: false
+    t.text "estimate_number", null: false
+    t.bigint "estimate_id", null: false
+    t.string "department_code_id", limit: 3, null: false
+    t.string "charge_code_id", limit: 4, null: false
+    t.string "assistant_code_id", limit: 4, null: false
+    t.string "customer_code_id", limit: 6, null: false
+    t.text "cus_department_name", null: false
+    t.text "cus_charge_name", null: false
+    t.string "bill_code", null: false
+    t.text "bill_name", null: false
+    t.string "ship_code", limit: 6, null: false
+    t.text "ship_charge_name", null: false
+    t.string "ship_post_code", limit: 7, null: false
+    t.text "ship_prefecture", null: false
+    t.text "ship_address1", null: false
+    t.text "ship_address2", null: false
+    t.string "ship_phone_number", limit: 11, null: false
+    t.string "ship_fax_number", limit: 10, null: false
+    t.text "cus_order_number", null: false
+    t.boolean "bulk_delivery_flag"
+    t.text "receive_order_name", null: false
+    t.string "aggregate_category"
+    t.bigint "receive_order_amount", null: false
+    t.bigint "tax_amount", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assistant_code_id"], name: "index_t_receive_orders_on_assistant_code_id"
+    t.index ["charge_code_id"], name: "index_t_receive_orders_on_charge_code_id"
+    t.index ["customer_code_id"], name: "index_t_receive_orders_on_customer_code_id"
+    t.index ["department_code_id"], name: "index_t_receive_orders_on_department_code_id"
+    t.index ["estimate_id"], name: "index_t_receive_orders_on_estimate_id"
+  end
+
   add_foreign_key "m_customers", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "m_customers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_products", "m_makers", column: "maker_code_id", primary_key: "maker_code"
@@ -235,4 +320,15 @@ ActiveRecord::Schema.define(version: 2021_01_15_045750) do
   add_foreign_key "m_suppliers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_users", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "t_estimate_details", "t_estimates"
+  add_foreign_key "t_receive_order_details", "m_makers", column: "maker_code_id", primary_key: "maker_code"
+  add_foreign_key "t_receive_order_details", "m_order_categories", column: "order_category_code_id", primary_key: "order_category_code"
+  add_foreign_key "t_receive_order_details", "m_products", column: "product_code_id", primary_key: "product_code"
+  add_foreign_key "t_receive_order_details", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
+  add_foreign_key "t_receive_order_details", "m_warehouses", column: "warehouse_code_id", primary_key: "warehouse_code"
+  add_foreign_key "t_receive_order_details", "t_receive_orders", column: "receive_order_id"
+  add_foreign_key "t_receive_orders", "m_customers", column: "customer_code_id", primary_key: "customer_code"
+  add_foreign_key "t_receive_orders", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "t_receive_orders", "m_users", column: "assistant_code_id", primary_key: "user_code"
+  add_foreign_key "t_receive_orders", "m_users", column: "charge_code_id", primary_key: "user_code"
+  add_foreign_key "t_receive_orders", "t_estimates", column: "estimate_id"
 end

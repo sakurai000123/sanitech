@@ -1,0 +1,2 @@
+class TReceiveOrder < ApplicationRecord
+end
