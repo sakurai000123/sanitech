@@ -7,11 +7,11 @@ class CreateTEstimates < ActiveRecord::Migration[6.0]
       t.text :estimate_number, null: false
       t.integer :estimate_branch_number, limit: 2, null: false
       t.date :estimate_date, null: false
-      t.string :department_code, limit: 3, null: false
-      t.string :charge_code, limit: 4, null: false
-      t.string :issuer_code, limit: 4, null: false
-      t.string :authorizer_code, limit: 4, null: false
-      t.string :customer_code, limit: 6, null: false
+      t.references :department_code, type: :string, limit: 3, null:false, foreign_key: {to_table: :m_departments, primary_key: :department_code} 
+      t.references :charge_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :user_code} 
+      t.references :issuer_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :user_code} 
+      t.references :authorizer_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :user_code} 
+      t.references :customer_code, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_customers, primary_key: :customer_code} 
       t.text :cus_department_name, null: false
       t.text :cus_charge_name, null: false
       t.string :delivery_date_category, null: false

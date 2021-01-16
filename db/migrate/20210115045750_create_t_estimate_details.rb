@@ -3,13 +3,13 @@ class CreateTEstimateDetails < ActiveRecord::Migration[6.0]
     create_table :t_estimate_details do |t|
       t.text :create_user_name, null: false
       t.text :update_user_name, null: false
-      t.references :t_estimate, foreign_key: true, null: false
+      t.references :estimate, null: false, foreign_key: {to_table: :t_estimates} 
       t.integer :line_number, limit: 2, null: false
       t.integer :sort_number, limit: 2, null: false
-      t.string :maker_code, limit: 4, null: false
+      t.references :maker_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_makers, primary_key: :maker_code} 
       t.text :maker_name, null: false
-      t.string :supplier_code, limit: 5, null: false
-      t.string :product_code, limit: 8, null: false
+      t.references :supplier_code, type: :string, limit: 5, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :supplier_code} 
+      t.references :product_code, type: :string, limit: 8, null: false, foreign_key: {to_table: :m_products, primary_key: :product_code} 
       t.text :product_name, null: false
       t.text :product_model_number, null: false
       t.integer :estimate_quantity, limit: 2, null: false

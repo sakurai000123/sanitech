@@ -47,6 +47,44 @@ class CreateMTable < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    ##### 入金口座
+    create_table :m_deposit_accounts, id: false do |t|
+      t.string :deposit_account_code, limit: 3, primary_key: true, null: false
+      t.text :create_user_name, null: false
+      t.text :update_user_name, null: false
+      t.text :deposit_account_name, null: false
+      t.date :start_date
+      t.date :end_date
+      t.string :account_category, null: false
+      t.string :account_number, limit: 7, null: false
+      t.string :account_type, null: false
+      t.string :account_holder, limit: 30, null: false
+      t.string :bank_code, limit: 4, null: false
+      t.string :branch_code, limit: 3, null: false
+      t.boolean :delete_flag
+
+      t.timestamps
+    end
+
+    ##### 支払口座
+    create_table :m_payment_accounts, id: false do |t|
+      t.string :payment_account_code, limit: 3, primary_key: true, null: false
+      t.text :create_user_name, null: false
+      t.text :update_user_name, null: false
+      t.text :payment_account_name, null: false
+      t.date :start_date
+      t.date :end_date
+      t.string :account_category, null: false
+      t.string :account_number, limit: 7, null: false
+      t.string :account_type, null: false
+      t.string :account_holder, limit: 30, null: false
+      t.string :bank_code, limit: 4, null: false
+      t.string :branch_code, limit: 3, null: false
+      t.boolean :delete_flag
+
+      t.timestamps
+    end
     
     ###### 得意先
     create_table :m_customers, id: false do |t|
@@ -71,7 +109,7 @@ class CreateMTable < ActiveRecord::Migration[6.0]
       t.string :payment_category, null: false
       t.string :close_date, null: false
       t.string :payment_date, null: false
-      t.string :deposit_account_code, limit: 3, null: false
+      t.references :deposit_account_code, type: :string, limit: 3, null:false, foreign_key: {to_table: :m_deposit_accounts, primary_key: :deposit_account_code} 
       t.boolean :delete_flag
 
       t.timestamps
@@ -99,7 +137,7 @@ class CreateMTable < ActiveRecord::Migration[6.0]
       t.string :payment_category, null: false
       t.string :close_date, null: false
       t.string :payment_day, null: false
-      t.string :payment_account_code, null: false
+      t.references :payment_account_code, type: :string, limit: 3, null:false, foreign_key: {to_table: :m_payment_accounts, primary_key: :payment_account_code} 
       t.text :note
       t.boolean :delete_flag
 

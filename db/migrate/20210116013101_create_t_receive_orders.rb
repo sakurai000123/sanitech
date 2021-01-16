@@ -13,9 +13,9 @@ class CreateTReceiveOrders < ActiveRecord::Migration[6.0]
       t.references :customer_code, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_customers, primary_key: :customer_code} 
       t.text :cus_department_name, null:false
       t.text :cus_charge_name, null:false
-      t.string :bill_code, null:false
+      t.references :bill_code, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_customers, primary_key: :customer_code} 
       t.text :bill_name, null:false
-      t.string :ship_code, limit: 6, null:false
+      t.references :ship_code, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_customers, primary_key: :customer_code} 
       t.text :ship_charge_name, null:false
       t.string :ship_post_code, limit: 7, null:false
       t.text :ship_prefecture, null:false

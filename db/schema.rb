@@ -36,11 +36,12 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
     t.string "payment_category", null: false
     t.string "close_date", null: false
     t.string "payment_date", null: false
-    t.string "deposit_account_code", limit: 3, null: false
+    t.string "deposit_account_code_id", limit: 3, null: false
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["department_code_id"], name: "index_m_customers_on_department_code_id"
+    t.index ["deposit_account_code_id"], name: "index_m_customers_on_deposit_account_code_id"
     t.index ["user_code_id"], name: "index_m_customers_on_user_code_id"
   end
 
@@ -154,12 +155,13 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
     t.string "payment_category", null: false
     t.string "close_date", null: false
     t.string "payment_day", null: false
-    t.string "payment_account_code", null: false
+    t.string "payment_account_code_id", limit: 3, null: false
     t.text "note"
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["department_code_id"], name: "index_m_suppliers_on_department_code_id"
+    t.index ["payment_account_code_id"], name: "index_m_suppliers_on_payment_account_code_id"
     t.index ["user_code2_id"], name: "index_m_suppliers_on_user_code2_id"
     t.index ["user_code_id"], name: "index_m_suppliers_on_user_code_id"
   end
@@ -293,13 +295,13 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
   create_table "t_estimate_details", force: :cascade do |t|
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
-    t.bigint "t_estimate_id", null: false
+    t.bigint "estimate_id", null: false
     t.integer "line_number", limit: 2, null: false
     t.integer "sort_number", limit: 2, null: false
-    t.string "maker_code", limit: 4, null: false
+    t.string "maker_code_id", limit: 4, null: false
     t.text "maker_name", null: false
-    t.string "supplier_code", limit: 5, null: false
-    t.string "product_code", limit: 8, null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.string "product_code_id", limit: 8, null: false
     t.text "product_name", null: false
     t.text "product_model_number", null: false
     t.integer "estimate_quantity", limit: 2, null: false
@@ -316,7 +318,10 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
     t.text "details_memo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["t_estimate_id"], name: "index_t_estimate_details_on_t_estimate_id"
+    t.index ["estimate_id"], name: "index_t_estimate_details_on_estimate_id"
+    t.index ["maker_code_id"], name: "index_t_estimate_details_on_maker_code_id"
+    t.index ["product_code_id"], name: "index_t_estimate_details_on_product_code_id"
+    t.index ["supplier_code_id"], name: "index_t_estimate_details_on_supplier_code_id"
   end
 
   create_table "t_estimates", force: :cascade do |t|
@@ -325,11 +330,11 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
     t.text "estimate_number", null: false
     t.integer "estimate_branch_number", limit: 2, null: false
     t.date "estimate_date", null: false
-    t.string "department_code", limit: 3, null: false
-    t.string "charge_code", limit: 4, null: false
-    t.string "issuer_code", limit: 4, null: false
-    t.string "authorizer_code", limit: 4, null: false
-    t.string "customer_code", limit: 6, null: false
+    t.string "department_code_id", limit: 3, null: false
+    t.string "charge_code_id", limit: 4, null: false
+    t.string "issuer_code_id", limit: 4, null: false
+    t.string "authorizer_code_id", limit: 4, null: false
+    t.string "customer_code_id", limit: 6, null: false
     t.text "cus_department_name", null: false
     t.text "cus_charge_name", null: false
     t.string "delivery_date_category", null: false
@@ -343,6 +348,11 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["authorizer_code_id"], name: "index_t_estimates_on_authorizer_code_id"
+    t.index ["charge_code_id"], name: "index_t_estimates_on_charge_code_id"
+    t.index ["customer_code_id"], name: "index_t_estimates_on_customer_code_id"
+    t.index ["department_code_id"], name: "index_t_estimates_on_department_code_id"
+    t.index ["issuer_code_id"], name: "index_t_estimates_on_issuer_code_id"
   end
 
   create_table "t_payments", force: :cascade do |t|
@@ -460,9 +470,9 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
     t.string "customer_code_id", limit: 6, null: false
     t.text "cus_department_name", null: false
     t.text "cus_charge_name", null: false
-    t.string "bill_code", null: false
+    t.string "bill_code_id", limit: 6, null: false
     t.text "bill_name", null: false
-    t.string "ship_code", limit: 6, null: false
+    t.string "ship_code_id", limit: 6, null: false
     t.text "ship_charge_name", null: false
     t.string "ship_post_code", limit: 7, null: false
     t.text "ship_prefecture", null: false
@@ -479,10 +489,12 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["assistant_code_id"], name: "index_t_receive_orders_on_assistant_code_id"
+    t.index ["bill_code_id"], name: "index_t_receive_orders_on_bill_code_id"
     t.index ["charge_code_id"], name: "index_t_receive_orders_on_charge_code_id"
     t.index ["customer_code_id"], name: "index_t_receive_orders_on_customer_code_id"
     t.index ["department_code_id"], name: "index_t_receive_orders_on_department_code_id"
     t.index ["estimate_id"], name: "index_t_receive_orders_on_estimate_id"
+    t.index ["ship_code_id"], name: "index_t_receive_orders_on_ship_code_id"
   end
 
   create_table "t_reports", force: :cascade do |t|
@@ -619,10 +631,12 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
   end
 
   add_foreign_key "m_customers", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "m_customers", "m_deposit_accounts", column: "deposit_account_code_id", primary_key: "deposit_account_code"
   add_foreign_key "m_customers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_products", "m_makers", column: "maker_code_id", primary_key: "maker_code"
   add_foreign_key "m_products", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
   add_foreign_key "m_suppliers", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "m_suppliers", "m_payment_accounts", column: "payment_account_code_id", primary_key: "payment_account_code"
   add_foreign_key "m_suppliers", "m_users", column: "user_code2_id", primary_key: "user_code"
   add_foreign_key "m_suppliers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_users", "m_departments", column: "department_code_id", primary_key: "department_code"
@@ -635,7 +649,15 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
   add_foreign_key "t_deposits", "m_customers", column: "customer_code_id", primary_key: "customer_code"
   add_foreign_key "t_deposits", "m_deposit_accounts", column: "deposit_account_code_id", primary_key: "deposit_account_code"
   add_foreign_key "t_deposits", "t_demands", column: "demand_id"
-  add_foreign_key "t_estimate_details", "t_estimates"
+  add_foreign_key "t_estimate_details", "m_makers", column: "maker_code_id", primary_key: "maker_code"
+  add_foreign_key "t_estimate_details", "m_products", column: "product_code_id", primary_key: "product_code"
+  add_foreign_key "t_estimate_details", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
+  add_foreign_key "t_estimate_details", "t_estimates", column: "estimate_id"
+  add_foreign_key "t_estimates", "m_customers", column: "customer_code_id", primary_key: "customer_code"
+  add_foreign_key "t_estimates", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "t_estimates", "m_users", column: "authorizer_code_id", primary_key: "user_code"
+  add_foreign_key "t_estimates", "m_users", column: "charge_code_id", primary_key: "user_code"
+  add_foreign_key "t_estimates", "m_users", column: "issuer_code_id", primary_key: "user_code"
   add_foreign_key "t_payments", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
   add_foreign_key "t_purchase_details", "m_products", column: "product_code_id", primary_key: "product_code"
   add_foreign_key "t_purchase_details", "t_purchases", column: "purchase_id"
@@ -650,7 +672,9 @@ ActiveRecord::Schema.define(version: 2021_01_16_064057) do
   add_foreign_key "t_receive_order_details", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
   add_foreign_key "t_receive_order_details", "m_warehouses", column: "warehouse_code_id", primary_key: "warehouse_code"
   add_foreign_key "t_receive_order_details", "t_receive_orders", column: "receive_order_id"
+  add_foreign_key "t_receive_orders", "m_customers", column: "bill_code_id", primary_key: "customer_code"
   add_foreign_key "t_receive_orders", "m_customers", column: "customer_code_id", primary_key: "customer_code"
+  add_foreign_key "t_receive_orders", "m_customers", column: "ship_code_id", primary_key: "customer_code"
   add_foreign_key "t_receive_orders", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "t_receive_orders", "m_users", column: "assistant_code_id", primary_key: "user_code"
   add_foreign_key "t_receive_orders", "m_users", column: "charge_code_id", primary_key: "user_code"
