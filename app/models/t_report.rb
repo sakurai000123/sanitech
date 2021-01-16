@@ -1,0 +1,2 @@
+class TReport < ApplicationRecord
+end

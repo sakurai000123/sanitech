@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_061800) do
+ActiveRecord::Schema.define(version: 2021_01_16_064057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -485,6 +485,31 @@ ActiveRecord::Schema.define(version: 2021_01_16_061800) do
     t.index ["estimate_id"], name: "index_t_receive_orders_on_estimate_id"
   end
 
+  create_table "t_reports", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.string "department_code_id", limit: 3, null: false
+    t.string "user_code_id", limit: 4, null: false
+    t.string "report_type", null: false
+    t.date "issue_date", null: false
+    t.text "title"
+    t.text "period"
+    t.text "overview"
+    t.text "cause"
+    t.text "task"
+    t.text "countermeasures"
+    t.string "customer_code_id", limit: 6, null: false
+    t.text "customer_name"
+    t.text "customer_charge_name"
+    t.text "disposition_contents"
+    t.boolean "reported_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_code_id"], name: "index_t_reports_on_customer_code_id"
+    t.index ["department_code_id"], name: "index_t_reports_on_department_code_id"
+    t.index ["user_code_id"], name: "index_t_reports_on_user_code_id"
+  end
+
   create_table "t_sales", force: :cascade do |t|
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
@@ -593,26 +618,6 @@ ActiveRecord::Schema.define(version: 2021_01_16_061800) do
     t.index ["user_code_id"], name: "index_t_send_orders_on_user_code_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name", limit: 255, null: false
-    t.string "name_ruby", limit: 255
-    t.string "master_key", limit: 255
-    t.string "password_digest", limit: 255, null: false
-    t.string "employee_no", limit: 255, null: false
-    t.date "joined_company_date"
-    t.string "company_phone", limit: 20
-    t.string "company_car_no", limit: 255
-    t.string "emergency_contact_phone", limit: 20
-    t.string "emergency_contact_name", limit: 255
-    t.string "email", limit: 255
-    t.string "blood_type", limit: 2
-    t.date "health_check_date"
-    t.text "remarks"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_no"], name: "index_users_on_employee_no", unique: true
-  end
-
   add_foreign_key "m_customers", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "m_customers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_products", "m_makers", column: "maker_code_id", primary_key: "maker_code"
@@ -650,6 +655,9 @@ ActiveRecord::Schema.define(version: 2021_01_16_061800) do
   add_foreign_key "t_receive_orders", "m_users", column: "assistant_code_id", primary_key: "user_code"
   add_foreign_key "t_receive_orders", "m_users", column: "charge_code_id", primary_key: "user_code"
   add_foreign_key "t_receive_orders", "t_estimates", column: "estimate_id"
+  add_foreign_key "t_reports", "m_customers", column: "customer_code_id", primary_key: "customer_code"
+  add_foreign_key "t_reports", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "t_reports", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "t_sales", "m_customers", column: "customer_code_id", primary_key: "customer_code"
   add_foreign_key "t_sales", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "t_sales", "m_users", column: "assistant_code_id", primary_key: "user_code"
