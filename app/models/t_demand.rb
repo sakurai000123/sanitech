@@ -1,0 +1,2 @@
+class TDemand < ApplicationRecord
+end

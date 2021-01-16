@@ -1,0 +1,2 @@
+class TAccountReceivable < ApplicationRecord
+end

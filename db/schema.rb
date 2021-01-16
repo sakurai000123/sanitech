@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_043141) do
+ActiveRecord::Schema.define(version: 2021_01_16_061800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,23 @@ ActiveRecord::Schema.define(version: 2021_01_16_043141) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "m_deposit_accounts", primary_key: "deposit_account_code", id: :string, limit: 3, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "deposit_account_name", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.string "account_category", null: false
+    t.string "account_number", limit: 7, null: false
+    t.string "account_type", null: false
+    t.string "account_holder", limit: 30, null: false
+    t.string "bank_code", limit: 4, null: false
+    t.string "branch_code", limit: 3, null: false
+    t.boolean "delete_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "m_makers", primary_key: "maker_code", id: :string, limit: 4, force: :cascade do |t|
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
@@ -75,6 +92,23 @@ ActiveRecord::Schema.define(version: 2021_01_16_043141) do
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
     t.text "order_category_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "m_payment_accounts", primary_key: "payment_account_code", id: :string, limit: 3, force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.text "payment_account_name", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.string "account_category", null: false
+    t.string "account_number", limit: 7, null: false
+    t.string "account_type", null: false
+    t.string "account_holder", limit: 30, null: false
+    t.string "bank_code", limit: 4, null: false
+    t.string "branch_code", limit: 3, null: false
+    t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -171,6 +205,91 @@ ActiveRecord::Schema.define(version: 2021_01_16_043141) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "t_account_payables", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.date "billing_date", null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.bigint "not_payment", null: false
+    t.date "payment_date", null: false
+    t.bigint "payment_amount", null: false
+    t.bigint "payment_fee", null: false
+    t.string "payment_category", null: false
+    t.date "payment_due_date", null: false
+    t.bigint "amount", null: false
+    t.bigint "tax_amount", null: false
+    t.bigint "total_amount", null: false
+    t.bigint "offset_amount", null: false
+    t.bigint "erase_amount", null: false
+    t.bigint "balance", null: false
+    t.bigint "demand_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["demand_id"], name: "index_t_account_payables_on_demand_id"
+    t.index ["supplier_code_id"], name: "index_t_account_payables_on_supplier_code_id"
+  end
+
+  create_table "t_account_receivables", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.date "billing_date", null: false
+    t.string "customer_code_id", limit: 6, null: false
+    t.bigint "not_deposit", null: false
+    t.string "payment_category", null: false
+    t.date "deposit_date", null: false
+    t.bigint "deposit_amount", null: false
+    t.bigint "tax_amount", null: false
+    t.bigint "amount", null: false
+    t.bigint "offset_amount", null: false
+    t.bigint "erase_amount", null: false
+    t.bigint "payment_fee", null: false
+    t.bigint "balance", null: false
+    t.bigint "demand_id", null: false
+    t.bigint "purchase_amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_code_id"], name: "index_t_account_receivables_on_customer_code_id"
+    t.index ["demand_id"], name: "index_t_account_receivables_on_demand_id"
+  end
+
+  create_table "t_demands", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.date "issue_date", null: false
+    t.string "demand_category", null: false
+    t.string "customer_code_id", limit: 6, null: false
+    t.string "user_code_id", limit: 4, null: false
+    t.date "payment_date", null: false
+    t.bigint "adjustment_amount", null: false
+    t.string "payment_category", null: false
+    t.bigint "last_demand_amount", null: false
+    t.bigint "deposit_amount", null: false
+    t.boolean "deposited_flag", null: false
+    t.date "close_date", null: false
+    t.boolean "Invoiced_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_code_id"], name: "index_t_demands_on_customer_code_id"
+    t.index ["user_code_id"], name: "index_t_demands_on_user_code_id"
+  end
+
+  create_table "t_deposits", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.date "deposit_date", null: false
+    t.bigint "demand_id", null: false
+    t.string "customer_code_id", limit: 6, null: false
+    t.string "payment_category", null: false
+    t.string "deposit_account_code_id", limit: 3, null: false
+    t.bigint "deposit_amount", null: false
+    t.bigint "erase_amount", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_code_id"], name: "index_t_deposits_on_customer_code_id"
+    t.index ["demand_id"], name: "index_t_deposits_on_demand_id"
+    t.index ["deposit_account_code_id"], name: "index_t_deposits_on_deposit_account_code_id"
+  end
+
   create_table "t_estimate_details", force: :cascade do |t|
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
@@ -224,6 +343,20 @@ ActiveRecord::Schema.define(version: 2021_01_16_043141) do
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "t_payments", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.date "payment_date", null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.string "payment_category", null: false
+    t.bigint "payment_amount", null: false
+    t.bigint "tax_amount", null: false
+    t.boolean "completion_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["supplier_code_id"], name: "index_t_payments_on_supplier_code_id"
   end
 
   create_table "t_purchase_details", force: :cascade do |t|
@@ -468,7 +601,17 @@ ActiveRecord::Schema.define(version: 2021_01_16_043141) do
   add_foreign_key "m_suppliers", "m_users", column: "user_code2_id", primary_key: "user_code"
   add_foreign_key "m_suppliers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_users", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "t_account_payables", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
+  add_foreign_key "t_account_payables", "t_demands", column: "demand_id"
+  add_foreign_key "t_account_receivables", "m_customers", column: "customer_code_id", primary_key: "customer_code"
+  add_foreign_key "t_account_receivables", "t_demands", column: "demand_id"
+  add_foreign_key "t_demands", "m_customers", column: "customer_code_id", primary_key: "customer_code"
+  add_foreign_key "t_demands", "m_users", column: "user_code_id", primary_key: "user_code"
+  add_foreign_key "t_deposits", "m_customers", column: "customer_code_id", primary_key: "customer_code"
+  add_foreign_key "t_deposits", "m_deposit_accounts", column: "deposit_account_code_id", primary_key: "deposit_account_code"
+  add_foreign_key "t_deposits", "t_demands", column: "demand_id"
   add_foreign_key "t_estimate_details", "t_estimates"
+  add_foreign_key "t_payments", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
   add_foreign_key "t_purchase_details", "m_products", column: "product_code_id", primary_key: "product_code"
   add_foreign_key "t_purchase_details", "t_purchases", column: "purchase_id"
   add_foreign_key "t_purchase_details", "t_send_order_details", column: "send_order_detail_id"

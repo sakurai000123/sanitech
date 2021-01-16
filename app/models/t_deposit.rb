@@ -1,0 +1,2 @@
+class TDeposit < ApplicationRecord
+end
