@@ -1,0 +1,2 @@
+class TSale < ApplicationRecord
+end

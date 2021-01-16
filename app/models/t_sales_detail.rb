@@ -1,0 +1,2 @@
+class TSalesDetail < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_032317) do
+ActiveRecord::Schema.define(version: 2021_01_16_043141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -352,6 +352,52 @@ ActiveRecord::Schema.define(version: 2021_01_16_032317) do
     t.index ["estimate_id"], name: "index_t_receive_orders_on_estimate_id"
   end
 
+  create_table "t_sales", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.bigint "receive_order_id", null: false
+    t.date "sales_date", null: false
+    t.date "close_date", null: false
+    t.string "department_code_id", limit: 3, null: false
+    t.string "charge_code_id", limit: 4, null: false
+    t.string "assistant_code_id", limit: 4, null: false
+    t.string "customer_code_id", limit: 6, null: false
+    t.bigint "sales_amount", null: false
+    t.integer "tax_amount", limit: 2, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assistant_code_id"], name: "index_t_sales_on_assistant_code_id"
+    t.index ["charge_code_id"], name: "index_t_sales_on_charge_code_id"
+    t.index ["customer_code_id"], name: "index_t_sales_on_customer_code_id"
+    t.index ["department_code_id"], name: "index_t_sales_on_department_code_id"
+    t.index ["receive_order_id"], name: "index_t_sales_on_receive_order_id"
+  end
+
+  create_table "t_sales_details", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.bigint "sale_id", null: false
+    t.integer "line_number", limit: 2, null: false
+    t.integer "sort_number", limit: 2, null: false
+    t.string "product_code_id", limit: 8, null: false
+    t.text "product_name", null: false
+    t.text "product_model_number", null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.text "supplier_name", null: false
+    t.bigint "sale_unit_price", null: false
+    t.integer "ship_quantity", limit: 2, null: false
+    t.text "product_unit", null: false
+    t.bigint "sales_detail_amount", null: false
+    t.string "sales_category"
+    t.boolean "visible_maker_flag"
+    t.boolean "shipped_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_code_id"], name: "index_t_sales_details_on_product_code_id"
+    t.index ["sale_id"], name: "index_t_sales_details_on_sale_id"
+    t.index ["supplier_code_id"], name: "index_t_sales_details_on_supplier_code_id"
+  end
+
   create_table "t_send_order_details", force: :cascade do |t|
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
@@ -441,6 +487,14 @@ ActiveRecord::Schema.define(version: 2021_01_16_032317) do
   add_foreign_key "t_receive_orders", "m_users", column: "assistant_code_id", primary_key: "user_code"
   add_foreign_key "t_receive_orders", "m_users", column: "charge_code_id", primary_key: "user_code"
   add_foreign_key "t_receive_orders", "t_estimates", column: "estimate_id"
+  add_foreign_key "t_sales", "m_customers", column: "customer_code_id", primary_key: "customer_code"
+  add_foreign_key "t_sales", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "t_sales", "m_users", column: "assistant_code_id", primary_key: "user_code"
+  add_foreign_key "t_sales", "m_users", column: "charge_code_id", primary_key: "user_code"
+  add_foreign_key "t_sales", "t_receive_orders", column: "receive_order_id"
+  add_foreign_key "t_sales_details", "m_products", column: "product_code_id", primary_key: "product_code"
+  add_foreign_key "t_sales_details", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
+  add_foreign_key "t_sales_details", "t_sales", column: "sale_id"
   add_foreign_key "t_send_order_details", "m_makers", column: "maker_code_id", primary_key: "maker_code"
   add_foreign_key "t_send_order_details", "m_products", column: "product_code_id", primary_key: "product_code"
   add_foreign_key "t_send_order_details", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
