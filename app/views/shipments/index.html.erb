@@ -1,0 +1,105 @@
+<div class="contents-wrap">
+  <div class="contents-inner">
+    <% #エラーメッセージ呼び出し %>
+    <%#= render "layouts/errors", errors: @???.errors %>
+    <div class="gray-wrap">
+      <h1>出荷入力</h1>
+      <div class="top-edit">
+        <dl class="edit-wrap x2">
+          <dt>受注番号</dt>
+          <dd>
+            <span class="input w200"
+              ><input type="text" name="" id=""
+            /></span>
+          </dd>
+          <dt>出荷日</dt>
+          <dd>
+            <span class="input w200"
+              ><input type="text" name="" id=""
+            /></span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x4">
+          <dt>部門</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="001"
+            /></span>
+            <span class="input w-flex not-edit"> 本社 </span>
+          </dd>
+          <dt>担当者</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="0005"
+            /></span>
+            <span class="input w-flex not-edit"> 広瀬愛未 </span>
+          </dd>
+          <dt>アシスタント</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="0002"
+            /></span>
+            <span class="input w-flex not-edit"> 太田足理子 </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x2">
+          <dt>得意先</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="000023"
+            /></span>
+            <span class="input w-flex not-edit"> 株式会社サンテック </span>
+          </dd>
+          <dt></dt>
+          <dd class="top-button-list">
+            <button>検索</button>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="contents-inner">
+    <table>
+      <thead>
+        <tr>
+          <th>　</th>
+          <th>出荷</th>
+          <th>品名</th>
+          <th>型番</th>
+          <th>仕入先</th>
+          <th>単価</th>
+          <th>数量</th>
+          <th>単位</th>
+          <th>金額</th>
+          <th>区分</th>
+          <th>メーカー非表示</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ー</td>
+          <td></td>
+          <td>油性塗料（住友グリーン）</td>
+          <td>SR-425</td>
+          <td>株式会社はがた</td>
+          <td class="right">10,000</td>
+          <td class="right">3</td>
+          <td>缶</td>
+          <td class="right">30,000</td>
+          <td>受注品</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="contents-inner">
+    <ul class="bottom-button-list">
+      <li><button>全てON</button></li>
+      <li><button>全てOFF</button></li>
+      <li><button>登録</button></li>
+      <li><button>仮送信</button></li>
+      <li><button>プレビューしないで印刷</button></li>
+      <li><button class="small">戻る</button></li>
+    </ul>
+  </div>
+</div>
