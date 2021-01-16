@@ -1,0 +1,2 @@
+class TSendOrderDetail < ApplicationRecord
+end

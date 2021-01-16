@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_015606) do
+ActiveRecord::Schema.define(version: 2021_01_16_025048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -311,6 +311,68 @@ ActiveRecord::Schema.define(version: 2021_01_16_015606) do
     t.index ["estimate_id"], name: "index_t_receive_orders_on_estimate_id"
   end
 
+  create_table "t_send_order_details", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.bigint "send_order_id", null: false
+    t.integer "line_number", limit: 2, null: false
+    t.integer "sort_number", limit: 2, null: false
+    t.bigint "receive_order_detail_id", null: false
+    t.string "maker_code_id", limit: 4, null: false
+    t.text "maker_name", null: false
+    t.string "product_code_id", limit: 8, null: false
+    t.text "product_name", null: false
+    t.text "product_model_number", null: false
+    t.integer "send_order_quantity", limit: 2, null: false
+    t.text "product_unit", null: false
+    t.bigint "purchase_unit_price", null: false
+    t.bigint "receive_order_detail_amount", null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.text "supplier_name", null: false
+    t.text "supplier_charge_name", null: false
+    t.bigint "unit_price", null: false
+    t.date "delivery_deadline", null: false
+    t.boolean "send_direct_flag"
+    t.string "customer_code", limit: 6
+    t.text "cus_charge_name"
+    t.string "cus_post_code", limit: 7
+    t.text "cus_prefecture"
+    t.text "cus_address1"
+    t.text "cus_address2"
+    t.string "cus_phone_number", limit: 11
+    t.string "cus_fax_number", limit: 10
+    t.text "note"
+    t.boolean "bill_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["maker_code_id"], name: "index_t_send_order_details_on_maker_code_id"
+    t.index ["product_code_id"], name: "index_t_send_order_details_on_product_code_id"
+    t.index ["receive_order_detail_id"], name: "index_t_send_order_details_on_receive_order_detail_id"
+    t.index ["send_order_id"], name: "index_t_send_order_details_on_send_order_id"
+    t.index ["supplier_code_id"], name: "index_t_send_order_details_on_supplier_code_id"
+  end
+
+  create_table "t_send_orders", force: :cascade do |t|
+    t.text "create_user_name"
+    t.text "update_user_name"
+    t.text "send_order_number"
+    t.text "send_order_branch_number"
+    t.date "send_order_date"
+    t.bigint "receive_order_id", null: false
+    t.string "department_code_id", limit: 3, null: false
+    t.string "user_code_id", limit: 4, null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.bigint "send_order_amount"
+    t.integer "tax_amount", limit: 2
+    t.boolean "completion_flag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_code_id"], name: "index_t_send_orders_on_department_code_id"
+    t.index ["receive_order_id"], name: "index_t_send_orders_on_receive_order_id"
+    t.index ["supplier_code_id"], name: "index_t_send_orders_on_supplier_code_id"
+    t.index ["user_code_id"], name: "index_t_send_orders_on_user_code_id"
+  end
+
   add_foreign_key "m_customers", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "m_customers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_products", "m_makers", column: "maker_code_id", primary_key: "maker_code"
@@ -331,4 +393,13 @@ ActiveRecord::Schema.define(version: 2021_01_16_015606) do
   add_foreign_key "t_receive_orders", "m_users", column: "assistant_code_id", primary_key: "user_code"
   add_foreign_key "t_receive_orders", "m_users", column: "charge_code_id", primary_key: "user_code"
   add_foreign_key "t_receive_orders", "t_estimates", column: "estimate_id"
+  add_foreign_key "t_send_order_details", "m_makers", column: "maker_code_id", primary_key: "maker_code"
+  add_foreign_key "t_send_order_details", "m_products", column: "product_code_id", primary_key: "product_code"
+  add_foreign_key "t_send_order_details", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
+  add_foreign_key "t_send_order_details", "t_receive_order_details", column: "receive_order_detail_id"
+  add_foreign_key "t_send_order_details", "t_send_orders", column: "send_order_id"
+  add_foreign_key "t_send_orders", "m_departments", column: "department_code_id", primary_key: "department_code"
+  add_foreign_key "t_send_orders", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
+  add_foreign_key "t_send_orders", "m_users", column: "user_code_id", primary_key: "user_code"
+  add_foreign_key "t_send_orders", "t_receive_orders", column: "receive_order_id"
 end
