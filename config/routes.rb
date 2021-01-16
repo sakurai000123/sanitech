@@ -33,8 +33,8 @@ Rails.application.routes.draw do
   resources :cashbooks
   # 請求書発行
   resources :invoices
-  
-  
+
+
   # 照会種別一覧
   resources :inquiry_managements
   # 担当別推移
@@ -43,6 +43,13 @@ Rails.application.routes.draw do
   resources :inquiry_inhouses
   # 経費推移
   resources :inquiry_expenses
+
+  # 未発注一覧
+  resources :not_orders
+  # 出荷入力
+  resources :shipments
+  # 入荷入力
+  resources :instocks
 
   # PDFテスト
   get '/test_pdf', to: 'estimates#test_pdf' 

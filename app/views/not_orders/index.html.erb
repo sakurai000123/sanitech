@@ -1,0 +1,271 @@
+<div class="contents-wrap">
+  <div class="contents-inner">
+    <% #エラーメッセージ呼び出し %>
+    <%#= render "layouts/errors", errors: @???.errors %>
+    <div class="gray-wrap">
+      <div class="heading-wrap">
+        <h1>未発注一覧</h1>
+        <p class="top-caution-text">１件のデータが抽出されました</p>
+      </div>
+      <div class="top-edit">
+        <dl class="edit-wrap small">
+          <dt>受注番号</dt>
+          <dd>
+            <span class="input w100"
+              ><input type="text" name="" id="" value="000002" /></span
+            ><span class="hyphen">~</span>
+            <span class="input w100"
+              ><input type="text" name="" id="" value="000002"
+            /></span>
+          </dd>
+          <dt>発注日</dt>
+          <dd>
+            <span class="input w100"
+              ><input type="text" name="" id="" value="2020/10/2" /></span
+            ><span class="hyphen">~</span>
+            <span class="input w100"
+              ><input type="text" name="" id="" value="2020/10/2"
+            /></span>
+          </dd>
+          <dt>部門</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="001"
+            /></span>
+            <span class="input w-flex not-edit"> 本社 </span>
+          </dd>
+          <dt>担当者</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="0005"
+            /></span>
+            <span class="input w200 not-edit"> 広瀬　愛未 </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x2">
+          <dt>納品先</dt>
+          <dd>
+            <span class="input contents-label"
+              ><input type="text" name="" id="" value="000023"
+            /></span>
+            <span class="input w-flex not-edit">株式会社サンテック</span>
+          </dd>
+          <dt>納品先担当者</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="社長　横田" />
+            </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x4">
+          <dt>納品先郵便番号</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="000-0000" />
+            </span>
+          </dd>
+          <dt>納品先都道府県</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="東京" />
+            </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x2">
+          <dt>納品先住所</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="" />
+            </span>
+          </dd>
+
+          <ul class="checkbox-list">
+            <li>
+              直送
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                value=""
+              />（　直送する場合ON　）
+            </li>
+          </ul>
+        </dl>
+        <dl class="edit-wrap x4">
+          <dt>納品先TEL</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="三ツ星　ベルト" />
+            </span>
+          </dd>
+          <dt>納品先FAX</dt>
+          <dd>
+            <span class="input w100per">
+              <input type="text" name="" id="" value="三ツ星　ベルト" />
+            </span>
+          </dd>
+        </dl>
+        <div class="top-edit-flex">
+          <dl class="edit-wrap small">
+            <dt class="w120">備考欄</dt>
+            <dd class="w-flex ml0">
+              <span class="input w100per">
+                <textarea
+                  value="※エンドレス品での御見積となります。"
+                ></textarea>
+              </span>
+            </dd>
+          </dl>
+          <ul class="top-button-list">
+            <li><button>検索</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contents-inner">
+    <table>
+      <thead>
+        <tr>
+          <th>洗濯</th>
+          <th>受注番号</th>
+          <th>内番</th>
+          <th>メーカー</th>
+          <th>メーカー名</th>
+          <th>商品CD</th>
+          <th>商品名</th>
+          <th>型番</th>
+          <th>数量</th>
+          <th>単位</th>
+          <th>仕入単価</th>
+          <th>受注金額</th>
+          <th>仕入先</th>
+          <th>単価</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" name="" id="" /></td>
+          <td>000002</td>
+          <td>0</td>
+          <td>0008</td>
+          <td>エスケー化研</td>
+          <td>00000000</td>
+          <td>油性塗料住友グリーン</td>
+          <td>SR-425</td>
+          <td>3</td>
+          <td>缶</td>
+          <td class="right">7,000</td>
+          <td class="right">21,000</td>
+          <td>株式会社はがた</td>
+          <td class="right">10,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="contents-inner">
+    <div class="gray-wrap">
+      <div class="flex-wrap">
+        <div class="bottom-left-wrap">
+          <dl class="edit-wrap x1">
+            <dt>仕入先</dt>
+            <dd>
+              <span class="input contents-label"
+                ><input
+                  type="text"
+                  name=""
+                  id=""
+                  value="10000
+                                "
+              /></span>
+              <span class="input w-flex">
+                <input type="text" name="" id="" value="株式会社はがた" />
+              </span>
+            </dd>
+            <dt>仕入先担当者</dt>
+            <dd>
+              <span class="input w100per">
+                <input type="text" name="" id="" value="社長　羽方" />
+              </span>
+            </dd>
+            <dt>備考</dt>
+            <dd>
+              <span class="input w100per">
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  value="東京SOC横浜工場様分"
+                />
+              </span>
+            </dd>
+          </dl>
+        </div>
+        <div class="bottom-right-wrap">
+          <div class="yellow-wrap mb-medium">
+            <dl class="edit-wrap x2">
+              <dt>合計金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="21,000"
+                  />
+                </span>
+              </dd>
+              <dt>消費税金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="2,100"
+                  />
+                </span>
+              </dd>
+
+              <dt>分類</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="center"
+                    type="text"
+                    name=""
+                    id=""
+                    value="物販"
+                  />
+                </span>
+              </dd>
+            </dl>
+          </div>
+          <ul class="checkbox-list x3">
+            <li>
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                value=""
+              />プレビューしないで印刷
+            </li>
+            <li>
+              <input type="checkbox" name="" id="" value="" />注文請書も発行
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="page005_bottom_button">
+        <ul class="bottom-button-list">
+          <li><button>登録</button></li>
+          <li><button>発注書</button></li>
+          <li><button>発注取り消し</button></li>
+          <li><button class="small">戻る</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

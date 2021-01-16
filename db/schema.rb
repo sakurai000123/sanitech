@@ -460,6 +460,26 @@ ActiveRecord::Schema.define(version: 2021_01_16_043141) do
     t.index ["user_code_id"], name: "index_t_send_orders_on_user_code_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+    t.string "name_ruby", limit: 255
+    t.string "master_key", limit: 255
+    t.string "password_digest", limit: 255, null: false
+    t.string "employee_no", limit: 255, null: false
+    t.date "joined_company_date"
+    t.string "company_phone", limit: 20
+    t.string "company_car_no", limit: 255
+    t.string "emergency_contact_phone", limit: 20
+    t.string "emergency_contact_name", limit: 255
+    t.string "email", limit: 255
+    t.string "blood_type", limit: 2
+    t.date "health_check_date"
+    t.text "remarks"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_no"], name: "index_users_on_employee_no", unique: true
+  end
+
   add_foreign_key "m_customers", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "m_customers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_products", "m_makers", column: "maker_code_id", primary_key: "maker_code"
