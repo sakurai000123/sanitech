@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_025048) do
+ActiveRecord::Schema.define(version: 2021_01_16_032317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,6 +226,47 @@ ActiveRecord::Schema.define(version: 2021_01_16_025048) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "t_purchase_details", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.bigint "purchase_id", null: false
+    t.integer "line_number", limit: 2, null: false
+    t.integer "sort_number", limit: 2, null: false
+    t.bigint "send_order_detail_id", null: false
+    t.string "product_code_id", limit: 8, null: false
+    t.text "product_name", null: false
+    t.text "product_model_number", null: false
+    t.bigint "purchase_unit_price", null: false
+    t.integer "purchase_quantity", limit: 2, null: false
+    t.bigint "purchase_amount", null: false
+    t.date "receive_order_date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_code_id"], name: "index_t_purchase_details_on_product_code_id"
+    t.index ["purchase_id"], name: "index_t_purchase_details_on_purchase_id"
+    t.index ["send_order_detail_id"], name: "index_t_purchase_details_on_send_order_detail_id"
+  end
+
+  create_table "t_purchases", force: :cascade do |t|
+    t.text "create_user_name", null: false
+    t.text "update_user_name", null: false
+    t.date "purchase_date", null: false
+    t.string "supplier_code_id", limit: 5, null: false
+    t.text "supplier_name", null: false
+    t.string "user_code_id", limit: 4, null: false
+    t.bigint "send_order_id", null: false
+    t.bigint "receive_order_id", null: false
+    t.bigint "purchase_amount", null: false
+    t.bigint "tax_amount", null: false
+    t.date "purchase_slip_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["receive_order_id"], name: "index_t_purchases_on_receive_order_id"
+    t.index ["send_order_id"], name: "index_t_purchases_on_send_order_id"
+    t.index ["supplier_code_id"], name: "index_t_purchases_on_supplier_code_id"
+    t.index ["user_code_id"], name: "index_t_purchases_on_user_code_id"
+  end
+
   create_table "t_receive_order_details", force: :cascade do |t|
     t.text "create_user_name", null: false
     t.text "update_user_name", null: false
@@ -382,6 +423,13 @@ ActiveRecord::Schema.define(version: 2021_01_16_025048) do
   add_foreign_key "m_suppliers", "m_users", column: "user_code_id", primary_key: "user_code"
   add_foreign_key "m_users", "m_departments", column: "department_code_id", primary_key: "department_code"
   add_foreign_key "t_estimate_details", "t_estimates"
+  add_foreign_key "t_purchase_details", "m_products", column: "product_code_id", primary_key: "product_code"
+  add_foreign_key "t_purchase_details", "t_purchases", column: "purchase_id"
+  add_foreign_key "t_purchase_details", "t_send_order_details", column: "send_order_detail_id"
+  add_foreign_key "t_purchases", "m_suppliers", column: "supplier_code_id", primary_key: "supplier_code"
+  add_foreign_key "t_purchases", "m_users", column: "user_code_id", primary_key: "user_code"
+  add_foreign_key "t_purchases", "t_receive_orders", column: "receive_order_id"
+  add_foreign_key "t_purchases", "t_send_orders", column: "send_order_id"
   add_foreign_key "t_receive_order_details", "m_makers", column: "maker_code_id", primary_key: "maker_code"
   add_foreign_key "t_receive_order_details", "m_order_categories", column: "order_category_code_id", primary_key: "order_category_code"
   add_foreign_key "t_receive_order_details", "m_products", column: "product_code_id", primary_key: "product_code"

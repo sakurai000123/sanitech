@@ -1,0 +1,2 @@
+class TPurchaseDetail < ApplicationRecord
+end
