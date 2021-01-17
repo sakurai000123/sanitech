@@ -51,9 +51,4 @@ Rails.application.routes.draw do
   # 入荷入力
   resources :instocks
 
-  # PDFテスト
-  get '/test_pdf', to: 'estimates#test_pdf' 
-  # チャートテスト
-  get '/test_chart', to: 'estimates#test_chart'
-
 end
