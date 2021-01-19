@@ -17,6 +17,7 @@
 # rails db:seed
 
 5.times do |n|
+  # 部署
   MDepartment.create(
     department_code: "00#{n + 1}",
     create_user_name: "test#{n + 1}",

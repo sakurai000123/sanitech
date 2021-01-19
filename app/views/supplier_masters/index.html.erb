@@ -4,164 +4,169 @@
     <%#= render "layouts/errors", errors: @???.errors %>
     <div class="gray-wrap">
       <h1>仕入先入力</h1>
-      <div class="top-edit">
-        <dl class="edit-wrap small">
-          <dt>仕入先番号</dt>
-          <dd>
-            <span class="input w100 not-edit">S</span
-            ><span class="hyphen">−</span>
-            <span class="input w50 not-edit">100 </span>
-          </dd>
-          <dt>登録日</dt>
-          <dd>
-            <span class="input w100"
-              ><input type="text" name="" id="" value="2020年11月18日"
-            /></span>
-          </dd>
-          <dt>部門</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="001"
-            /></span>
-            <span class="input w100 not-edit"> 本社 </span>
-          </dd>
-          <dt>担当者</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="0005"
-            /></span>
-            <span class="input w100 not-edit"> 広瀬愛未 </span>
-          </dd>
-          <dt>発行者</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="0005"
-            /></span>
-            <span class="input w100 not-edit"> 広瀬愛未 </span>
-          </dd>
-          <dt>マスタキー</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="" />
-            </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x2">
-          <dt>仕入先名</dt>
-          <dd>
-            <span class="input w100per">
-              <input
-                type="text"
-                name=""
-                id=""
-                value="（株）サンアイテック"
-              />
-            </span>
-          </dd>
-          <dt>仕入先担当者</dt>
-          <dd>
-            <span class="input w100per">
-              <input
-                type="text"
-                name=""
-                id=""
-                value="代表取締役　長塚友和"
-              />
-            </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>仕入先住所</dt>
-          <dd class="x2">
-            <span class="input w100per">
-              <input
-                type="text"
-                name=""
-                id=""
-                value="〒302-0034 茨城県取手市戸頭4-21-24"
-              />
-            </span>
-          </dd>
-          <dt>電話番号</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="0297-70-2030" />
-            </span>
-          </dd>
-          <dt>FAX番号</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="0297-70-2031" />
-            </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>支払条件</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="1"
-            /></span>
-            <span class="input w-flex">
-              <input type="text" name="" id="" value="現金" />
-            </span>
-          </dd>
-          <dt>締日</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="1"
-            /></span>
-            <span class="input w-flex">
-              <input type="text" name="" id="" value="末日" />
-            </span>
-          </dd>
-          <dt>支払日</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="1"
-            /></span>
-            <span class="input w-flex">
-              <input type="text" name="" id="" value="翌末日" />
-            </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x2">
-          <dt>振込先</dt>
-          <dd>
-            <span class="input w100per">
-              <input
-                type="text"
-                name=""
-                id=""
-                value="常陽銀行　戸頭支店　普通　１４３４８７３"
-              />
-            </span>
-          </dd>
-        </dl>
-        <div class="top-edit-flex">
+      <%= form_for @supplier, url: {:controller => :supplier_masters, :action => :upsert, :id => @supplier.id } do |f| %>
+        <div class="top-edit">
           <dl class="edit-wrap small">
-            <dt class="w120">備考欄</dt>
-            <dd class="w-flex ml0">
-              <div class="w100per">
-                <span class="input w100per upper">
-                  <input type="text" name="" id="" value="10万円以上手形" />
-                </span>
-                <span class="input w100per lower">
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    value="長塚メール　101tn@sannaitekku.co.jp"
-                  />
-                </span>
-              </div>
+            <dt>仕入先番号</dt>
+            <dd>
+              <!--
+              <span class="input w100 not-edit">S</span>
+              <span class="hyphen">−</span>
+              <span class="input w50 not-edit">100 </span>
+              -->
+              <span class="input w100"><%= f.text_field :supplier_number %></span>
+            </dd>
+            <dt>登録日</dt>
+            <dd>
+              <span class="input w200">
+                <%= f.date_field :start_date %>
+              </span>
+            </dd>
+            <dt>部門</dt>
+            <dd>
+              <span class="input contents-label">
+                <%= f.text_field :department_code_id %>
+              </span>
+              <span class="input w100 not-edit"><%= @department_name %></span>
+            </dd>
+            <dt>担当者</dt>
+            <dd>
+              <span class="input contents-label">
+                <%= f.text_field :user_code_id %>
+              </span>
+              <span class="input w100 not-edit"><%= @user_name1 %></span>
+            </dd>
+            <dt>発行者</dt>
+            <dd>
+              <span class="input contents-label">
+                <%= f.text_field :user_code2_id %>
+              </span>
+              <span class="input w100 not-edit"><%= @user_name2 %></span>
+            </dd>
+            <dt>マスタキー</dt>
+            <dd>
+              <span class="input w100per">
+                <input type="text" name="" id="" value="" />
+              </span>
             </dd>
           </dl>
-          <ul class="top-button-list">
-            <li><button>新規登録</button></li>
-            <li><button>保存</button></li>
-          </ul>
+          <dl class="edit-wrap x2">
+            <dt>仕入先名</dt>
+            <dd>
+              <span class="input w100per">
+                <%= f.text_field :supplier_name %>
+              </span>
+            </dd>
+            <dt>仕入先担当者</dt>
+            <dd>
+              <span class="input w100per">
+                <%= f.text_field :charge_name %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>仕入先住所</dt>
+            <dd class="x2">
+              <span class="input w100per">
+                
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  value="〒302-0034 茨城県取手市戸頭4-21-24"
+                />
+              </span>
+            </dd>
+            <dt>電話番号</dt>
+            <dd>
+              <span class="input w100per">
+                <%= f.text_field :phone_number %>
+              </span>
+            </dd>
+            <dt>FAX番号</dt>
+            <dd>
+              <span class="input w100per">
+                <%= f.text_field :fax_number %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>支払条件</dt>
+            <dd>
+              <span class="input contents-label">
+                <input type="text" name="" id="" value="1"/>
+              </span>
+              <span class="input w-flex">
+                <%= f.select :payment_category, [["現金", "現金"], ["振込", "振込"], ["手形", "手形"]], include_blank: "選択して下さい" %>
+              </span>
+            </dd>
+            <dt>締日</dt>
+            <dd>
+              <span class="input contents-label"
+                ><input type="text" name="" id="" value="1"
+              /></span>
+              <span class="input w-flex">
+                <%= f.select :close_date, [["末日", "末日"]], include_blank: "選択して下さい" %>
+              </span>
+            </dd>
+            <dt>支払日</dt>
+            <dd>
+              <span class="input contents-label"
+                ><input type="text" name="" id="" value="1"
+              /></span>
+              <span class="input w-flex">
+                <%= f.select :close_date, [["翌末日", "翌末日"]], include_blank: "選択して下さい" %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x2">
+            <dt>振込先</dt>
+            <dd>
+              <span class="input w100per">
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  value="常陽銀行　戸頭支店　普通　１４３４８７３"
+                />
+              </span>
+            </dd>
+          </dl>
+          <div class="top-edit-flex">
+            <dl class="edit-wrap small">
+              <dt class="w120">備考欄</dt>
+              <dd class="w-flex ml0">
+                <div class="w100per">
+                  <span class="input w100per upper">
+                    <%= f.text_field :note %>
+                  </span>
+                  <span class="input w100per lower">
+                    <input
+                      type="text"
+                      name=""
+                      id=""
+                      value="長塚メール　101tn@sannaitekku.co.jp"
+                    />
+                  </span>
+                </div>
+              </dd>
+            </dl>
+            <ul class="top-button-list">
+              <li><button>新規登録</button></li>
+              <li><button>保存</button></li>
+            </ul>
+          </div>
+          <h4>郵便番号※仕入先住所</h4>
+          <%= f.text_field :post_code %>
+          <h4>都道府県※仕入先住所</h4>
+          <%= f.text_field :prefecture %>
+          <h4>住所1※仕入先住所</h4>
+          <%= f.text_field :address1 %>
+          <h4>住所2※仕入先住所</h4>
+          <%= f.text_field :address2 %>
+
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="contents-inner">
@@ -174,8 +179,6 @@
           <th>電話番号</th>
           <th>FAX番号</th>
           <th>仕入先担当者</th>
-          <th>詳細</th>
-          <th>選択</th>
         </tr>
       </thead>
       <tbody>
@@ -186,8 +189,6 @@
           <td>03-5202-2515</td>
           <td>03-5202-2516</td>
           <td>本田</td>
-          <td><button>詳細</button></td>
-          <td><button>選択</button></td>
         </tr>
       </tbody>
     </table>
