@@ -16,8 +16,8 @@
 # 以下を実行で作成される
 # rails db:seed
 
+# 部署
 5.times do |n|
-  # 部署
   MDepartment.create(
     department_code: "00#{n + 1}",
     create_user_name: "test#{n + 1}",
@@ -33,7 +33,7 @@
     parent_department_code: '001'
   )
 end
-# ユーザ作成
+# ユーザ作成（社員）
 MUser.create(
   user_code: '0001',
   create_user_name: 'test1',
@@ -54,3 +54,28 @@ MUser.create(
   emergency_phone_number: '09012341234',
   blood_type: 'A'
 )
+# 入金口座
+5.times do |n|
+  MDepositAccount.create(
+    deposit_account_code: "00#{n + 1}",
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    deposit_account_name: "赤色銀行#{n + 1}",
+    start_date: DateTime.strptime("09/0#{n + 1}/2009 17:00", "%m/%d/%Y %H:%M"),
+    end_date: DateTime.strptime("09/0#{n + 1}/2012 17:00", "%m/%d/%Y %H:%M"),
+    account_category: '1',
+    account_number: "000000#{n + 1}",
+    account_type: '1',
+    account_holder: "株式会社123#{n + 1}",
+    bank_code: "123#{n + 1}",
+    branch_code: "11#{n + 1}",
+  )
+end
+
+# 支払口座
+# 得意先
+# 仕入先
+# 受注区分
+# メーカー
+# 商品
+# 倉庫
