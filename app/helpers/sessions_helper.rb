@@ -1,15 +1,15 @@
 module SessionsHelper
   # 渡されたユーザーでログインする
   def log_in(user)
-    session[:user_code] = user.user_code
-    session[:user_name] = user.family_name + user.given_name
+    session[:id] = user.id
+    session[:user_name] = user.user_name
   end
 
   # 現在ログイン中のユーザーを返す (いる場合)
   def current_user
-    if session[:user_code]
-     #@current_user = @current_user || MUser.find_by(user_code: session[:user_code])と同じ意味
-      @current_user ||= MUser.find_by(user_code: session[:user_code])
+    if session[:id]
+     #@current_user = @current_user || MUser.find_by(id: session[:id])と同じ意味
+      @current_user ||= MUser.find_by(id: session[:id])
     end
   end
 
@@ -25,7 +25,7 @@ module SessionsHelper
 
   # 現在のユーザーをログアウトする
   def log_out
-    session[:user_code] = nil
+    session[:id] = nil
     session[:user_name] = nil
     @current_user = nil
   end

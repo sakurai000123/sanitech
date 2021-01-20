@@ -20,28 +20,26 @@
             <dt>部門</dt>
             <dd>
               <span class="input contents-label">
-                <%= f.text_field :department_code_id %>
+                <%= f.text_field :department_id %>
               </span>
               <span class="input w100 not-edit"><%= @department_name %></span>
             </dd>
             <dt>社員No</dt>
             <dd>
               <span class="input w100">
-                <%= f.text_field :user_code %>
+                <%= f.text_field :id %>
               </span>
             </dd>
             <dt>氏名</dt>
             <dd>
               <span class="input w100per">
-                <%= f.text_field :family_name %>
-                <%= f.text_field :given_name %>
+                <%= f.text_field :user_name %>
               </span>
             </dd>
             <dt>振り仮名</dt>
             <dd>
               <span class="input w100per">
-                <%= f.text_field :family_name_kana %>
-                <%= f.text_field :given_name_kana %>
+                <%= f.text_field :user_name_kana %>
               </span>
             </dd>
             <dt>マスタキー</dt>
@@ -55,7 +53,7 @@
             <dt>所属部署</dt>
             <dd>
               <span class="input w200">
-                <input type="text" name="" id="" value="営業部"/>
+                <%= f.text_field :affiliation_department %>
               </span>
             </dd>
             <dt>役職</dt>
@@ -75,7 +73,7 @@
             <dt>社用車No</dt>
             <dd>
               <span class="input w120">
-                <%= f.text_field :company_car_No %>
+                <%= f.text_field :company_car_no %>
               </span>
             </dd>
             <dt>緊急連絡先</dt>
@@ -85,8 +83,7 @@
                   <%= f.text_field :emergency_phone_number %>
                 </span>
                 <span class="input w100per lower">
-                  <input type="text" name="" id="" value="田中"/>
-                  <input type="text" name="" id="" value="太郎"/>
+                  <%= f.text_field :emergency_name %>
                 </span>
               </div>
             </dd>
@@ -146,7 +143,7 @@
           <dt>権限</dt>
           <dd>
             <span class="input w100">
-              <%= f.text_field :authority_code %>
+              <%= f.text_field :authority_id %>
             </span>
           </dd>
           
@@ -173,12 +170,12 @@
       </thead>
       <tbody>
         <% @users.each.with_index(1) do |user, i| %>
-          <tr data-link="<%= edit_employee_information_path(user.user_code) %>">
+          <tr data-link="<%= edit_employee_information_path(user.id) %>">
             <td><%= i %></td>
-            <td><%= user.department_code_id %></td>
-            <td><%= user.user_code %></td>
-            <td><%= user.family_name %><%= user.given_name %></td>
-            <td>所属部署</td>
+            <td><%= user.department_id %></td>
+            <td><%= user.id %></td>
+            <td><%= user.user_name %></td>
+            <td><%= user.affiliation_department %></td>
             <td><%= user.position %></td>
             <td><%= user.mobile_phone_number %></td>
             <td><%= user.mail_address %></td>

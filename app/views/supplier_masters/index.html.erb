@@ -25,23 +25,23 @@
             <dt>部門</dt>
             <dd>
               <span class="input contents-label">
-                <%= f.text_field :department_code_id %>
+                <%= f.text_field :department_id %>
               </span>
               <span class="input w100 not-edit"><%= @department_name %></span>
             </dd>
             <dt>担当者</dt>
             <dd>
               <span class="input contents-label">
-                <%= f.text_field :user_code_id %>
+                <%= f.text_field :charge_id %>
               </span>
-              <span class="input w100 not-edit"><%= @user_name1 %></span>
+              <span class="input w100 not-edit"><%= @charge_user_name %></span>
             </dd>
             <dt>発行者</dt>
             <dd>
               <span class="input contents-label">
-                <%= f.text_field :user_code2_id %>
+                <%= f.text_field :input_user_id %>
               </span>
-              <span class="input w100 not-edit"><%= @user_name2 %></span>
+              <span class="input w100 not-edit"><%= @input_user_name %></span>
             </dd>
             <dt>マスタキー</dt>
             <dd>
@@ -97,7 +97,7 @@
                 <input type="text" name="" id="" value="1"/>
               </span>
               <span class="input w-flex">
-                <%= f.select :payment_category, [["現金", "現金"], ["振込", "振込"], ["手形", "手形"]], include_blank: "選択して下さい" %>
+                <%= f.select :payment_category_code, [["現金", "現金"], ["振込", "振込"], ["手形", "手形"]], include_blank: "選択して下さい" %>
               </span>
             </dd>
             <dt>締日</dt>
@@ -106,7 +106,7 @@
                 ><input type="text" name="" id="" value="1"
               /></span>
               <span class="input w-flex">
-                <%= f.select :close_date, [["末日", "末日"]], include_blank: "選択して下さい" %>
+                <%= f.select :close_date_code, [["末日", "末日"]], include_blank: "選択して下さい" %>
               </span>
             </dd>
             <dt>支払日</dt>
@@ -115,7 +115,7 @@
                 ><input type="text" name="" id="" value="1"
               /></span>
               <span class="input w-flex">
-                <%= f.select :close_date, [["翌末日", "翌末日"]], include_blank: "選択して下さい" %>
+                <%= f.select :close_date_code, [["翌末日", "翌末日"]], include_blank: "選択して下さい" %>
               </span>
             </dd>
           </dl>

@@ -7,9 +7,9 @@ class SupplierMastersController < ApplicationController
     @user_name2 = nil
     if params[:supplier_code].present?
       @supplier = MSupplier.find_by(supplier_code: params[:supplier_code])
-      @department_name = MDepartment.find_by(department_code: @supplier.department_code_id).department_name
-      @user_name1 = MUser.find_by(user_code: @supplier.user_code_id).user_code
-      @user_name2 = MUser.find_by(user_code: @supplier.user_code2_id).user_code
+      @department_name = MDepartment.find_by(department_code: @supplier.department_id).department_name
+      @charge_user_name = MUser.find_by(id: @supplier.charge_id).id
+      @input_user_name = MUser.find_by(id: @supplier.input_user_id).id
     else
       @supplier = MSupplier.new
     end

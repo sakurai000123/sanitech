@@ -19,56 +19,64 @@
 # 部署
 5.times do |n|
   MDepartment.create(
-    department_code: "00#{n + 1}",
+    id: "00#{n + 1}",
     create_user_name: "test#{n + 1}",
     update_user_name: "test#{n + 1}",
     department_name:"部門名#{n + 1}",
     department_name_kana: "ブモン",
-    depth:"階層#{n + 1}",
     post_code: '1234567',
     prefecture: '千葉県',
     address1: '浦安市',
     address2: '舞浜１−１',
-    phone_number: '12345678901',
-    parent_department_code: '001'
+    phone_number: '12345678901'
   )
 end
+
+# 権限作成
+MAuthority.create(
+  id: '001',
+  create_user_name: "test1",
+  update_user_name: "test1",
+  authority_name: '全権限'
+)
+
 # ユーザ作成（社員）
 MUser.create(
-  user_code: '0001',
+  id: '0001',
   create_user_name: 'test1',
   update_user_name: 'test1',
-  authority_code: '001',
-  department_code_id: '001',
-  family_name: 'テスト',
-  family_name_kana: 'テスト',
-  given_name: '太郎',
-  given_name_kana: 'タロウ',
+  authority_id: '001',
+  hire_date: DateTime.strptime("09/01/2009 17:00", "%m/%d/%Y %H:%M"),
+  department_id: '001',
+  user_name: 'テスト',
+  user_name_kana: 'テスト',
+  master_key: '001',
+  affiliation_department: 'テスト部署',
+  position: 'テスト役職',
+  emergency_phone_number: '09011111111',
+  emergency_name: 'test2',
   mail_address: 'test1@test.test',
+  blood_type: 'A',
   login_id: '0001',
   password: 'test1',
-  password_confirmation: 'test1',
-  hire_date: DateTime.strptime("09/01/2009 17:00", "%m/%d/%Y %H:%M"),
-  master_key: '0001',
-  position: 'test',
-  emergency_phone_number: '09012341234',
-  blood_type: 'A'
+  password_confirmation: 'test1'
+  
 )
 # 入金口座
 5.times do |n|
   MDepositAccount.create(
-    deposit_account_code: "00#{n + 1}",
+    id: "00#{n + 1}",
     create_user_name: "test#{n + 1}",
     update_user_name: "test#{n + 1}",
     deposit_account_name: "赤色銀行#{n + 1}",
     start_date: DateTime.strptime("09/0#{n + 1}/2009 17:00", "%m/%d/%Y %H:%M"),
     end_date: DateTime.strptime("09/0#{n + 1}/2012 17:00", "%m/%d/%Y %H:%M"),
-    account_category: '1',
+    account_category_code: '1',
     account_number: "000000#{n + 1}",
-    account_type: '1',
+    account_type_code: '1',
     account_holder: "株式会社123#{n + 1}",
     bank_code: "123#{n + 1}",
-    branch_code: "11#{n + 1}",
+    branch_code: "11#{n + 1}"
   )
 end
 
