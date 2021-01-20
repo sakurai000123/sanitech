@@ -44,9 +44,16 @@
             </dd>
             <dt>マスタキー</dt>
             <dd>
-              <span class="input w100per">
+              <span class="input w100">
                 <%= f.text_field :master_key %>
               </span>
+            </dd>
+            <dt>権限</dt>
+            <dd>
+              <span class="input contents-label">
+                <%= f.text_field :authority_id %>
+              </span>
+              <span class="input w100 not-edit"><%= @authority_name %></span>
             </dd>
           </dl>
           <dl class="edit-wrap x2">
@@ -112,16 +119,11 @@
           <div class="top-edit-flex">
             <dl class="edit-wrap small">
               <dt class="w120">備考欄</dt>
-              <dd class="w-flex ml0">
-                <div class="w100per">
-                  <span class="input w100per upper">
+                <dd class="w-flex ml0">
+                  <span class="input w100per">
                     <%= f.text_area :note %>
                   </span>
-                  <span class="input w100per lower">
-                    <input type="text" name="" id="" value="" />
-                  </span>
-                </div>
-              </dd>
+                </dd>
             </dl>
             <ul class="top-button-list">
               <li><button name="create">新規登録</button></li>
@@ -140,12 +142,7 @@
               <%= f.password_field :password %>
             </span>
           </dd>
-          <dt>権限</dt>
-          <dd>
-            <span class="input w100">
-              <%= f.text_field :authority_id %>
-            </span>
-          </dd>
+          
           
         </div>
       <% end %>

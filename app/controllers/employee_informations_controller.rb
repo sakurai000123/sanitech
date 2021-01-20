@@ -6,6 +6,7 @@ class EmployeeInformationsController < ApplicationController
     if params[:id].present?
       @user = MUser.find_by(id: params[:id])
       @department_name = MDepartment.find_by(id: @user.department_id).department_name
+      @authority_name = MAuthority.find_by(id: @user.authority_id).authority_name
     else
       @user = MUser.new
     end
