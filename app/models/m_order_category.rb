@@ -1,2 +1,0 @@
-class MOrderCategory < ApplicationRecord
-end

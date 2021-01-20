@@ -3,201 +3,201 @@ class CreateMTable < ActiveRecord::Migration[6.0]
   def change
     ###### 部門
     create_table :m_departments, id: false do |t|
-      t.string :department_code, limit: 3, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :department_name, null: false
-      t.text :department_name_kana, null: false
-      t.integer :depth, limit: 2, null: false
-      t.string :parent_department_code, limit: 3, null: false
-      t.string :post_code, limit: 7, null: false
-      t.text :prefecture, null: false
-      t.text :address1, null: false
-      t.text :address2, null: false
-      t.string :phone_number, limit: 11, null: false
-      t.string :fax_number, limit: 10
-      t.boolean :delete_flag
+      t.string :id, limit: 3, null: false, primary_key: true #部門ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.string :department_name, null: false #部門名
+      t.string :department_name_kana, null: false #部門名カナ
+      t.string :post_code, limit: 8, null: false #郵便番号
+      t.string :prefecture, null: false #都道府県
+      t.string :address1, null: false #住所1
+      t.string :address2, null: false #住所2
+      t.string :phone_number, limit: 13, null: false #電話番号
+      t.string :fax_number, limit: 12 #FAX番号
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end
+
+    ###### 権限
+    create_table :m_authorities, id: false do |t|
+      t.string :id, limit: 3, null: false, primary_key: true #権限ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.string :authority_name, null: false #権限名
+      t.boolean :delete_flag #削除フラグ
+
+      t.timestamps
+    end
+
     ###### 社員
     create_table :m_users, id: false do |t|
-      t.string :user_code, limit: 4, primary_key: true, null: false
-      t.text :create_user_name, null:false
-      t.text :update_user_name, null:false
-      t.string :authority_code, limit: 3, null:false
-      t.references :department_code, type: :string, limit: 3, null:false, foreign_key: {to_table: :m_departments, primary_key: :department_code} 
-      t.integer :company_car_No, limit: 2
-      t.text :family_name, null:false
-      t.text :family_name_kana, null:false
-      t.text :given_name, null:false
-      t.text :given_name_kana, null:false
-      t.string :mobile_phone_number, limit: 11
-      t.text :mail_address, null:false, unique:true
-      t.string :login_id, limit: 20, null:false, unique:true
-      t.string :password_digest, limit: 255, null:false, unique:true
-      t.date :hire_date, null:false
-      t.text :master_key, null:false
-      t.text :position, null:false
-      t.string :emergency_phone_number, limit: 11, null:false
-      t.string :blood_type, null:false
-      t.date :medical_examination_date
-      t.text :note
-      t.boolean :delete_flag
+      t.string :id, limit: 4, null: false, primary_key: true #社員ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.references :authority, type: :string, limit: 3, null: false, foreign_key: {to_table: :m_authorities, primary_key: :id} #権限ID
+      t.date :hire_date, null: false #入社日
+      t.references :department, type: :string, limit: 3, null: false, foreign_key: {to_table: :m_departments, primary_key: :id} #部門ID
+      t.string :user_name, null: false #氏名
+      t.string :user_name_kana, null: false #氏名カナ
+      t.string :master_key, null: false #マスタキー
+      t.string :affiliation_department, null: false #所属部署
+      t.string :position, null: false #役職
+      t.string :mobile_phone_number, limit: 13, unique:true #携帯電話番号
+      t.string :company_car_no, limit: 4 #社用車No
+      t.string :emergency_phone_number, limit: 11, null: false #緊急連絡先
+      t.string :emergency_name, null: false #緊急連絡先名
+      t.string :mail_address, null: false, unique:true #メールアドレス
+      t.string :blood_type, limit: 2, null: false #血液型
+      t.date :medical_examination_date #健康診断実施日
+      t.text :note #備考
+      t.string :login_id, limit: 20, null: false, unique:true #ログインID
+      t.string :password_digest, limit: 255, null: false #パスワード
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end
 
     ##### 入金口座
     create_table :m_deposit_accounts, id: false do |t|
-      t.string :deposit_account_code, limit: 3, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :deposit_account_name, null: false
-      t.date :start_date
-      t.date :end_date
-      t.string :account_category, null: false
-      t.string :account_number, limit: 7, null: false
-      t.string :account_type, null: false
-      t.string :account_holder, limit: 30, null: false
-      t.string :bank_code, limit: 4, null: false
-      t.string :branch_code, limit: 3, null: false
-      t.boolean :delete_flag
+      t.string :id, limit: 3, null: false, primary_key: true #入金口座ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.string :deposit_account_name, null: false #入金口座名
+      t.date :start_date #適用開始日
+      t.date :end_date #終了日
+      t.string :account_category_code, limit: 1, null: false #口座区分CD
+      t.string :account_number, limit: 7, null: false #口座番号
+      t.string :account_type_code, limit: 1, null: false #口座種別CD
+      t.string :account_holder, limit: 30, null: false #口座名義
+      t.string :bank_code, limit: 4, null: false #銀行コード
+      t.string :branch_code, limit: 3, null: false #支店コード
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end
 
     ##### 支払口座
     create_table :m_payment_accounts, id: false do |t|
-      t.string :payment_account_code, limit: 3, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :payment_account_name, null: false
-      t.date :start_date
-      t.date :end_date
-      t.string :account_category, null: false
-      t.string :account_number, limit: 7, null: false
-      t.string :account_type, null: false
-      t.string :account_holder, limit: 30, null: false
-      t.string :bank_code, limit: 4, null: false
-      t.string :branch_code, limit: 3, null: false
-      t.boolean :delete_flag
+      t.string :id, limit: 3, null: false, primary_key: true #支払口座ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.string :payment_account_name, null: false #支払口座名
+      t.date :start_date #適用開始日
+      t.date :end_date #終了日
+      t.string :account_category_code, limit: 1, null: false #口座区分CD
+      t.string :account_number_code, limit: 7, null: false #口座番号
+      t.string :account_type, limit: 1, null: false #口座種別CD
+      t.string :account_holder, limit: 30, null: false #口座名義
+      t.string :bank_code, limit: 4, null: false #銀行コード
+      t.string :branch_code, limit: 3, null: false #支店コード
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end
     
     ###### 得意先
     create_table :m_customers, id: false do |t|
-      t.string :customer_code, limit: 6, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :customer_number, null: false
-      t.text :customer_name, null: false
-      t.text :customer_name_kana, null: false
-      t.references :department_code, type: :string, limit: 3, null:false, foreign_key: {to_table: :m_departments, primary_key: :department_code} 
-      t.references :user_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :user_code} 
-      t.text :charge_name, null: false
-      t.text :charge_name_kana, null: false
-      t.text :charge_position, null: false
-      t.string :cus_post_code, limit: 7, null: false
-      t.text :cus_prefecture, null: false
-      t.text :cus_address1, null: false
-      t.text :cus_address2, null: false
-      t.string :phone_number, limit: 11, null: false
-      t.string :fax_number, limit: 10
-      t.text :mail_address
-      t.string :payment_category, null: false
-      t.string :close_date, null: false
-      t.string :payment_date, null: false
-      t.references :deposit_account_code, type: :string, limit: 3, null:false, foreign_key: {to_table: :m_deposit_accounts, primary_key: :deposit_account_code} 
-      t.boolean :delete_flag
+      t.string :id, limit: 6, null: false, primary_key: true #得意先ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.date :start_date, null: false #登録日
+      t.references :department, type: :string, limit: 3, null: false, foreign_key: {to_table: :m_departments, primary_key: :id} #部門ID
+      t.references :charge, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :id} #担当者ID
+      t.references :input_user, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :id} #入力者ID
+      t.string :customer_name, null: false #得意先名
+      t.string :charge_name, null: false #得意先担当者名
+      t.string :charge_position, null: false #得意先担当者役職
+      t.string :cus_post_code, limit: 8, null: false #郵便番号
+      t.string :cus_prefecture, null: false #都道府県
+      t.string :cus_address1, null: false #住所1
+      t.string :cus_address2, null: false #住所2
+      t.string :phone_number, limit: 13, null: false #電話番号
+      t.string :fax_number, limit: 12 #FAX番号
+      t.string :mail_address #メールアドレス
+      t.string :payment_category_code, limit: 1, null: false #支払条件CD
+      t.string :close_date_code, limit: 1, null: false #締日CD
+      t.string :payment_date_code, limit: 1, null: false #支払日CD
+      t.references :deposit_account, type: :string, limit: 3, null: false, foreign_key: {to_table: :m_deposit_accounts, primary_key: :id} #振込先ID
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end
 
     ###### 仕入先
     create_table :m_suppliers, id: false do |t|
-      t.string :supplier_code, limit: 5, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :supplier_number, null: false
-      t.date :start_date, null: false
-      t.references :department_code, type: :string, limit: 3, null:false, foreign_key: {to_table: :m_departments, primary_key: :department_code} 
-      t.references :user_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :user_code} 
-      t.references :user_code2, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :user_code} 
-      t.text :supplier_name, null: false
-      t.text :charge_name, null: false
-      t.text :charge_position, null: false
-      t.string :post_code, null: false
-      t.text :prefecture, null: false
-      t.text :address1, null: false
-      t.text :address2, null: false
-      t.string :phone_number, null: false
-      t.string :fax_number, null: false
-      t.string :payment_category, null: false
-      t.string :close_date, null: false
-      t.string :payment_day, null: false
-      t.references :payment_account_code, type: :string, limit: 3, null:false, foreign_key: {to_table: :m_payment_accounts, primary_key: :payment_account_code} 
-      t.text :note
-      t.boolean :delete_flag
-
-      t.timestamps
-    end
-    
-    ##### 受注区分
-    create_table :m_order_categories, id: false do |t|
-      t.string :order_category_code, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :order_category_name, null: false
+      t.string :id, limit: 6, null: false, primary_key: true #仕入先ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.string :supplier_number, limit: 5, null: false #仕入先番号
+      t.date :start_date, null: false #登録日
+      t.references :department, type: :string, limit: 3, null: false, foreign_key: {to_table: :m_departments, primary_key: :id} #部門ID
+      t.references :charge, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :id} #担当者ID
+      t.references :input_user, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :id} #入力者ID
+      t.string :supplier_name, null: false #仕入先名
+      t.string :charge_name, null: false #仕入先担当者名
+      t.string :charge_position, null: false #仕入先担当者役職
+      t.string :post_code, limit: 8, null: false #郵便番号
+      t.string :prefecture, null: false #都道府県
+      t.string :address1, null: false #住所1
+      t.string :address2, null: false #住所2
+      t.string :phone_number, limit: 13, null: false #電話番号
+      t.string :fax_number, limit: 12 #FAX番号
+      t.string :mail_address #メールアドレス
+      t.string :payment_category_code, limit: 1, null: false #支払条件CD
+      t.string :close_date_code, limit: 1, null: false #締日CD
+      t.string :payment_day_code, limit: 1, null: false #支払日CD
+      t.references :payment_account, type: :string, limit: 3, null: false, foreign_key: {to_table: :m_payment_accounts, primary_key: :id} #振込先ID
+      t.text :note #備考
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end
 
     ##### メーカー
     create_table :m_makers, id: false do |t|
-      t.string :maker_code, limit: 4, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :maker_name, null: false
-      t.boolean :delete_flag
+      t.string :id, limit: 4, null: false, primary_key: true #メーカーID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.string :maker_name, null: false #メーカー名
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end
 
     ##### 商品
     create_table :m_products, id: false do |t|
-      t.string :product_code, limit: 8, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :product_name, null: false
-      t.text :product_name_kana, null: false
-      t.string :product_category, null: false
-      t.text :model_number, null: false
-      t.text :unit, null: false
-      t.integer :unit_price, limit: 5, null: false
-      t.integer :original_unit_price, limit: 5, null: false
-      t.integer :cost, limit: 5, null: false
-      t.integer :sale_unit_price, limit: 5, null: false
-      t.references :supplier_code, type: :string, limit: 5, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :supplier_code} 
-      t.references :maker_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_makers, primary_key: :maker_code} 
-      t.boolean :delete_flag
+      t.string :id, limit: 8, null: false, primary_key: true #商品ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.string :product_name, null: false #商品名
+      t.string :product_name_kana, null: false #商品名カナ
+      t.string :product_category, null: false #商品区分
+      t.string :model_number, null: false #製品型番
+      t.string :unit, null: false #単位
+      t.integer :unit_price, null: false #単価
+      t.integer :original_unit_price, null: false #原単価
+      t.integer :cost, null: false #原価
+      t.integer :sale_unit_price, null: false #定価
+      t.references :supplier, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :id} #仕入先ID
+      t.references :maker, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_makers, primary_key: :id} #メーカーID
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end
 
     ##### 倉庫
     create_table :m_warehouses, id: false do |t|
-      t.string :warehouse_code, limit: 4, primary_key: true, null: false
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.text :warehouse_name, null: false
-      t.string :warehouse_category, null: false
-      t.string :post_code, limit: 7, null: false
-      t.text :prefecture, null: false
-      t.text :address1, null: false
-      t.text :address2, null: false
-      t.boolean :delete_flag
+      t.string :id, limit: 4, null: false, primary_key: true #倉庫ID
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.string :warehouse_name, null: false #倉庫名
+      t.string :warehouse_category, null: false #倉庫区分
+      t.string :post_code, limit: 8, null: false #郵便番号
+      t.string :prefecture, null: false #都道府県
+      t.string :address1, null: false #住所1
+      t.string :address2, null: false #住所2
+      t.boolean :delete_flag #削除フラグ
 
       t.timestamps
     end

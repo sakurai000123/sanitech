@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MOrderCategoryTest < ActiveSupport::TestCase
+class MAuthorityTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

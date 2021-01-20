@@ -1,42 +1,46 @@
 class CreateTReceiveOrderDetails < ActiveRecord::Migration[6.0]
   def change
+    ##### 受注明細
     create_table :t_receive_order_details do |t|
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.references :receive_order, null: false, foreign_key: {to_table: :t_receive_orders} 
-      t.integer :line_number, limit: 2, null: false
-      t.integer :sort_number, limit: 2, null: false
-      t.references :order_category_code, type: :string, null: false, foreign_key: {to_table: :m_order_categories, primary_key: :order_category_code} 
-      t.text :order_category_name, null: false
-      t.boolean :invalid_flag
-      t.references :maker_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_makers, primary_key: :maker_code} 
-      t.text :maker_name, null: false
-      t.references :product_code, type: :string, limit: 8, null: false, foreign_key: {to_table: :m_products, primary_key: :product_code} 
-      t.text :product_name, null: false
-      t.text :product_model_number, null: false
-      t.references :warehouse_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_warehouses, primary_key: :warehouse_code} 
-      t.text :warehouse_name, null: false
-      t.integer :receive_order_quantity, limit: 2, null: false
-      t.text :product_unit, null: false, null: false
-      t.boolean :unit_price_pending_flag
-      t.boolean :cost_pending_flag
-      t.integer :sale_unit_price, limit: 5, null: false
-      t.integer :multiplication_rate, limit: 2, null: false
-      t.integer :receive_order_detail_amount, limit: 5, null: false
-      t.integer :profit_rate, limit: 2, null: false
-      t.integer :list_price, limit: 5, null: false
-      t.date :stock_date, null: false
-      t.integer :original_unit_price, limit: 5, null: false
-      t.integer :cost_price, limit: 5, null: false
-      t.references :supplier_code, type: :string, limit: 5, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :supplier_code} 
-      t.text :supplier_name, null: false
-      t.date :delivery_date, null: false
-      t.text :note
-      t.boolean :spec_detail_flag
-      t.text :detail_note
-      t.text :detail_memo
-      t.integer :pre_recorded, limit: 5
-      t.integer :list_price_rate, limit: 2
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.references :receive_order, type: :string, null: false, foreign_key: {to_table: :t_receive_orders, primary_key: :id} #受注ID
+      t.integer :line_number, null: false #行番号
+      t.integer :sort_number, null: false #ソート番号
+      #t.references :order_category, type: :integer, null: false, foreign_key: {to_table: :, primary_key: :id} #受注区分ID
+      t.string :order_category_name, null: false #受注区分名
+      t.boolean :invalid_flag #無効フラグ
+      t.references :maker, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_makers, primary_key: :id} #メーカーID
+      t.string :maker_name, null: false #メーカー名
+      t.references :product, type: :string, limit: 8, null: false, foreign_key: {to_table: :m_products, primary_key: :id} #商品ID
+      t.string :product_name, null: false #商品名
+      t.string :product_model_number, null: false #型番
+      t.string :classification_name, null: false #分類名
+      t.references :warehouse, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_warehouses, primary_key: :id} #倉庫ID
+      t.string :warehouse_name, null: false #倉庫名
+      t.integer :receive_order_quantity, null: false #受注数量
+      t.string :product_unit, null: false #単位
+      t.boolean :unit_price_pending_flag #単価未決フラグ
+      t.boolean :cost_pending_flag #原価未決フラグ
+      t.integer :sale_unit_price, null: false #販売単価
+      t.integer :multiplication_rate, null: false #掛率
+      t.integer :receive_order_detail_amount, null: false #受注金額
+      t.integer :profit_rate, null: false #利益率
+      t.integer :list_price, null: false #定価
+      t.date :stock_date, null: false #入荷予定日
+      t.integer :original_unit_price, null: false #原単価
+      t.integer :cost_price, null: false #原価金額
+      t.references :supplier, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :id} #仕入先ID
+      t.string :supplier_name, null: false #仕入先名
+      t.date :delivery_date, null: false #指定納期
+      t.text :note #備考
+      t.integer :classification_code, null: false #分類CD
+      t.string :spec_detail #仕様詳細
+      t.string :detail_note #明細備考
+      t.string :detail_memo #明細メモ
+      t.integer :pre_recorded #先計上
+      t.integer :list_price_rate #定価率
+      t.boolean :special_order_flag #特殊受注フラグ
 
       t.timestamps
     end

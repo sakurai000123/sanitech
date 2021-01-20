@@ -1,17 +1,18 @@
 class CreateTPurchases < ActiveRecord::Migration[6.0]
   def change
+    ##### 入荷
     create_table :t_purchases do |t|
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.date :purchase_date, null: false
-      t.references :supplier_code, type: :string, limit: 5, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :supplier_code} 
-      t.text :supplier_name, null: false
-      t.references :user_code, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :user_code} 
-      t.references :send_order, null: false, foreign_key: {to_table: :t_send_orders} 
-      t.references :receive_order, null: false, foreign_key: {to_table: :t_receive_orders} 
-      t.integer :purchase_amount, limit: 5, null: false
-      t.integer :tax_amount, limit: 5, null: false
-      t.date :purchase_slip_date
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.date :purchase_date, null: false #入荷日
+      t.references :supplier, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :id} #仕入先ID
+      t.string :supplier_name, null: false #仕入先名
+      t.references :user, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_users, primary_key: :id} #社員ID
+      t.references :send_order, type: :string, null: false, foreign_key: {to_table: :t_send_orders, primary_key: :id} #発注ID
+      t.references :send_order_detail, type: :integer, null: false, foreign_key: {to_table: :t_send_order_details, primary_key: :id} #発注明細ID
+      t.integer :purchase_amount, null: false #仕入金額合計
+      t.integer :tax_amount, null: false #消費税合計
+      t.date :purchase_slip_date #仕入伝票日付
 
       t.timestamps
     end

@@ -1,23 +1,24 @@
 class CreateTSalesDetails < ActiveRecord::Migration[6.0]
   def change
+    ##### 出荷明細
     create_table :t_sales_details do |t|
-      t.text :create_user_name, null: false
-      t.text :update_user_name, null: false
-      t.references :sale, null: false, foreign_key: {to_table: :t_sales} 
-      t.integer :line_number, limit: 2, null: false
-      t.integer :sort_number, limit: 2, null: false
-      t.references :product_code, type: :string, limit: 8, null: false, foreign_key: {to_table: :m_products, primary_key: :product_code} 
-      t.text :product_name, null: false
-      t.text :product_model_number, null: false
-      t.references :supplier_code, type: :string, limit: 5, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :supplier_code} 
-      t.text :supplier_name, null: false
-      t.integer :sale_unit_price, limit: 5, null: false
-      t.integer :ship_quantity, limit: 2, null: false
-      t.text :product_unit, null: false
-      t.integer :sales_detail_amount, limit: 5, null: false
-      t.string :sales_category
-      t.boolean :visible_maker_flag
-      t.boolean :shipped_flag
+      t.string :create_user_name, null: false #作成者
+      t.string :update_user_name, null: false #更新者
+      t.references :sales, type: :integer, null: false, foreign_key: {to_table: :t_sales, primary_key: :id} #出荷ID
+      t.integer :line_number, null: false #行番号
+      t.integer :sort_number, null: false #ソート番号
+      t.references :product, type: :string, limit: 8, null: false, foreign_key: {to_table: :m_products, primary_key: :id} #商品ID
+      t.string :product_name, null: false #商品名
+      t.string :product_model_number, null: false #型番
+      t.references :supplier, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :id} #仕入先ID
+      t.string :supplier_name, null: false #仕入先名
+      t.integer :sale_unit_price, null: false #販売単価
+      t.integer :ship_quantity, null: false #出荷数量
+      t.string :product_unit, null: false #単位
+      t.integer :sales_detail_amount, null: false #金額合計
+      t.string :sales_category #売上区分
+      t.boolean :visible_maker_flag #メーカー非表示フラグ
+      t.boolean :shipped_flag #出荷済フラグ
 
       t.timestamps
     end

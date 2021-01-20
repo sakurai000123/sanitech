@@ -1,0 +1,2 @@
+class TReturn < ApplicationRecord
+end

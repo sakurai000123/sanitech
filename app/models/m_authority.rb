@@ -1,0 +1,2 @@
+class MAuthority < ApplicationRecord
+end
