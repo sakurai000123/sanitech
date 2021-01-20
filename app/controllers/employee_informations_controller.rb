@@ -1,11 +1,13 @@
 class EmployeeInformationsController < ApplicationController
   before_action :logged_in_user
+  include EmployeeInformationsHelper
+
   def index
-    get_user
+    get_users
     @department_name = nil
     @authority_name = nil
     if params[:id].present?
-      @user = MUser.find_by(id: params[:id])
+      get_user_by_id(params[:id])
       @department_name = MDepartment.find_by(id: @user.department_id).department_name
       @authority_name = MAuthority.find_by(id: @user.authority_id).authority_name
     else
@@ -14,26 +16,25 @@ class EmployeeInformationsController < ApplicationController
   end
 
   def edit
-    @user = MUser.find_by(id: params[:id])
-    get_user
+    get_user_by_id(params[:id])
+    get_users
     redirect_to employee_informations_path(id: @user.id)
   end
 
   def upsert
     if params[:create]
       @user = MUser.new(user_params)
-      get_user
-      @user.create_user_name = session[:user_name]
-      @user.update_user_name = session[:user_name]
+      get_users
+      insert_common(@user)
       if @user.save
         redirect_to employee_informations_path
       else
         render :index
       end
     else
-      @user = MUser.find_by(id: user_params[:id])
-      get_user
-      @user.update_user_name = session[:user_name]
+      get_user_by_id(user_params[:id])
+      get_users
+      update_common(@user)
       if @user.update(user_params)
         redirect_to employee_informations_path
       else
@@ -70,8 +71,5 @@ class EmployeeInformationsController < ApplicationController
     )
   end
 
-  def get_user
-    @users = MUser.all.order(id: 'ASC')
-  end
 end
 

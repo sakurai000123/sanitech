@@ -1,13 +1,15 @@
 class CustomerMastersController < ApplicationController
   before_action :logged_in_user
+  include CustomerMastersHelper
+
   def index
     get_customers
     @department_name = nil
     @charge_name = nil
     @input_user_name = nil
-    
+
     if params[:id].present?
-      @customer = MCustomer.find_by(id: params[:id])
+      get_customer_by_id(params[:id])
       @department_name = MDepartment.find_by(id: @customer.department_id).department_name
       @charge_name = MUser.find_by(id: @customer.charge_id).user_name
       @input_user_name = MUser.find_by(id: @customer.input_user_id).user_name
@@ -18,7 +20,7 @@ class CustomerMastersController < ApplicationController
   end
 
   def edit
-    @customer = MCustomer.find_by(id: params[:id])
+    get_customer_by_id(params[:id])
     get_customers
     redirect_to customer_masters_path(id: @customer.id)
   end
@@ -27,17 +29,16 @@ class CustomerMastersController < ApplicationController
     if params[:create]
       @customer = MCustomer.new(customer_params)
       get_customers
-      @customer.create_user_name = session[:user_name]
-      @customer.update_user_name = session[:user_name]
+      insert_common(@customer)
       if @customer.save
         redirect_to customer_masters_path
       else
         render :index
       end
     else
-      @customer = MCustomer.find_by(id: customer_params[:id])
+      get_customer_by_id(customer_params[:id])
       get_customers
-      @customer.update_user_name = session[:user_name]
+      update_common(@customer)
       if @customer.update(customer_params)
         redirect_to customer_masters_path
       else
@@ -70,10 +71,6 @@ class CustomerMastersController < ApplicationController
       :deposit_account_id,
       :delete_flag
     )
-  end
-
-  def get_customers
-    @customers = MCustomer.all.order(id: 'ASC')
   end
 
 end
