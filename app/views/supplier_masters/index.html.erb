@@ -165,6 +165,7 @@
     <table>
       <thead>
         <tr>
+          <th>No</th>
           <th>仕入先コード</th>
           <th>仕入先名</th>
           <th>住所</th>
@@ -176,6 +177,7 @@
       <tbody>
         <% @suppliers.each.with_index(1) do |supplier, i| %>
           <tr data-link="<%= edit_supplier_master_path(supplier.id) %>">
+            <td><%= i %></td>
             <td><%= supplier.id %></td>
             <td><%= supplier.supplier_name %></td>
             <td>
