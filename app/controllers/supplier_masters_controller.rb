@@ -4,14 +4,8 @@ class SupplierMastersController < ApplicationController
 
   def index
     get_suppliers
-    @department_name = nil
-    @user_name1 = nil
-    @user_name2 = nil
     if params[:id].present?
       get_supplier_by_id(params[:id])
-      @department_name = MDepartment.find_by(department_code: @supplier.department_id).department_name
-      @charge_user_name = MUser.find_by(id: @supplier.charge_id).id
-      @input_user_name = MUser.find_by(id: @supplier.input_user_id).id
     else
       @supplier = MSupplier.new
     end
@@ -28,19 +22,17 @@ class SupplierMastersController < ApplicationController
       @supplier = MSupplier.new(supplier_params)
       get_suppliers
       insert_common(@supplier)
-      @supplier.create_user_name = session[:user_name]
-      @supplier.update_user_name = session[:user_name]
       if @supplier.save
-        redirect_to supplier_masters_path
+        redirect_to supplier_masters_path(id: @supplier.id)
       else
         render :index
       end
     else
       get_supplier_by_id(supplier_params[:id])
       get_suppliers
-      @supplier.update_user_name = session[:user_name]
+      update_common(@supplier)
       if @supplier.update(supplier_params)
-        redirect_to supplier_masters_path
+        redirect_to supplier_masters_path(id: @supplier.id)
       else
         render :index
       end
@@ -50,8 +42,27 @@ class SupplierMastersController < ApplicationController
   private
   def supplier_params
     params.require(:m_supplier).permit(
-      #:password,
-      
+      :id,
+      :supplier_number,
+      :start_date,
+      :department_id,
+      :charge_id,
+      :input_user_id,
+      :supplier_name,
+      :charge_name,
+      :charge_position,
+      :post_code,
+      :prefecture,
+      :address1,
+      :address2,
+      :phone_number,
+      :fax_number,
+      :mail_address,
+      :payment_category_code,
+      :close_date_code,
+      :payment_day_code,
+      :payment_account_id,
+      :note
     )  
   end
 

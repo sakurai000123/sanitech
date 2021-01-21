@@ -4,6 +4,6 @@ module SupplierMastersHelper
   end
 
   def get_suppliers
-    @suppliers = MSupplier.all.order(supplier_code: 'ASC')
+    @suppliers = MSupplier.all.order(id: 'ASC')
   end
 end

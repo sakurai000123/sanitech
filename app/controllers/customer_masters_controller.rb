@@ -4,15 +4,8 @@ class CustomerMastersController < ApplicationController
 
   def index
     get_customers
-    @department_name = nil
-    @charge_name = nil
-    @input_user_name = nil
-
     if params[:id].present?
       get_customer_by_id(params[:id])
-      @department_name = MDepartment.find_by(id: @customer.department_id).department_name
-      @charge_name = MUser.find_by(id: @customer.charge_id).user_name
-      @input_user_name = MUser.find_by(id: @customer.input_user_id).user_name
     else
       @customer = MCustomer.new
     end
@@ -31,7 +24,7 @@ class CustomerMastersController < ApplicationController
       get_customers
       insert_common(@customer)
       if @customer.save
-        redirect_to customer_masters_path
+        redirect_to customer_masters_path(id: @customer.id)
       else
         render :index
       end
@@ -40,7 +33,7 @@ class CustomerMastersController < ApplicationController
       get_customers
       update_common(@customer)
       if @customer.update(customer_params)
-        redirect_to customer_masters_path
+        redirect_to customer_masters_path(id: @customer.id)
       else
         render :index
       end

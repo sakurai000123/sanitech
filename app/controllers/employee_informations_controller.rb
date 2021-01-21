@@ -4,10 +4,8 @@ class EmployeeInformationsController < ApplicationController
 
   def index
     get_users
-    @authority_name = nil
     if params[:id].present?
       get_user_by_id(params[:id])
-      @authority_name = MAuthority.find_by(id: @user.authority_id).authority_name
     else
       @user = MUser.new
     end
@@ -25,7 +23,7 @@ class EmployeeInformationsController < ApplicationController
       get_users
       insert_common(@user)
       if @user.save
-        redirect_to employee_informations_path
+        redirect_to employee_informations_path(id: @user.id)
       else
         render :index
       end
@@ -34,7 +32,7 @@ class EmployeeInformationsController < ApplicationController
       get_users
       update_common(@user)
       if @user.update(user_params)
-        redirect_to employee_informations_path
+        redirect_to employee_informations_path(id: @user.id)
       else
         render :index
       end
