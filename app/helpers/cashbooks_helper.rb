@@ -1,2 +1,0 @@
-module CashbooksHelper
-end
