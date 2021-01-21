@@ -66,4 +66,21 @@ module ApplicationHelper
   def payment_date_code_list
     return [['1:翌末日', '1']]
   end
+
+  # 納期選択リスト
+  def delivery_date_category_code_list
+    return [['1:実働約2～3日', '1']]
+  end
+
+  # 受渡場所選択リスト
+  def delivery_place_code_list
+    return [['1:御社', '1']]
+  end
+
+  # 有効期限選択リスト
+  def expiration_code_list
+    return [['1:1ヶ月', '1']]
+  end
+
+  
 end

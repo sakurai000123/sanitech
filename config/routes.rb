@@ -37,8 +37,6 @@ Rails.application.routes.draw do
   resources :inquiry_charges
   # サンアイテック推移
   resources :inquiry_inhouses
-  # 経費推移
-  resources :inquiry_expenses
 
   # 未発注一覧
   resources :not_orders
