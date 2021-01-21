@@ -28,6 +28,18 @@ module ApplicationHelper
     return list
   end
 
+  # 入金口座選択リスト
+  def deposit_accounts_list
+    data_list = MDepositAccount.all.order(id: 'ASC')
+    list = []
+    type_hash = { "1" => "普通", "2" => "当座", "3" => "その他" }
+    data_list.each do |data|
+      info = data.id + ':'  + data.deposit_account_name + ' ' + type_hash[data.account_type_code] + ' ' + data.account_number
+      list.push([info, data.id])
+    end
+    return list
+  end
+
   # 支払条件選択リスト
   def payment_category_code_list
     return [['1:現金', '1']]

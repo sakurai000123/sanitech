@@ -137,11 +137,8 @@
           <dl class="edit-wrap x2">
             <dt>振込先</dt>
             <dd>
-              <span class="input contents-label">
-                <%= f.text_field :deposit_account_id %>
-              </span>
               <span class="input w-flex">
-                <input type="text" name="" id="" value="翌末日" />
+                <%= f.select :deposit_account_id, deposit_accounts_list, include_blank: select_blank %>
               </span>
             </dd>
           </dl>
