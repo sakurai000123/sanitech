@@ -1,12 +1,14 @@
 class SupplierMastersController < ApplicationController
   before_action :logged_in_user
+  include SupplierMastersHelper
+
   def index
     get_suppliers
     @department_name = nil
     @user_name1 = nil
     @user_name2 = nil
-    if params[:supplier_code].present?
-      @supplier = MSupplier.find_by(supplier_code: params[:supplier_code])
+    if params[:id].present?
+      get_supplier_by_id(params[:id])
       @department_name = MDepartment.find_by(department_code: @supplier.department_id).department_name
       @charge_user_name = MUser.find_by(id: @supplier.charge_id).id
       @input_user_name = MUser.find_by(id: @supplier.input_user_id).id
@@ -16,15 +18,16 @@ class SupplierMastersController < ApplicationController
   end
 
   def edit
-    @supplier = MSupplier.find_by(params[:supplier_code])
+    get_supplier_by_id(params[:id])
     get_suppliers
-    redirect_to supplier_masters_path(supplier_code: @supplier.supplier_code)
+    redirect_to supplier_masters_path(id: @supplier.id)
   end
 
   def upsert
     if params[:create]
       @supplier = MSupplier.new(supplier_params)
       get_suppliers
+      insert_common(@supplier)
       @supplier.create_user_name = session[:user_name]
       @supplier.update_user_name = session[:user_name]
       if @supplier.save
@@ -33,7 +36,7 @@ class SupplierMastersController < ApplicationController
         render :index
       end
     else
-      @supplier = MSupplier.find_by(supplier_code: supplier_params[:supplier_code])
+      get_supplier_by_id(supplier_params[:id])
       get_suppliers
       @supplier.update_user_name = session[:user_name]
       if @supplier.update(supplier_params)
@@ -52,7 +55,4 @@ class SupplierMastersController < ApplicationController
     )  
   end
 
-  def get_suppliers
-    @suppliers = MSupplier.all.order(supplier_code: 'ASC')
-  end
 end

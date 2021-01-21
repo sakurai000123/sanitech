@@ -4,11 +4,9 @@ class EmployeeInformationsController < ApplicationController
 
   def index
     get_users
-    @department_name = nil
     @authority_name = nil
     if params[:id].present?
       get_user_by_id(params[:id])
-      @department_name = MDepartment.find_by(id: @user.department_id).department_name
       @authority_name = MAuthority.find_by(id: @user.authority_id).authority_name
     else
       @user = MUser.new

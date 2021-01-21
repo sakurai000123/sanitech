@@ -19,10 +19,9 @@
 
             <dt>部門</dt>
             <dd>
-              <span class="input contents-label">
-                <%= f.text_field :department_id %>
+              <span class="input w120">
+                <%= f.select :department_id, departments_list, include_blank: select_blank %>
               </span>
-              <span class="input w100 not-edit"><%= @department_name %></span>
             </dd>
             <dt>社員No</dt>
             <dd>
@@ -50,10 +49,9 @@
             </dd>
             <dt>権限</dt>
             <dd>
-              <span class="input contents-label">
-                <%= f.text_field :authority_id %>
+              <span class="input w120">
+                <%= f.select :authority_id, authoritys_list, include_blank: select_blank %>
               </span>
-              <span class="input w100 not-edit"><%= @authority_name %></span>
             </dd>
           </dl>
           <dl class="edit-wrap x2">
@@ -105,7 +103,7 @@
             <dt>血液型</dt>
             <dd>
               <span class="input w120">
-                <%= f.select :blood_type, [["A", "A"], ["B", "B"], ["O", "O"], ["AB", "AB"]], include_blank: "選択して下さい" %>
+                <%= f.select :blood_type, blood_type_list, include_blank: select_blank %>
               </span>
             </dd>
             <dt>健康診断実施日</dt>
@@ -142,7 +140,6 @@
               <%= f.password_field :password %>
             </span>
           </dd>
-          
           
         </div>
       <% end %>

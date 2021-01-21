@@ -97,7 +97,7 @@
                 <input type="text" name="" id="" value="1"/>
               </span>
               <span class="input w-flex">
-                <%= f.select :payment_category_code, [["現金", "現金"], ["振込", "振込"], ["手形", "手形"]], include_blank: "選択して下さい" %>
+                <%= f.select :payment_category_code, [["現金", "現金"], ["振込", "振込"], ["手形", "手形"]], include_blank: select_blank %>
               </span>
             </dd>
             <dt>締日</dt>
@@ -106,7 +106,7 @@
                 ><input type="text" name="" id="" value="1"
               /></span>
               <span class="input w-flex">
-                <%= f.select :close_date_code, [["末日", "末日"]], include_blank: "選択して下さい" %>
+                <%= f.select :close_date_code, [["末日", "末日"]], include_blank: select_blank %>
               </span>
             </dd>
             <dt>支払日</dt>
@@ -115,7 +115,7 @@
                 ><input type="text" name="" id="" value="1"
               /></span>
               <span class="input w-flex">
-                <%= f.select :close_date_code, [["翌末日", "翌末日"]], include_blank: "選択して下さい" %>
+                <%= f.select :close_date_code, [["翌末日", "翌末日"]], include_blank: select_blank %>
               </span>
             </dd>
           </dl>
