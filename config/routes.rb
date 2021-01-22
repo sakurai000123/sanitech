@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :estimates
   # 受注
   resources :orders
+  post 'orders/upsert', to: 'orders#upsert'
+  patch 'orders/upsert/:id', to: 'orders#upsert'
   # 売掛
   resources :receivables
   # 買掛

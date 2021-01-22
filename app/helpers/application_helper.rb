@@ -12,6 +12,14 @@ module ApplicationHelper
     return list
   end
 
+  # 得意先選択リスト
+  def customers_list
+    data_list = MCustomer.all.order(id: 'ASC')
+    list = []
+    data_list.each{ |data| list.push([data.id + ':' + data.customer_name, data.id]) }
+    return list
+  end
+
   # 部門選択リスト
   def departments_list
     data_list = MDepartment.all.order(id: 'ASC')
@@ -81,6 +89,15 @@ module ApplicationHelper
   def expiration_code_list
     return [['1:1ヶ月', '1']]
   end
+
+  # 見積選択リスト
+  def estimates_list
+    data_list = TEstimate.all.order(id: 'ASC')
+    list = []
+    data_list.each{ |data| list.push([data.id + ':' + data.estimate_name, data.id]) }
+    return list
+  end
+  
 
   
 end
