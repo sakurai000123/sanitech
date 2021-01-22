@@ -1,6 +1,15 @@
-<h1>マスタ管理</h1>
-</br>
-<p><%= link_to '従業員情報入力', employee_informations_path %></p>
-<p><%= link_to '得意先入力', customer_masters_path %></p>
-<p><%= link_to '仕入先入力', supplier_masters_path %></p>
-<p><%= link_to '請求書発行', invoices_path %></p>
+<div class="contents-wrap small-size">
+  <div class="contents-inner">
+    <div class="gray-wrap">
+      <div class="heading-wrap mb-large">
+        <h1>マスタ管理</h1>
+      </div>
+      <ul class="menu-button">
+        <li><%= link_to '従業員情報入力', employee_informations_path, class: 'button' %></li>
+        <li><%= link_to '得意先入力', customer_masters_path, class: 'button' %></li>
+        <li><%= link_to '仕入先入力', supplier_masters_path, class: 'button' %></li>
+        <li><%= link_to '請求書発行', invoices_path, class: 'button' %></li>
+      </ul>
+    </div>
+  </div>
+</div>
