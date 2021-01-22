@@ -25,24 +25,6 @@
                 <%= f.date_field :start_date %>
               </span>
             </dd>
-            <dt>部門</dt>
-            <dd>
-              <span class="input w120">
-                <%= f.select :department_id, departments_list, include_blank: select_blank %>
-              </span>
-            </dd>
-            <dt>担当者</dt>
-            <dd>
-              <span class="input w120">
-                <%= f.select :charge_id, users_list, include_blank: select_blank %>
-              </span>
-            </dd>
-            <dt>発行者</dt>
-            <dd>
-              <span class="input w120">
-                <%= f.select :input_user_id, users_list, include_blank: select_blank %>
-              </span>
-            </dd>
             <dt>マスタキー</dt>
             <dd>
               <span class="input w100per">
@@ -50,7 +32,28 @@
               </span>
             </dd>
           </dl>
-          <dl class="edit-wrap x2">
+          <dl class="edit-wrap x4">
+            <dt>部門</dt>
+            <dd>
+              <span class="input w200">
+                <%= f.select :department_id, departments_list, include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>担当者</dt>
+            <dd>
+              <span class="input w200">
+                <%= f.select :charge_id, users_list, include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>発行者</dt>
+            <dd>
+              <span class="input w200">
+                <%= f.select :input_user_id, users_list, include_blank: select_blank %>
+              </span>
+            </dd>
+            
+          </dl>
+          <dl class="edit-wrap x4">
             <dt>得意先名</dt>
             <dd>
               <span class="input w100per">
@@ -71,30 +74,34 @@
             </dd>
           </dl>
           <dl class="edit-wrap x4">
-            <dt>得意先住所（郵便番号）</dt>
-            <dd class="x2">
-              <span class="input w100per">
+            <dt>得意先郵便番号</dt>
+            <dd>
+              <span class="input w200">
                 <%= f.text_field :cus_post_code %>
               </span>
             </dd>
-            <dt>得意先住所（都道府県）</dt>
-            <dd class="x2">
-              <span class="input w100per">
+            <dt>得意先都道府県</dt>
+            <dd>
+              <span class="input w200">
                 <%= f.text_field :cus_prefecture %>
               </span>
             </dd>
-            <dt>得意先住所（住所1）</dt>
-            <dd class="x2">
-              <span class="input w100per">
-                <%= f.text_field :cus_address1 %>
-              </span>
-            </dd>
-            <dt>得意先住所（住所2）</dt>
-            <dd class="x2">
-              <span class="input w100per">
-                <%= f.text_field :cus_address2 %>
-              </span>
-            </dd>
+          </dl>
+          <dl class="edit-wrap x2">
+              <dt>得意先住所１</dt>
+              <dd>
+                <span class="input w100per">
+                  <%= f.text_field :cus_address1 %>
+                </span>
+              </dd>
+              <dt>得意先住所２</dt>
+              <dd>
+                <span class="input w100per">
+                  <%= f.text_field :cus_address2 %>
+                </span>
+              </dd>
+          </dl>
+          <dl class="edit-wrap x4">
             <dt>電話番号</dt>
             <dd>
               <span class="input w100per">
@@ -147,7 +154,7 @@
               <dt class="w120">備考欄</dt>
               <dd class="w-flex ml0">
                 <span class="input w100per">
-                  <input type="text" value="※項目未作成">
+                  <textarea>※項目未作成</textarea>
                 </span>
               </dd>
             </dl>

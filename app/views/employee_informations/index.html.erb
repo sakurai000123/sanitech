@@ -9,14 +9,12 @@
       <%= form_for @user, url: {:controller => :employee_informations, :action => :upsert, :id => @user.id } do |f| %>
         <div class="top-edit">
           <dl class="edit-wrap small">
-            
             <dt>入社日</dt>
             <dd>
               <span class="input w200">
                 <%= f.date_field :hire_date %>
               </span>
             </dd>
-
             <dt>部門</dt>
             <dd>
               <span class="input w120">
@@ -25,10 +23,24 @@
             </dd>
             <dt>社員No</dt>
             <dd>
-              <span class="input w100">
+              <span class="input w100per">
                 <%= f.text_field :id %>
               </span>
             </dd>
+            <dt>ログインID</dt>
+            <dd>
+              <span class="input w100per">
+                <%= f.text_field :login_id %>
+              </span>
+            </dd>
+            <dt>パスワード</dt>
+            <dd>
+              <span class="input w100per">
+                <%= f.password_field :password %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
             <dt>氏名</dt>
             <dd>
               <span class="input w100per">
@@ -43,16 +55,17 @@
             </dd>
             <dt>マスタキー</dt>
             <dd>
-              <span class="input w100">
+              <span class="input w200">
                 <%= f.text_field :master_key %>
               </span>
             </dd>
             <dt>権限</dt>
             <dd>
-              <span class="input w120">
+              <span class="input w200">
                 <%= f.select :authority_id, authoritys_list, include_blank: select_blank %>
               </span>
             </dd>
+            
           </dl>
           <dl class="edit-wrap x2">
             <dt>所属部署</dt>
@@ -128,19 +141,6 @@
               <li><button name="update">保存</button></li>
             </ul>
           </div>
-          <dt>ログインID</dt>
-          <dd>
-            <span class="input w100">
-              <%= f.text_field :login_id %>
-            </span>
-          </dd>
-          <dt>パスワード</dt>
-          <dd>
-            <span class="input w100">
-              <%= f.password_field :password %>
-            </span>
-          </dd>
-          
         </div>
       <% end %>
     </div>
