@@ -5,7 +5,7 @@
   <div class="contents-inner">
     <div class="gray-wrap">
       <h1>従業員情報入力</h1>
-      <%= form_for @user, url: {:controller => :employee_informations, :action => :upsert, :id => @user.id } do |f| %>
+      <%= form_for @user, url: {controller: :employee_informations, action: :upsert, id: @user.id} do |f| %>
         <div class="top-edit">
           <dl class="edit-wrap small">
             <dt>入社日</dt>
@@ -136,8 +136,14 @@
               </dd>
             </dl>
             <ul class="top-button-list">
+            
               <li><button name="create">登録</button></li>
-              <li><button name="update">更新</button></li>
+              <li>
+                <button name="update"
+                        class="<%= @user.id.blank? ? 'btn-not-edit' : '' %>"
+                        <%= @user.id.blank? ? 'disabled' : '' %>
+                >更新</button>
+              </li>
             </ul>
           </div>
         </div>

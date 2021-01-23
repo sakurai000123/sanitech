@@ -619,3 +619,12 @@ th {
   }
 
 }
+
+.btn-not-edit{
+    background: #ccc;
+    color:#333;
+    &:hover{
+        cursor: not-allowed;
+    }
+    
+}

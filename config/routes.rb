@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # 受注
   resources :orders
   post 'orders/upsert', to: 'orders#upsert'
+  post 'orders/upsert/:id', to: 'orders#upsert'
   patch 'orders/upsert/:id', to: 'orders#upsert'
   # 売掛
   resources :receivables
@@ -18,16 +19,19 @@ Rails.application.routes.draw do
   # マスタマネジメント
   resources :master_managements
   # 従業員入力
-  resources :employee_informations
-  post 'employee_informations/upsert', to: 'employee_informations#upsert'
-  patch 'employee_informations/upsert/:id', to: 'employee_informations#upsert'
+  resources :employee_informations, only: [:index, :edit]
+  post 'employee_informations', to: 'employee_informations#upsert'
+  post 'employee_informations/:id', to: 'employee_informations#upsert'
+  patch 'employee_informations/:id', to: 'employee_informations#upsert'
   # 得意先入力
-  resources :customer_masters
-  post 'customer_masters/upsert', to: 'customer_masters#upsert'
-  patch 'customer_masters/upsert/:id', to: 'customer_masters#upsert'
+  resources :customer_masters, only: [:index, :edit]
+  post 'customer_masters', to: 'customer_masters#upsert'
+  post 'customer_masters/:id', to: 'customer_masters#upsert'
+  patch 'customer_masters/:id', to: 'customer_masters#upsert'
   # 仕入先入力
-  resources :supplier_masters
+  resources :supplier_masters, only: [:index, :edit]
   post 'supplier_masters/upsert', to: 'supplier_masters#upsert'
+  post 'supplier_masters/upsert/:id', to: 'supplier_masters#upsert'
   patch 'supplier_masters/upsert/:id', to: 'supplier_masters#upsert'
   # 請求書発行
   resources :invoices

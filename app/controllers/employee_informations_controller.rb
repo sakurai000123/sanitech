@@ -8,14 +8,13 @@ class EmployeeInformationsController < ApplicationController
       get_user_by_id(params[:id])
     else
       @user = MUser.new(session[:user] || {})
-      session[:user] = nil
     end
+    session[:user] = nil
   end
 
   def edit
-    get_user_by_id(params[:id])
     get_users
-    redirect_to employee_informations_path(id: @user.id)
+    redirect_to employee_informations_path(id: params[:id])
   end
 
   def upsert
@@ -29,7 +28,7 @@ class EmployeeInformationsController < ApplicationController
       else
         flash[:error] = @user.errors.full_messages
         session[:user] = @user.attributes.slice(*user_params.keys)
-        redirect_to employee_informations_path
+        render :index
       end
     else
       get_user_by_id(user_params[:id])
@@ -41,7 +40,7 @@ class EmployeeInformationsController < ApplicationController
       else
         flash[:error] = @user.errors.full_messages
         session[:user] = @user.attributes.slice(*user_params.keys)
-        redirect_to employee_informations_path
+        render :index
       end
     end
     
