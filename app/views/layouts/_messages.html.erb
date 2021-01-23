@@ -1,24 +1,22 @@
-<% if errors.any? %>
-  <div class="error">
-  <% errors.full_messages.each do |message| %>
-    <%= message %></br>
+<% if flash[:error].present? %>
+  <% flash[:error].each do |message| %>
+      <div class="alert error"><%= message %></div>
   <% end %>
-  </div>
 <% end %>
 
-<% if flash[:notice] %>
-  <div class="success">
-    <%= flash[:notice] %>
-  </div>
+<% if flash[:success].present? %>
+  <div class="alert success"><%= flash[:success] %></div>
 <% end %>
+
 
 <style>
+  .alert{
+    padding: .5px 30px;
+  }
   .error{
     background: #f7cbd3;
-    padding: 10px 30px;
   }
   .success{
     background: #c6ffc6;
-    padding: 10px 30px;
   }
 </style>

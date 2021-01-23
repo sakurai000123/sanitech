@@ -7,7 +7,8 @@ class EmployeeInformationsController < ApplicationController
     if params[:id].present?
       get_user_by_id(params[:id])
     else
-      @user = MUser.new
+      @user = MUser.new(session[:user] || {})
+      session[:user] = nil
     end
   end
 
@@ -23,18 +24,24 @@ class EmployeeInformationsController < ApplicationController
       get_users
       insert_common(@user)
       if @user.save
-        redirect_to employee_informations_path(id: @user.id), notice: '登録が完了しました。'
+        flash[:success] = '登録が完了しました'
+        redirect_to employee_informations_path(id: @user.id)
       else
-        render :index
+        flash[:error] = @user.errors.full_messages
+        session[:user] = @user.attributes.slice(*user_params.keys)
+        redirect_to employee_informations_path
       end
     else
       get_user_by_id(user_params[:id])
       get_users
       update_common(@user)
       if @user.update(user_params)
-        redirect_to employee_informations_path(id: @user.id), notice: '更新が完了しました。'
+        flash[:success] = '更新が完了しました'
+        redirect_to employee_informations_path(id: @user.id)
       else
-        render :index
+        flash[:error] = @user.errors.full_messages
+        session[:user] = @user.attributes.slice(*user_params.keys)
+        redirect_to employee_informations_path
       end
     end
     
