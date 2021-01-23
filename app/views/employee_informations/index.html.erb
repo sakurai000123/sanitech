@@ -1,8 +1,7 @@
 
-
+<% #エラーメッセージ呼び出し %>
+<%= render "layouts/messages", errors: @user.errors %>
 <div class="contents-wrap">
-  <% #エラーメッセージ呼び出し %>
-  <%= render "layouts/errors", errors: @user.errors %>
   <div class="contents-inner">
     <div class="gray-wrap">
       <h1>従業員情報入力</h1>
@@ -137,8 +136,8 @@
               </dd>
             </dl>
             <ul class="top-button-list">
-              <li><button name="create">新規登録</button></li>
-              <li><button name="update">保存</button></li>
+              <li><button name="create">登録</button></li>
+              <li><button name="update">更新</button></li>
             </ul>
           </div>
         </div>

@@ -1,8 +1,8 @@
+<% #エラーメッセージ呼び出し %>
+<%#= render "layouts/messages", errors: @???.errors %>
 <div class="contents-wrap">
   <%= form_for @order, url: {:controller => :orders, :action => :upsert, :id => @order.id } do |f| %>
     <div class="contents-inner">
-      <% #エラーメッセージ呼び出し %>
-      <%#= render "layouts/errors", errors: @???.errors %>
       <div class="gray-wrap">
         <h1>受注入力</h1>
         <div class="top-edit">

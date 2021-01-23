@@ -1,7 +1,7 @@
+<% #エラーメッセージ呼び出し %>
+<%#= render "layouts/messages", errors: @???.errors %>
 <div class="contents-wrap">
   <div class="contents-inner">
-    <% #エラーメッセージ呼び出し %>
-    <%#= render "layouts/errors", errors: @???.errors %>
     <div class="gray-wrap">
       <h1>仕入先入力</h1>
       <%= form_for @supplier, url: {:controller => :supplier_masters, :action => :upsert, :id => @supplier.id } do |f| %>
@@ -150,8 +150,8 @@
               </dd>
             </dl>
             <ul class="top-button-list">
-              <li><button name="create">新規登録</button></li>
-              <li><button name="update">保存</button></li>
+              <li><button name="create">登録</button></li>
+              <li><button name="update">更新</button></li>
             </ul>
           </div>
           <h4>仕入先コード</h4>

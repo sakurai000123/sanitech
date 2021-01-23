@@ -23,7 +23,7 @@ class EmployeeInformationsController < ApplicationController
       get_users
       insert_common(@user)
       if @user.save
-        redirect_to employee_informations_path(id: @user.id)
+        redirect_to employee_informations_path(id: @user.id), notice: '登録が完了しました。'
       else
         render :index
       end
@@ -32,7 +32,7 @@ class EmployeeInformationsController < ApplicationController
       get_users
       update_common(@user)
       if @user.update(user_params)
-        redirect_to employee_informations_path(id: @user.id)
+        redirect_to employee_informations_path(id: @user.id), notice: '更新が完了しました。'
       else
         render :index
       end
