@@ -16,6 +16,19 @@
 # 以下を実行で作成される
 # rails db:seed
 
+# データ削除
+# ↓↓↓追記は1行目にする↓↓↓
+MWarehouse.destroy_all # 倉庫
+MProduct.destroy_all # 商品
+MMaker.destroy_all # メーカー
+MSupplier.destroy_all # 仕入先
+MCustomer.destroy_all # 得意先
+MPaymentAccount.destroy_all # 支払口座
+MDepositAccount.destroy_all # 入金口座
+MUser.destroy_all # ユーザ（社員）
+MAuthority.destroy_all # 権限
+MDepartment.destroy_all # 部署（部門）
+
 # 部署（部門）
 5.times do |n|
   MDepartment.create(
@@ -32,35 +45,39 @@
   )
 end
 
-# 権限作成
-MAuthority.create(
-  id: '001',
-  create_user_name: "test1",
-  update_user_name: "test1",
-  authority_name: '全権限'
-)
+# 権限
+5.times do |n|
+  MAuthority.create(
+    id: "00#{n + 1}",
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    authority_name: "全権限#{n + 1}"
+  )
+end
 
-# ユーザ作成（社員）
-MUser.create(
-  id: '0001',
-  create_user_name: 'test1',
-  update_user_name: 'test1',
-  authority_id: '001',
-  hire_date: DateTime.strptime("09/01/2009 17:00", "%m/%d/%Y %H:%M"),
-  department_id: '001',
-  user_name: 'テスト',
-  user_name_kana: 'テスト',
-  master_key: '001',
-  affiliation_department: 'テスト部署',
-  position: 'テスト役職',
-  emergency_phone_number: '09011111111',
-  emergency_name: 'test2',
-  mail_address: 'test1@test.test',
-  blood_type: 'A',
-  login_id: '0001',
-  password: 'test1',
-  password_confirmation: 'test1'
-)
+# ユーザ（社員）
+5.times do |n|
+  MUser.create(
+    id: "000#{n + 1}",
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    authority_id: "00#{n + 1}",
+    hire_date: DateTime.strptime("09/01/2009 17:00", "%m/%d/%Y %H:%M"),
+    department_id: "00#{n + 1}",
+    user_name: "テスト#{n + 1}",
+    user_name_kana: "テスト#{n + 1}",
+    master_key: "00#{n + 1}",
+    affiliation_department: "テスト部署#{n + 1}",
+    position: "テスト役職#{n + 1}",
+    emergency_phone_number: "0901111111#{n + 1}",
+    emergency_name: "test#{n + 1}",
+    mail_address: "test#{n + 1}@test.test",
+    blood_type: 'A',
+    login_id: "000#{n + 1}",
+    password: "test#{n + 1}",
+    password_confirmation: "test#{n + 1}"
+  )
+end
 
 # 入金口座
 5.times do |n|
