@@ -2,7 +2,7 @@ class MUser < ApplicationRecord
   has_one :m_customer
   has_one :m_supplier
 
-  validate :add_user_error
+  # バリデーション
   validates :hire_date,
   presence: { message: sprintf(Message::INPUT_BLANK, "入社日")}
 
