@@ -139,10 +139,12 @@
             
               <li><button name="create">登録</button></li>
               <li>
-                <button name="update"
-                        class="<%= @user.id.blank? ? 'btn-not-edit' : '' %>"
-                        <%= @user.id.blank? ? 'disabled' : '' %>
-                >更新</button>
+                <button
+                  name="update"
+                  class="<%= @user.id.blank? ? 'btn-not-edit' : '' %>"
+                  <%= @user.id.blank? ? 'disabled' : '' %>>
+                  更新
+                </button>
               </li>
             </ul>
           </div>

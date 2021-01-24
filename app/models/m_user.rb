@@ -1,62 +1,54 @@
 class MUser < ApplicationRecord
-  has_secure_password
   has_one :m_customer
   has_one :m_supplier
 
   validate :add_user_error
+  validates :hire_date,
+  presence: { message: sprintf(Message::INPUT_BLANK, "入社日")}
+
+  validates :department_id,
+  presence: { message: sprintf(Message::SELECT_BLANK, "部門")}
   
-  def add_user_error
-    if hire_date.blank?
-      errors[:base] << "入社日を入力してください"
-    end
+  validates :id,
+  presence: { message: sprintf(Message::INPUT_BLANK, "社員No")},
+  uniqueness: { message: sprintf(Message::RECORD_UNIQUENESS, "社員No")}
 
-    if department_id.blank?
-      errors[:base] << "部門を選択してください"
-    end
+  validates :login_id,
+  presence: { message: sprintf(Message::INPUT_BLANK, "ログインID")}
 
-    if id.blank?
-      errors[:base] << "社員Noを入力してください"
-    end
+  has_secure_password validations: false
+  validates :password,
+  presence: {on: :create, message: sprintf(Message::INPUT_BLANK, "パスワード")}
 
-    if login_id.blank?
-      errors[:base] << "ログインIDを入力してください"
-    end
+  validates :user_name,
+  presence: { message: sprintf(Message::INPUT_BLANK, "氏名")}
 
-    if user_name.blank?
-      errors[:base] << "氏名を入力してください"
-    end
+  validates :master_key,
+  presence: { message: sprintf(Message::INPUT_BLANK, "マスターキー")}
 
-    if master_key.blank?
-      errors[:base] << "マスターキーを入力してください"
-    end
+  validates :authority_id,
+  presence: { message: sprintf(Message::SELECT_BLANK, "権限")}
 
-    if authority_id.blank?
-      errors[:base] << "権限を選択してください"
-    end
+  validates :affiliation_department,
+  presence: { message: sprintf(Message::INPUT_BLANK, "所属部署")}
 
-    if affiliation_department.blank?
-      errors[:base] << "所属部署を入力してください"
-    end
+  validates :position,
+  presence: { message: sprintf(Message::INPUT_BLANK, "役職")}
 
-    if position.blank?
-      errors[:base] << "役職を入力してください"
-    end
+  validates :emergency_phone_number,
+  presence: { message: sprintf(Message::INPUT_BLANK, "緊急連絡先")}
 
-    if emergency_phone_number.blank?
-      errors[:base] << "緊急連絡先を入力してください"
-    end
+  validates :mobile_phone_number,
+  uniqueness: { message: sprintf(Message::RECORD_UNIQUENESS, "社用携帯番号")}, allow_blank: true
 
-    if emergency_name.blank?
-      errors[:base] << "緊急連絡先名を入力してください"
-    end
+  validates :emergency_name,
+  presence: { message: sprintf(Message::INPUT_BLANK, "緊急連絡先名")}
 
-    if mail_address.blank?
-      errors[:base] << "メールアドレスを入力してください"
-    end
+  validates :mail_address,
+  presence: { message: sprintf(Message::INPUT_BLANK, "メールアドレス")},
+  uniqueness: { message: sprintf(Message::RECORD_UNIQUENESS, "メールアドレス")}
 
-    if blood_type.blank?
-      errors[:base] << "血液型を選択してください"
-    end
-    
-  end
+  validates :blood_type,
+  presence: { message: sprintf(Message::SELECT_BLANK, "血液型")}
+
 end

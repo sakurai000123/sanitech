@@ -1,5 +1,5 @@
 <% #エラーメッセージ呼び出し %>
-<%#= render "layouts/messages", errors: @???.errors %>
+<%= render "layouts/messages", flash: flash %>
 <div class="contents-wrap">
   <div class="contents-inner">
     <div class="gray-wrap">
@@ -16,28 +16,14 @@
               -->
               <span class="input w100"><%= f.text_field :supplier_number %></span>
             </dd>
+            <dt>仕入先コード</dt>
+            <dd>
+              <span class="input w100per"><%= f.text_field :id %></span>
+            </dd>
             <dt>登録日</dt>
             <dd>
               <span class="input w200">
                 <%= f.date_field :start_date %>
-              </span>
-            </dd>
-            <dt>部門</dt>
-            <dd>
-              <span class="input w120">
-                <%= f.select :department_id, departments_list, include_blank: select_blank %>
-              </span>
-            </dd>
-            <dt>担当者</dt>
-            <dd>
-              <span class="input w120">
-                <%= f.select :charge_id, users_list, include_blank: select_blank %>
-              </span>
-            </dd>
-            <dt>発行者</dt>
-            <dd>
-              <span class="input w120">
-                <%= f.select :input_user_id, users_list, include_blank: select_blank %>
               </span>
             </dd>
             <dt>マスタキー</dt>
@@ -47,7 +33,27 @@
               </span>
             </dd>
           </dl>
-          <dl class="edit-wrap x2">
+          <dl class="edit-wrap x4">
+            <dt>部門</dt>
+            <dd>
+              <span class="input w200">
+                <%= f.select :department_id, departments_list, include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>担当者</dt>
+            <dd>
+              <span class="input w200">
+                <%= f.select :charge_id, users_list, include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>発行者</dt>
+            <dd>
+              <span class="input w200">
+                <%= f.select :input_user_id, users_list, include_blank: select_blank %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
             <dt>仕入先名</dt>
             <dd>
               <span class="input w100per">
@@ -68,31 +74,34 @@
             </dd>
           </dl>
           <dl class="edit-wrap x4">
-            <dt>仕入先住所（郵便番号）</dt>
+            <dt>仕入先郵便番号</dt>
             <dd class="x2">
               <span class="input w100per">
                 <%= f.text_field :post_code %>
               </span>
             </dd>
-            <dt>仕入先住所（都道府県）</dt>
+            <dt>仕入先都道府県</dt>
             <dd class="x2">
               <span class="input w100per">
                 <%= f.text_field :prefecture %>
               </span>
             </dd>
-            <dt>仕入先住所（住所1）</dt>
+          </dl>
+          <dl class="edit-wrap x2">
+            <dt>仕入先住所1</dt>
             <dd class="x2">
               <span class="input w100per">
                 <%= f.text_field :address1 %>
               </span>
             </dd>
-            <dt>仕入先住所（住所2）</dt>
+            <dt>仕入先住所2</dt>
             <dd class="x2">
               <span class="input w100per">
                 <%= f.text_field :address2 %>
               </span>
             </dd>
-
+          </dl>
+          <dl class="edit-wrap x4">
             <dt>電話番号</dt>
             <dd>
               <span class="input w100per">
@@ -151,12 +160,16 @@
             </dl>
             <ul class="top-button-list">
               <li><button name="create">登録</button></li>
-              <li><button name="update">更新</button></li>
+              <li>
+                <button
+                  name="update"
+                  class="<%= @supplier.id.blank? ? 'btn-not-edit' : '' %>"
+                  <%= @supplier.id.blank? ? 'disabled' : '' %>>
+                  更新
+                </button>
+              </li>
             </ul>
           </div>
-          <h4>仕入先コード</h4>
-          <%= f.text_field :id %>
-
         </div>
       <% end %>
     </div>

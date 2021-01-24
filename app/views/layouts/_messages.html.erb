@@ -1,5 +1,5 @@
 <% if flash[:error].present? %>
-  <% flash[:error].each do |message| %>
+  <% flash[:error].each do |key, message| %>
       <div class="alert error"><%= message %></div>
   <% end %>
 <% end %>

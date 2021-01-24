@@ -14,6 +14,8 @@ class EmployeeInformationsController < ApplicationController
 
   def edit
     get_users
+    flash[:error] = nil
+    flash[:success] = nil
     redirect_to employee_informations_path(id: params[:id])
   end
 
@@ -26,7 +28,7 @@ class EmployeeInformationsController < ApplicationController
         flash[:success] = '登録が完了しました'
         redirect_to employee_informations_path(id: @user.id)
       else
-        flash[:error] = @user.errors.full_messages
+        flash[:error] = @user.errors
         session[:user] = @user.attributes.slice(*user_params.keys)
         render :index
       end
@@ -38,7 +40,7 @@ class EmployeeInformationsController < ApplicationController
         flash[:success] = '更新が完了しました'
         redirect_to employee_informations_path(id: @user.id)
       else
-        flash[:error] = @user.errors.full_messages
+        flash[:error] = @user.errors
         session[:user] = @user.attributes.slice(*user_params.keys)
         render :index
       end

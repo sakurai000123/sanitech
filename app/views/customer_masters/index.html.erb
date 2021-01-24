@@ -1,5 +1,5 @@
 <% #エラーメッセージ呼び出し %>
-<%#= render "layouts/messages", errors: @???.errors %>
+<%= render "layouts/messages", flash: flash %>
 <div class="contents-wrap">
   <div class="contents-inner">
     <div class="gray-wrap">
@@ -160,7 +160,14 @@
             </dl>
             <ul class="top-button-list">
               <li><button name="create">登録</button></li>
-              <li><button name="update">更新</button></li>
+              <li>
+                <button
+                  name="update"
+                  class="<%= @customer.id.blank? ? 'btn-not-edit' : '' %>"
+                  <%= @customer.id.blank? ? 'disabled' : '' %>>
+                  更新
+                </button>
+              </li>
             </ul>
           </div>
         </div>
