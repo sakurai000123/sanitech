@@ -7,15 +7,16 @@ class CustomerMastersController < ApplicationController
     if params[:id].present?
       get_customer_by_id(params[:id])
     else
-      @customer = MCustomer.new
+      @customer = MCustomer.new(session[:customer] || {})
     end
 
   end
 
   def edit
-    get_customer_by_id(params[:id])
     get_customers
-    redirect_to customer_masters_path(id: @customer.id)
+    flash[:error] = nil
+    flash[:success] = nil
+    redirect_to customer_masters_path(id: params[:id])
   end
 
   def upsert
@@ -24,8 +25,11 @@ class CustomerMastersController < ApplicationController
       get_customers
       insert_common(@customer)
       if @customer.save
+        flash[:success] = '登録が完了しました'
         redirect_to customer_masters_path(id: @customer.id)
       else
+        flash[:error] = @customer.errors
+        session[:customer] = @customer.attributes.slice(*customer_params.keys)
         render :index
       end
     else
@@ -33,8 +37,11 @@ class CustomerMastersController < ApplicationController
       get_customers
       update_common(@customer)
       if @customer.update(customer_params)
+        flash[:success] = '更新が完了しました'
         redirect_to customer_masters_path(id: @customer.id)
       else
+        flash[:error] = @customer.errors
+        session[:customer] = @customer.attributes.slice(*customer_params.keys)
         render :index
       end
     end
