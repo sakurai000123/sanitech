@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   # メニュー
   resources :menus
   # 見積
-  resources :estimates
+  resources :estimates, shallow: true do
+    # 見積明細
+    resources :estimate_details
+  end
+  post 'estimates/upsert', to: 'estimates#upsert'
+  patch 'estimates/upsert/:id', to: 'estimates#upsert'
   # 受注
   resources :orders
   post 'orders/upsert', to: 'orders#upsert'
