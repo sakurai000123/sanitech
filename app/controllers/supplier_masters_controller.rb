@@ -7,13 +7,15 @@ class SupplierMastersController < ApplicationController
     if params[:id].present?
       get_supplier_by_id(params[:id])
     else
-      @supplier = MSupplier.new
+      @supplier = MSupplier.new(session[:supplier] || {})
     end
+    session[:supplier] = nil
   end
 
   def edit
-    get_supplier_by_id(params[:id])
     get_suppliers
+    flash[:error] = nil
+    flash[:success] = nil
     redirect_to supplier_masters_path(id: @supplier.id)
   end
 
@@ -23,8 +25,11 @@ class SupplierMastersController < ApplicationController
       get_suppliers
       insert_common(@supplier)
       if @supplier.save
+        flash[:success] = '登録が完了しました'
         redirect_to supplier_masters_path(id: @supplier.id)
       else
+        flash[:error] = @supplier.errors
+        session[:supplier] = @supplier.attributes.slice(*supplier_params.keys)
         render :index
       end
     else
@@ -32,8 +37,11 @@ class SupplierMastersController < ApplicationController
       get_suppliers
       update_common(@supplier)
       if @supplier.update(supplier_params)
+        flash[:success] = '更新が完了しました'
         redirect_to supplier_masters_path(id: @supplier.id)
       else
+        flash[:error] = @supplier.errors
+        session[:supplier] = @supplier.attributes.slice(*supplier_params.keys)
         render :index
       end
     end
