@@ -16,7 +16,7 @@ class SupplierMastersController < ApplicationController
     get_suppliers
     flash[:error] = nil
     flash[:success] = nil
-    redirect_to supplier_masters_path(id: @supplier.id)
+    redirect_to supplier_masters_path(id: params[:id])
   end
 
   def upsert
