@@ -9,7 +9,7 @@ class CustomerMastersController < ApplicationController
     else
       @customer = MCustomer.new(session[:customer] || {})
     end
-
+    session[:customer] = nil
   end
 
   def edit

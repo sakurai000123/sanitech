@@ -44,7 +44,7 @@ class MCustomer < ApplicationRecord
   format: { with: Validate::PHONE_NUMBER_REGEX, message: sprintf(Message::FORMAT_ERROR, "電話番号")}
 
   validates :fax_number,
-  format: { with: Validate::PHONE_NUMBER_REGEX, message: sprintf(Message::FORMAT_ERROR, "FAX番号")}
+  format: { with: Validate::PHONE_NUMBER_REGEX, message: sprintf(Message::FORMAT_ERROR, "FAX番号"), allow_blank: true}
 
   validates :mail_address,
   presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "メールアドレス")},
