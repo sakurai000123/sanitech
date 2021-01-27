@@ -4,137 +4,205 @@
   <div class="contents-inner">
     <div class="gray-wrap">
       <h1>見積入力</h1>
+      <%= form_for @estimate, url: {controller: :estimates, action: :create, id: @estimate.id} do |f| %>
       <div class="top-edit">
         <dl class="edit-wrap small">
           <dt>見積番号</dt>
           <dd>
-            <span class="input w100 not-edit"> 000001 </span
+            <span class="input w100 not-edit"></span
             ><span class="hyphen">−</span>
-            <span class="input w50 not-edit"> 1 </span>
+            <span class="input w50 not-edit"></span>
           </dd>
           <dt>見積日</dt>
           <dd>
-            <span class="input w100"
-              ><input type="text" name="" id="" value="2020/11/1"
-            /></span>
+            <span class="input w100">
+                <%= f.date_field :estimate_date %>
+            </span>
           </dd>
           <dt>部門</dt>
           <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="001"
-            /></span>
-            <span class="input w-flex not-edit"> 本社 </span>
+            <span class="input w100per">
+              <%= f.select :department_id, departments_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <%= @department.id %>
+              <%= f.hidden_field :department_id, value: @department.id %>
+            </span>
+            <span class="input w-flex not-edit">
+              <%= @department.department_name %>
+            </span>
+<%
+=end%>
           </dd>
           <dt>担当者</dt>
           <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="0005"
-            /></span>
-            <span class="input w100 not-edit"> 広瀬愛未 </span>
+            <span class="input w100per">
+              <%= f.select :charge_id, users_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <%= @current_user.id %>
+              <%= f.hidden_field :charge_id, value: @current_user.id %>
+            </span>
+            <span class="input w100 not-edit">
+              <%= @current_user.user_name %>
+            </span>
+<%
+=end%>
           </dd>
           <dt>発行者</dt>
           <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="0005"
-            /></span>
-            <span class="input w100 not-edit"> 広瀬愛未 </span>
+            <span class="input contents-label" >
+              <%= @current_user.id %>
+            </span>
+            <span class="input w100 not-edit">
+              <%= @current_user.user_name %>
+            </span>
           </dd>
           <dt>承認者</dt>
           <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="0001"
-            /></span>
-            <span class="input w100 not-edit"> 長塚友和 </span>
+            <span class="input w100per">
+              <%= f.select :authorizer_id, users_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <%= @current_user.id %>
+              <%= f.hidden_field :authorizer_id, value: @current_user.id %>
+            </span>
+            <span class="input w100 not-edit">
+              <%= @current_user.user_name %>
+            </span>
+<%
+=end%>
           </dd>
         </dl>
         <dl class="edit-wrap x2">
           <dt>得意先</dt>
           <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="000023"
-            /></span>
-            <span class="input w-flex">
-              <input type="text" name="" id="" value="株式会社サンテック" />
+            <span class="input w100per">
+              <%= f.select :customer_id, customers_list, include_blank: select_blank %>
             </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <%= f.collection_select :customer_id, MCustomer.all, :id, :id, include_blank: select_blank %>
+            <span class="input w-flex">
+              <%= f.collection_select :customer_id, MCustomer.all, :id, :customer_name, include_blank: select_blank %>
+            </span>
+<%
+=end%>
           </dd>
         </dl>
         <dl class="edit-wrap x2">
           <dt>得意先部署名</dt>
           <dd>
             <span class="input w100per">
-              <input type="text" name="" id="" value="公務課" />
+              <%= f.text_field :cus_department_name %>
             </span>
           </dd>
           <dt>得意先担当者</dt>
           <dd>
             <span class="input w100per">
-              <input type="text" name="" id="" value="係長　福田" />
+              <%= f.text_field :cus_charge_name %>
             </span>
           </dd>
         </dl>
         <dl class="edit-wrap x4">
           <dt>納期</dt>
           <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="1"
-            /></span>
+            <span class="input w100per">
+              <%= f.select :delivery_date_category_code, delivery_date_category_code_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <input type="text" name="" id="" value="1"/>
+            </span>
             <span class="input w-flex">
               <input type="text" name="" id="" value="実働約２〜3日" />
             </span>
+<%
+=end%>
           </dd>
           <dt>支払条件</dt>
           <dd>
-            <span class="input contents-label"
+            <span class="input w100per">
+              <%= f.select :payment_category_code, payment_category_code_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label"
               ><input type="text" name="" id="" value="1"
             /></span>
             <span class="input w-flex">
               <input type="text" name="" id="" value="実従来通り" />
             </span>
+<%
+=end%>
           </dd>
           <dt>受渡場所</dt>
           <dd>
-            <span class="input contents-label"
+            <span class="input w100per">
+              <%= f.select :delivery_place_code, delivery_place_code_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label"
               ><input type="text" name="" id="" value="1"
             /></span>
             <span class="input w-flex">
               <input type="text" name="" id="" value="御社" />
-            </span>
+            </span> 
+<%
+=end%>
           </dd>
           <dt>有効期限</dt>
           <dd>
-            <span class="input contents-label"
+            <span class="input w100per">
+              <%= f.select :estimate_expiration_code, expiration_code_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label"
               ><input type="text" name="" id="" value="1"
             /></span>
             <span class="input w-flex">
               <input type="text" name="" id="" value="1ヵ月" />
-            </span>
+            </span> 
+<%
+=end%>
           </dd>
         </dl>
         <dl class="edit-wrap x2">
           <dt>件名</dt>
           <dd>
             <span class="input w100per">
-              <input type="text" name="" id="" value="三ツ星　ベルト" />
+              <%= f.text_field :estimate_name %>
             </span>
           </dd>
         </dl>
         <div class="top-edit-flex">
           <dl class="edit-wrap small">
             <dt class="w120">備考欄</dt>
-            <dd class="w-flex">
+            <dd class="w-flex ml0">
               <span class="input w100per">
-                <textarea
-                  value="※エンドレス品での御見積となります。"
-                ></textarea>
+                <%= f.text_area :note %>
               </span>
             </dd>
           </dl>
           <ul class="top-button-list">
-            <li><button>保存</button></li>
+            <li>
+              <%= f.button :type => "submit" do %>保存<% end %>
+            </li>
             <li><button>読込</button></li>
             <li><button>ソート</button></li>
           </ul>
         </div>
+      <% end %>
       </div>
     </div>
   </div>

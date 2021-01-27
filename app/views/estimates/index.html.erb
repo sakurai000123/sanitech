@@ -144,6 +144,32 @@
         </tr>
       </thead>
       <tbody>
+        <% @estimates.each do |estimate| %>
+        <tr class="upper-row">
+          <td rowspan="2"><%= estimate.id %>-<%= estimate.estimate_branch_number %></td>
+          <td><%= estimate.estimate_branch_number %></td>
+          <td rowspan="2"><%= estimate.estimate_date %></td>
+          <td><%= estimate.create_user_name %></td>
+          <td><%= estimate.customer_name %></td>
+          <td><%= estimate.cus_department_name %></td>
+          <td><%= estimate.cus_charge_name %></td>
+          <td></td>
+          <td><%= estimate.estimate_amount %></td>
+          <td></td>
+          <td rowspan="2"><%= estimate.estimate_name %></td>
+          <td rowspan="2"><%= estimate.note %></td>
+        </tr>
+        <tr class="lower-row">
+          <td></td>
+          <td>三ツ星</td>
+          <td>ベルト（裏面センター）</td>
+          <td>NS82UG0/0W 100×2215E</td>
+          <td>２</td>
+          <td>本</td>
+          <td>8,000</td>
+          <td>4,000</td>
+        </tr>
+        <% end %>
         <tr class="upper-row">
           <td rowspan="2">000002-2</td>
           <td></td>

@@ -3,8 +3,8 @@ class TEstimate < ApplicationRecord
 
   # バリデーション
   validates :id,
-  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "見積ID")},
-  uniqueness: { message: sprintf(Message::RECORD_UNIQUENESS_ERROR, "見積ID")}
+  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "見積番号")},
+  uniqueness: { message: sprintf(Message::RECORD_UNIQUENESS_ERROR, "見積番号")}
 
   validates :create_user_name,
   presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "作成者")}
@@ -19,19 +19,19 @@ class TEstimate < ApplicationRecord
   presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "見積日")}
 
   validates :department_id,
-  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "部門ID")}
+  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "部門")}
 
   validates :charge_id,
-  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "担当者ID")}
+  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "担当者")}
 
   validates :issuer_id,
-  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "発行者ID")}
+  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "発行者")}
 
   validates :authorizer_id,
-  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "承認者ID")}
+  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "承認者")}
 
   validates :customer_id,
-  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "得意先ID")}
+  presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "得意先")}
 
   validates :customer_name,
   presence: { message: sprintf(Message::INPUT_BLANK_ERROR, "得意先名")}

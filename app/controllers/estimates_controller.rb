@@ -4,16 +4,38 @@ class EstimatesController < ApplicationController
 
 		def index
       get_estimates
-      if params[:id].present?
-
-      else
-        @estimate = TEstimate.new(session[:user] || {})
-        session[:user] = nil
-      end
     end
 
     def new
+      if params[:id].present?
 
+      else
+        @estimate = TEstimate.new
+        get_department
+      end
+    end
+
+    def create
+      @estimate = TEstimate.new(estimate_params)
+      @estimate.id = 18
+      @estimate.issuer_id = @current_user.id
+      @estimate.estimate_branch_number = 1
+      @estimate.create_user_name = @current_user.user_name
+      @estimate.update_user_name = @current_user.user_name
+      @estimate.customer_name = MCustomer.find(@estimate.customer_id).customer_name
+      @estimate.estimate_amount = 0
+      @estimate.tax_amount = 0
+      if @estimate.save
+        flash[:success] = '登録が完了しました'
+        redirect_to estimates_path
+      else
+        flash[:error] = @estimate.errors
+        session[:user] = @estimate.attributes.slice(*estimate_params.keys)
+        render :new
+      end
+    end
+
+    def edit
     end
 
     def show
@@ -28,17 +50,12 @@ class EstimatesController < ApplicationController
       end
     end
 
-    def edit
-
-    end
-
     def upsert
-
     end
 
     private
     def estimate_params
-      params.require(:t_estimates).permit(
+      params.require(:t_estimate).permit(
         :create_user_name,
         :update_user_name,
         :estimate_branch_number,
