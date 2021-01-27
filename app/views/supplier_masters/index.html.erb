@@ -48,8 +48,8 @@
             </dd>
             <dt>発行者</dt>
             <dd>
-              <span class="input w200">
-                <%= f.select :input_user_id, users_list, include_blank: select_blank %>
+              <span class="input w200 not-edit">
+                <%= @supplier.input_user.present? ? @supplier.input_user_id + ':' + @supplier.input_user.user_name : @current_user.id + ':' + @current_user.user_name %>
               </span>
             </dd>
           </dl>

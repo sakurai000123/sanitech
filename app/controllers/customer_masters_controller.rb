@@ -24,6 +24,7 @@ class CustomerMastersController < ApplicationController
       @customer = MCustomer.new(customer_params)
       get_customers
       insert_common(@customer)
+      input_user_set(@customer)
       if @customer.save
         flash[:success] = '登録が完了しました'
         redirect_to customer_masters_path(id: @customer.id)
@@ -54,7 +55,6 @@ class CustomerMastersController < ApplicationController
       :start_date,
       :department_id,
       :charge_id,
-      :input_user_id,
       :customer_name,
       :charge_name,
       :charge_position,

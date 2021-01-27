@@ -24,6 +24,7 @@ class SupplierMastersController < ApplicationController
       @supplier = MSupplier.new(supplier_params)
       get_suppliers
       insert_common(@supplier)
+      input_user_set(@supplier)
       if @supplier.save
         flash[:success] = '登録が完了しました'
         redirect_to supplier_masters_path(id: @supplier.id)
@@ -55,7 +56,6 @@ class SupplierMastersController < ApplicationController
       :start_date,
       :department_id,
       :charge_id,
-      :input_user_id,
       :supplier_name,
       :charge_name,
       :charge_position,

@@ -1,5 +1,6 @@
 class MCustomer < ApplicationRecord
   belongs_to :charge, class_name: "MUser", optional: true
+  belongs_to :input_user, class_name: "MUser", optional: true
 
   # バリデーション
   validates :id,
