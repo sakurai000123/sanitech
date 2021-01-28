@@ -4,6 +4,10 @@ class OrdersController < ApplicationController
 
   def index
     get_orders
+  end
+
+  def new
+    get_orders
     if params[:id].present?
       get_order_by_id(params[:id])
     else
@@ -25,7 +29,7 @@ class OrdersController < ApplicationController
       if @order.save
         redirect_to orders_path(id: @order.id)
       else
-        render :index
+        render :new
       end
     else
       get_order_by_id(order_params[:id])
@@ -34,7 +38,7 @@ class OrdersController < ApplicationController
       if @order.update(order_params)
         redirect_to orders_path(id: @order.id)
       else
-        render :index
+        render :new
       end
     end
   end
