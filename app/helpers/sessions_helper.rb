@@ -25,8 +25,7 @@ module SessionsHelper
 
   # 現在のユーザーをログアウトする
   def log_out
-    session[:id] = nil
-    session[:user_name] = nil
+    session.clear()
     @current_user = nil
   end
 end

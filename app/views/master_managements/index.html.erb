@@ -3,6 +3,7 @@
     <div class="gray-wrap">
       <div class="heading-wrap mb-large">
         <h1>マスタ管理</h1>
+        <%= session[:user] %>
       </div>
       <ul class="menu-button">
         <li><%= link_to '従業員情報入力', employee_informations_path, class: 'button' %></li>
