@@ -1,2 +1,0 @@
-class MDepositAccount < ApplicationRecord
-end

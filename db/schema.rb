@@ -44,13 +44,18 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "payment_category_code", limit: 1, null: false
     t.string "close_date_code", limit: 1, null: false
     t.string "payment_date_code", limit: 1, null: false
-    t.string "deposit_account_id", limit: 3, null: false
+    t.string "deposit_account_name", null: false
+    t.string "deposit_account_category_code", limit: 1, null: false
+    t.string "deposit_account_number", limit: 7, null: false
+    t.string "deposit_account_type_code", limit: 1, null: false
+    t.string "deposit_account_holder", limit: 30, null: false
+    t.string "deposit_bank_code", limit: 4, null: false
+    t.string "deposit_branch_code", limit: 3, null: false
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["charge_id"], name: "index_m_customers_on_charge_id"
     t.index ["department_id"], name: "index_m_customers_on_department_id"
-    t.index ["deposit_account_id"], name: "index_m_customers_on_deposit_account_id"
     t.index ["input_user_id"], name: "index_m_customers_on_input_user_id"
   end
 
@@ -70,44 +75,10 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "m_deposit_accounts", id: :string, limit: 3, force: :cascade do |t|
-    t.string "create_user_name", null: false
-    t.string "update_user_name", null: false
-    t.string "deposit_account_name", null: false
-    t.date "start_date"
-    t.date "end_date"
-    t.string "account_category_code", limit: 1, null: false
-    t.string "account_number", limit: 7, null: false
-    t.string "account_type_code", limit: 1, null: false
-    t.string "account_holder", limit: 30, null: false
-    t.string "bank_code", limit: 4, null: false
-    t.string "branch_code", limit: 3, null: false
-    t.boolean "delete_flag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "m_makers", id: :string, limit: 4, force: :cascade do |t|
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
     t.string "maker_name", null: false
-    t.boolean "delete_flag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "m_payment_accounts", id: :string, limit: 3, force: :cascade do |t|
-    t.string "create_user_name", null: false
-    t.string "update_user_name", null: false
-    t.string "payment_account_name", null: false
-    t.date "start_date"
-    t.date "end_date"
-    t.string "account_category_code", limit: 1, null: false
-    t.string "account_number_code", limit: 7, null: false
-    t.string "account_type", limit: 1, null: false
-    t.string "account_holder", limit: 30, null: false
-    t.string "bank_code", limit: 4, null: false
-    t.string "branch_code", limit: 3, null: false
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -155,7 +126,13 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "payment_category_code", limit: 1, null: false
     t.string "close_date_code", limit: 1, null: false
     t.string "payment_day_code", limit: 1, null: false
-    t.string "payment_account_id", limit: 3, null: false
+    t.string "payment_account_name", null: false
+    t.string "payment_account_category_code", limit: 1, null: false
+    t.string "payment_account_number_code", limit: 7, null: false
+    t.string "payment_account_type", limit: 1, null: false
+    t.string "payment_account_holder", limit: 30, null: false
+    t.string "payment_bank_code", limit: 4, null: false
+    t.string "payment_branch_code", limit: 3, null: false
     t.text "note"
     t.boolean "delete_flag"
     t.datetime "created_at", precision: 6, null: false
@@ -163,7 +140,6 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.index ["charge_id"], name: "index_m_suppliers_on_charge_id"
     t.index ["department_id"], name: "index_m_suppliers_on_department_id"
     t.index ["input_user_id"], name: "index_m_suppliers_on_input_user_id"
-    t.index ["payment_account_id"], name: "index_m_suppliers_on_payment_account_id"
   end
 
   create_table "m_users", id: :string, limit: 4, force: :cascade do |t|
@@ -300,7 +276,6 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "demand_id", null: false
     t.string "customer_id", limit: 6, null: false
     t.string "payment_category_code", limit: 1, null: false
-    t.string "deposit_account_id", limit: 3, null: false
     t.integer "deposit_amount", null: false
     t.integer "erase_amount", null: false
     t.integer "account_receivable_id", null: false
@@ -309,7 +284,6 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.index ["account_receivable_id"], name: "index_t_deposits_on_account_receivable_id"
     t.index ["customer_id"], name: "index_t_deposits_on_customer_id"
     t.index ["demand_id"], name: "index_t_deposits_on_demand_id"
-    t.index ["deposit_account_id"], name: "index_t_deposits_on_deposit_account_id"
   end
 
   create_table "t_estimate_details", force: :cascade do |t|
@@ -398,11 +372,11 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   create_table "t_purchase_details", force: :cascade do |t|
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
-    t.integer "purchase_id", null: false
+    t.integer "purchase_id_id", null: false
     t.integer "line_number", null: false
     t.integer "sort_number", null: false
-    t.integer "send_order_details_id", null: false
-    t.string "product_id", limit: 8, null: false
+    t.integer "send_order_details_id_id", null: false
+    t.string "product_id_id", limit: 8, null: false
     t.string "product_name", null: false
     t.string "product_model_number", null: false
     t.integer "purchase_unit_price", null: false
@@ -411,29 +385,27 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.date "receive_order_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_t_purchase_details_on_product_id"
-    t.index ["purchase_id"], name: "index_t_purchase_details_on_purchase_id"
-    t.index ["send_order_details_id"], name: "index_t_purchase_details_on_send_order_details_id"
+    t.index ["product_id_id"], name: "index_t_purchase_details_on_product_id_id"
+    t.index ["purchase_id_id"], name: "index_t_purchase_details_on_purchase_id_id"
+    t.index ["send_order_details_id_id"], name: "index_t_purchase_details_on_send_order_details_id_id"
   end
 
   create_table "t_purchases", force: :cascade do |t|
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
     t.date "purchase_date", null: false
-    t.string "supplier_id", limit: 6, null: false
+    t.string "supplier_id_id", limit: 6, null: false
     t.string "supplier_name", null: false
-    t.string "user_id", limit: 4, null: false
-    t.string "send_order_id", null: false
-    t.integer "send_order_detail_id", null: false
+    t.string "user_id_id", limit: 4, null: false
+    t.string "send_order_id_id", null: false
     t.integer "purchase_amount", null: false
     t.integer "tax_amount", null: false
     t.date "purchase_slip_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["send_order_detail_id"], name: "index_t_purchases_on_send_order_detail_id"
-    t.index ["send_order_id"], name: "index_t_purchases_on_send_order_id"
-    t.index ["supplier_id"], name: "index_t_purchases_on_supplier_id"
-    t.index ["user_id"], name: "index_t_purchases_on_user_id"
+    t.index ["send_order_id_id"], name: "index_t_purchases_on_send_order_id_id"
+    t.index ["supplier_id_id"], name: "index_t_purchases_on_supplier_id_id"
+    t.index ["user_id_id"], name: "index_t_purchases_on_user_id_id"
   end
 
   create_table "t_receive_order_details", force: :cascade do |t|
@@ -586,34 +558,35 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   create_table "t_sales", force: :cascade do |t|
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
-    t.string "receive_order_id", null: false
+    t.string "receive_order_id_id", null: false
     t.date "sales_date", null: false
     t.date "close_date", null: false
-    t.string "department_id", limit: 3, null: false
-    t.string "charge_id", limit: 4, null: false
-    t.string "assistant_id", limit: 4, null: false
-    t.string "customer_id", limit: 6, null: false
+    t.string "department_id_id", limit: 3, null: false
+    t.string "charge_id_id", limit: 4, null: false
+    t.string "assistant_id_id", limit: 4, null: false
+    t.string "customer_id_id", limit: 6, null: false
     t.integer "sales_amount", null: false
     t.integer "tax_amount", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["assistant_id"], name: "index_t_sales_on_assistant_id"
-    t.index ["charge_id"], name: "index_t_sales_on_charge_id"
-    t.index ["customer_id"], name: "index_t_sales_on_customer_id"
-    t.index ["department_id"], name: "index_t_sales_on_department_id"
-    t.index ["receive_order_id"], name: "index_t_sales_on_receive_order_id"
+    t.index ["assistant_id_id"], name: "index_t_sales_on_assistant_id_id"
+    t.index ["charge_id_id"], name: "index_t_sales_on_charge_id_id"
+    t.index ["customer_id_id"], name: "index_t_sales_on_customer_id_id"
+    t.index ["department_id_id"], name: "index_t_sales_on_department_id_id"
+    t.index ["receive_order_id_id"], name: "index_t_sales_on_receive_order_id_id"
   end
 
   create_table "t_sales_details", force: :cascade do |t|
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
-    t.integer "sales_id", null: false
+    t.integer "sales_id_id", null: false
     t.integer "line_number", null: false
     t.integer "sort_number", null: false
-    t.string "product_id", limit: 8, null: false
+    t.integer "receive_order_detail_id_id", null: false
+    t.string "product_id_id", limit: 8, null: false
     t.string "product_name", null: false
     t.string "product_model_number", null: false
-    t.string "supplier_id", limit: 6, null: false
+    t.string "supplier_id_id", limit: 6, null: false
     t.string "supplier_name", null: false
     t.integer "sale_unit_price", null: false
     t.integer "ship_quantity", null: false
@@ -624,9 +597,10 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.boolean "shipped_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_t_sales_details_on_product_id"
-    t.index ["sales_id"], name: "index_t_sales_details_on_sales_id"
-    t.index ["supplier_id"], name: "index_t_sales_details_on_supplier_id"
+    t.index ["product_id_id"], name: "index_t_sales_details_on_product_id_id"
+    t.index ["receive_order_detail_id_id"], name: "index_t_sales_details_on_receive_order_detail_id_id"
+    t.index ["sales_id_id"], name: "index_t_sales_details_on_sales_id_id"
+    t.index ["supplier_id_id"], name: "index_t_sales_details_on_supplier_id_id"
   end
 
   create_table "t_send_order_details", force: :cascade do |t|
@@ -712,13 +686,11 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   end
 
   add_foreign_key "m_customers", "m_departments", column: "department_id"
-  add_foreign_key "m_customers", "m_deposit_accounts", column: "deposit_account_id"
   add_foreign_key "m_customers", "m_users", column: "charge_id"
   add_foreign_key "m_customers", "m_users", column: "input_user_id"
   add_foreign_key "m_products", "m_makers", column: "maker_id"
   add_foreign_key "m_products", "m_suppliers", column: "supplier_id"
   add_foreign_key "m_suppliers", "m_departments", column: "department_id"
-  add_foreign_key "m_suppliers", "m_payment_accounts", column: "payment_account_id"
   add_foreign_key "m_suppliers", "m_users", column: "charge_id"
   add_foreign_key "m_suppliers", "m_users", column: "input_user_id"
   add_foreign_key "m_users", "m_authorities", column: "authority_id"
@@ -731,7 +703,6 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   add_foreign_key "t_demands", "t_receive_orders", column: "receive_order_id"
   add_foreign_key "t_demands", "t_sales", column: "sales_id"
   add_foreign_key "t_deposits", "m_customers", column: "customer_id"
-  add_foreign_key "t_deposits", "m_deposit_accounts", column: "deposit_account_id"
   add_foreign_key "t_deposits", "t_account_receivables", column: "account_receivable_id"
   add_foreign_key "t_deposits", "t_demands", column: "demand_id"
   add_foreign_key "t_estimate_details", "m_makers", column: "maker_id"
@@ -745,13 +716,12 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   add_foreign_key "t_estimates", "m_users", column: "issuer_id"
   add_foreign_key "t_payments", "m_suppliers", column: "supplier_id"
   add_foreign_key "t_payments", "t_account_payables", column: "account_payable_id"
-  add_foreign_key "t_purchase_details", "m_products", column: "product_id"
-  add_foreign_key "t_purchase_details", "t_purchases", column: "purchase_id"
-  add_foreign_key "t_purchase_details", "t_send_order_details", column: "send_order_details_id"
-  add_foreign_key "t_purchases", "m_suppliers", column: "supplier_id"
-  add_foreign_key "t_purchases", "m_users", column: "user_id"
-  add_foreign_key "t_purchases", "t_send_order_details", column: "send_order_detail_id"
-  add_foreign_key "t_purchases", "t_send_orders", column: "send_order_id"
+  add_foreign_key "t_purchase_details", "m_products", column: "product_id_id"
+  add_foreign_key "t_purchase_details", "t_purchases", column: "purchase_id_id"
+  add_foreign_key "t_purchase_details", "t_send_order_details", column: "send_order_details_id_id"
+  add_foreign_key "t_purchases", "m_suppliers", column: "supplier_id_id"
+  add_foreign_key "t_purchases", "m_users", column: "user_id_id"
+  add_foreign_key "t_purchases", "t_send_orders", column: "send_order_id_id"
   add_foreign_key "t_receive_order_details", "m_makers", column: "maker_id"
   add_foreign_key "t_receive_order_details", "m_products", column: "product_id"
   add_foreign_key "t_receive_order_details", "m_suppliers", column: "supplier_id"
@@ -774,14 +744,15 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   add_foreign_key "t_returns", "m_suppliers", column: "supplier_id"
   add_foreign_key "t_returns", "m_users", column: "charge_id"
   add_foreign_key "t_returns", "t_receive_orders", column: "receive_order_id"
-  add_foreign_key "t_sales", "m_customers", column: "customer_id"
-  add_foreign_key "t_sales", "m_departments", column: "department_id"
-  add_foreign_key "t_sales", "m_users", column: "assistant_id"
-  add_foreign_key "t_sales", "m_users", column: "charge_id"
-  add_foreign_key "t_sales", "t_receive_orders", column: "receive_order_id"
-  add_foreign_key "t_sales_details", "m_products", column: "product_id"
-  add_foreign_key "t_sales_details", "m_suppliers", column: "supplier_id"
-  add_foreign_key "t_sales_details", "t_sales", column: "sales_id"
+  add_foreign_key "t_sales", "m_customers", column: "customer_id_id"
+  add_foreign_key "t_sales", "m_departments", column: "department_id_id"
+  add_foreign_key "t_sales", "m_users", column: "assistant_id_id"
+  add_foreign_key "t_sales", "m_users", column: "charge_id_id"
+  add_foreign_key "t_sales", "t_receive_orders", column: "receive_order_id_id"
+  add_foreign_key "t_sales_details", "m_products", column: "product_id_id"
+  add_foreign_key "t_sales_details", "m_suppliers", column: "supplier_id_id"
+  add_foreign_key "t_sales_details", "t_receive_order_details", column: "receive_order_detail_id_id"
+  add_foreign_key "t_sales_details", "t_sales", column: "sales_id_id"
   add_foreign_key "t_send_order_details", "m_customers", column: "customer_id"
   add_foreign_key "t_send_order_details", "m_makers", column: "maker_id"
   add_foreign_key "t_send_order_details", "m_products", column: "product_id"

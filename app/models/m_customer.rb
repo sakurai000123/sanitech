@@ -60,9 +60,6 @@ class MCustomer < ApplicationRecord
   validates :payment_date_code,
   presence: { message: sprintf(Message::SELECT_BLANK_ERROR, "支払日")}
 
-  validates :deposit_account_id,
-  presence: { message: sprintf(Message::SELECT_BLANK_ERROR, "振込先")}
-
 
 
 end

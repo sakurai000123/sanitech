@@ -63,6 +63,4 @@ class MSupplier < ApplicationRecord
   validates :payment_day_code,
   presence: { message: sprintf(Message::SELECT_BLANK_ERROR, "支払日")}
 
-  validates :payment_account_id,
-  presence: { message: sprintf(Message::SELECT_BLANK_ERROR, "振込先")}
 end

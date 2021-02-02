@@ -57,44 +57,6 @@ class CreateMTable < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-
-    ##### 入金口座
-    create_table :m_deposit_accounts, id: false do |t|
-      t.string :id, limit: 3, null: false, primary_key: true #入金口座ID
-      t.string :create_user_name, null: false #作成者
-      t.string :update_user_name, null: false #更新者
-      t.string :deposit_account_name, null: false #入金口座名
-      t.date :start_date #適用開始日
-      t.date :end_date #終了日
-      t.string :account_category_code, limit: 1, null: false #口座区分CD
-      t.string :account_number, limit: 7, null: false #口座番号
-      t.string :account_type_code, limit: 1, null: false #口座種別CD
-      t.string :account_holder, limit: 30, null: false #口座名義
-      t.string :bank_code, limit: 4, null: false #銀行コード
-      t.string :branch_code, limit: 3, null: false #支店コード
-      t.boolean :delete_flag #削除フラグ
-
-      t.timestamps
-    end
-
-    ##### 支払口座
-    create_table :m_payment_accounts, id: false do |t|
-      t.string :id, limit: 3, null: false, primary_key: true #支払口座ID
-      t.string :create_user_name, null: false #作成者
-      t.string :update_user_name, null: false #更新者
-      t.string :payment_account_name, null: false #支払口座名
-      t.date :start_date #適用開始日
-      t.date :end_date #終了日
-      t.string :account_category_code, limit: 1, null: false #口座区分CD
-      t.string :account_number_code, limit: 7, null: false #口座番号
-      t.string :account_type, limit: 1, null: false #口座種別CD
-      t.string :account_holder, limit: 30, null: false #口座名義
-      t.string :bank_code, limit: 4, null: false #銀行コード
-      t.string :branch_code, limit: 3, null: false #支店コード
-      t.boolean :delete_flag #削除フラグ
-
-      t.timestamps
-    end
     
     ###### 得意先
     create_table :m_customers, id: false do |t|
@@ -118,7 +80,13 @@ class CreateMTable < ActiveRecord::Migration[6.0]
       t.string :payment_category_code, limit: 1, null: false #支払条件CD
       t.string :close_date_code, limit: 1, null: false #締日CD
       t.string :payment_date_code, limit: 1, null: false #支払日CD
-      t.references :deposit_account, type: :string, limit: 3, null: false, foreign_key: {to_table: :m_deposit_accounts, primary_key: :id} #振込先ID
+      t.string :deposit_account_name, null: false #入金口座名
+      t.string :deposit_account_category_code, limit: 1, null: false #口座区分CD
+      t.string :deposit_account_number, limit: 7, null: false #口座番号
+      t.string :deposit_account_type_code, limit: 1, null: false #口座種別CD
+      t.string :deposit_account_holder, limit: 30, null: false #口座名義
+      t.string :deposit_bank_code, limit: 4, null: false #銀行コード
+      t.string :deposit_branch_code, limit: 3, null: false #支店コード
       t.boolean :delete_flag #削除フラグ
 
       t.timestamps
@@ -147,7 +115,13 @@ class CreateMTable < ActiveRecord::Migration[6.0]
       t.string :payment_category_code, limit: 1, null: false #支払条件CD
       t.string :close_date_code, limit: 1, null: false #締日CD
       t.string :payment_day_code, limit: 1, null: false #支払日CD
-      t.references :payment_account, type: :string, limit: 3, null: false, foreign_key: {to_table: :m_payment_accounts, primary_key: :id} #振込先ID
+      t.string :payment_account_name, null: false #支払口座名
+      t.string :payment_account_category_code, limit: 1, null: false #口座区分CD
+      t.string :payment_account_number_code, limit: 7, null: false #口座番号
+      t.string :payment_account_type, limit: 1, null: false #口座種別CD
+      t.string :payment_account_holder, limit: 30, null: false #口座名義
+      t.string :payment_bank_code, limit: 4, null: false #銀行コード
+      t.string :payment_branch_code, limit: 3, null: false #支店コード
       t.text :note #備考
       t.boolean :delete_flag #削除フラグ
 

@@ -23,8 +23,6 @@ MProduct.destroy_all # 商品
 MMaker.destroy_all # メーカー
 MSupplier.destroy_all # 仕入先
 MCustomer.destroy_all # 得意先
-MPaymentAccount.destroy_all # 支払口座
-MDepositAccount.destroy_all # 入金口座
 MUser.destroy_all # ユーザ（社員）
 MAuthority.destroy_all # 権限
 MDepartment.destroy_all # 部署（部門）
@@ -79,42 +77,6 @@ end
   )
 end
 
-# 入金口座
-5.times do |n|
-  MDepositAccount.create(
-    id: "00#{n + 1}",
-    create_user_name: "test#{n + 1}",
-    update_user_name: "test#{n + 1}",
-    deposit_account_name: "赤色銀行#{n + 1}",
-    start_date: DateTime.strptime("09/0#{n + 1}/2009 17:00", "%m/%d/%Y %H:%M"),
-    end_date: DateTime.strptime("09/0#{n + 1}/2012 17:00", "%m/%d/%Y %H:%M"),
-    account_category_code: '1',
-    account_number: "000000#{n + 1}",
-    account_type_code: '1',
-    account_holder: "株式会社123#{n + 1}",
-    bank_code: "123#{n + 1}",
-    branch_code: "11#{n + 1}"
-  )
-end
-
-# 支払口座
-5.times do |n|
-  MPaymentAccount.create(
-    id: "00#{n + 1}",
-    create_user_name: "test#{n + 1}",
-    update_user_name: "test#{n + 1}",
-    payment_account_name: "青色銀行#{n + 1}",
-    start_date: DateTime.strptime("09/0#{n + 1}/2009 17:00", "%m/%d/%Y %H:%M"),
-    end_date: DateTime.strptime("09/0#{n + 1}/2012 17:00", "%m/%d/%Y %H:%M"),
-    account_category_code: '1',
-    account_number_code: "000000#{n + 1}",
-    account_type: '1',
-    account_holder: "株式会社123#{n + 1}",
-    bank_code: "123#{n + 1}",
-    branch_code: "11#{n + 1}"
-  )
-end
-
 # 得意先
 5.times do |n|
   MCustomer.create(
@@ -138,7 +100,13 @@ end
     payment_category_code: '1',
     close_date_code: '1',
     payment_date_code: '1',
-    deposit_account_id: '001'
+    deposit_account_name: "支払い口座名#{n + 1}",
+    deposit_account_category_code: "1",
+    deposit_account_number: "123456#{n + 1}",
+    deposit_account_type_code: "1",
+    deposit_account_holder: "テストメイギ#{n + 1}",
+    deposit_bank_code: "000#{n + 1}",
+    deposit_branch_code: "00#{n + 1}"
   )
 end
 
@@ -166,7 +134,13 @@ end
     payment_category_code: '1',
     close_date_code: '1',
     payment_day_code: '1',
-    payment_account_id: '001',
+    payment_account_name: "支払い口座名#{n + 1}",
+    payment_account_category_code: "1",
+    payment_account_number_code: "123456#{n + 1}",
+    payment_account_type: "1",
+    payment_account_holder: "テストメイギ#{n + 1}",
+    payment_bank_code: "000#{n + 1}",
+    payment_branch_code: "00#{n + 1}",
     note: "備考#{n + 1}"
   )
 end

@@ -1,2 +1,0 @@
-class MPaymentAccount < ApplicationRecord
-end
