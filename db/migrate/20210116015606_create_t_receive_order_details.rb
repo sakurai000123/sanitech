@@ -8,7 +8,7 @@ class CreateTReceiveOrderDetails < ActiveRecord::Migration[6.0]
       t.references :receive_order, type: :string, null: false, foreign_key: {to_table: :t_receive_orders, primary_key: :id} #受注ID
       t.integer :line_number, null: false #行番号
       t.integer :sort_number, null: false #ソート番号
-      # t.references :order_category, type: :integer, null: false, foreign_key: {to_table: :, primary_key: :id} #受注区分ID
+      t.integer :order_category_code, null: false #受注区分CD
       t.string :order_category_name, null: false #受注区分名
       t.boolean :invalid_flag #無効フラグ
       t.references :maker, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_makers, primary_key: :id} #メーカーID

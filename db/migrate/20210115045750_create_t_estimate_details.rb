@@ -12,7 +12,7 @@ class CreateTEstimateDetails < ActiveRecord::Migration[6.0]
       t.string :order_category_name, null: false #受注区分名
       t.references :maker, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_makers, primary_key: :id} #メーカーID
       t.string :maker_name, null: false #メーカー名
-      t.references :supplier, type: :string, limit: 5, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :id} #仕入先ID
+      t.references :supplier, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_suppliers, primary_key: :id} #仕入先ID
       t.references :product, type: :string, limit: 8, null: false, foreign_key: {to_table: :m_products, primary_key: :id} #商品ID
       t.string :product_name, null: false #商品名
       t.string :product_model_number, null: false #型番

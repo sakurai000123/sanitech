@@ -6,7 +6,7 @@ class CreateTAccountPayables < ActiveRecord::Migration[6.0]
       t.string :create_user_name, null: false #作成者
       t.string :update_user_name, null: false #更新者
       t.date :billing_date, null: false #請求日
-      t.references :supplier_id, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_customers, primary_key: :id} #仕入先ID
+      t.references :supplier, type: :string, limit: 6, null: false, foreign_key: {to_table: :m_customers, primary_key: :id} #仕入先ID
       t.string :applicable_date, null: false #適用年月
       t.integer :not_payment, null: false #未払い
       t.date :payment_plans_date, null: false #振込予定日

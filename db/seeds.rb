@@ -303,7 +303,7 @@ end
     receive_order_id: "1",
     line_number: 2,
     sort_number: 3,
-    # order_category_id: 4,
+    order_category_code: 4,
     order_category_name: "order_category_name",
     invalid_flag: false,
     maker_id: "0001",

@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
     t.date "billing_date", null: false
-    t.string "supplier_id_id", limit: 6, null: false
+    t.string "supplier_id", limit: 6, null: false
     t.string "applicable_date", null: false
     t.integer "not_payment", null: false
     t.date "payment_plans_date", null: false
@@ -205,7 +205,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "demand_no", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["supplier_id_id"], name: "index_t_account_payables_on_supplier_id_id"
+    t.index ["supplier_id"], name: "index_t_account_payables_on_supplier_id"
   end
 
   create_table "t_account_receivables", id: :serial, force: :cascade do |t|
@@ -273,17 +273,17 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
     t.date "deposit_date", null: false
-    t.string "demand_id_id", null: false
-    t.string "customer_id_id", limit: 6, null: false
+    t.string "demand_id", null: false
+    t.string "customer_id", limit: 6, null: false
     t.string "payment_category_code", limit: 1, null: false
     t.integer "deposit_amount", null: false
     t.integer "erase_amount", null: false
-    t.integer "account_receivable_id_id", null: false
+    t.integer "account_receivable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_receivable_id_id"], name: "index_t_deposits_on_account_receivable_id_id"
-    t.index ["customer_id_id"], name: "index_t_deposits_on_customer_id_id"
-    t.index ["demand_id_id"], name: "index_t_deposits_on_demand_id_id"
+    t.index ["account_receivable_id"], name: "index_t_deposits_on_account_receivable_id"
+    t.index ["customer_id"], name: "index_t_deposits_on_customer_id"
+    t.index ["demand_id"], name: "index_t_deposits_on_demand_id"
   end
 
   create_table "t_estimate_details", id: :serial, force: :cascade do |t|
@@ -296,7 +296,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "order_category_name", null: false
     t.string "maker_id", limit: 4, null: false
     t.string "maker_name", null: false
-    t.string "supplier_id", limit: 5, null: false
+    t.string "supplier_id", limit: 6, null: false
     t.string "product_id", limit: 8, null: false
     t.string "product_name", null: false
     t.string "product_model_number", null: false
@@ -357,16 +357,16 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
     t.date "payment_date", null: false
-    t.string "supplier_id_id", limit: 6, null: false
+    t.string "supplier_id", limit: 6, null: false
     t.string "payment_category_code", limit: 1, null: false
     t.integer "payment_amount", null: false
     t.integer "tax_amount", null: false
     t.boolean "completion_flag"
-    t.integer "account_payable_id_id", null: false
+    t.integer "account_payable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_payable_id_id"], name: "index_t_payments_on_account_payable_id_id"
-    t.index ["supplier_id_id"], name: "index_t_payments_on_supplier_id_id"
+    t.index ["account_payable_id"], name: "index_t_payments_on_account_payable_id"
+    t.index ["supplier_id"], name: "index_t_payments_on_supplier_id"
   end
 
   create_table "t_purchase_details", id: :serial, force: :cascade do |t|
@@ -414,6 +414,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.string "receive_order_id", null: false
     t.integer "line_number", null: false
     t.integer "sort_number", null: false
+    t.integer "order_category_code", null: false
     t.string "order_category_name", null: false
     t.boolean "invalid_flag"
     t.string "maker_id", limit: 4, null: false
@@ -497,8 +498,8 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   create_table "t_reports", id: :serial, force: :cascade do |t|
     t.string "create_user_name", null: false
     t.string "update_user_name", null: false
-    t.string "department_id_id", null: false
-    t.string "user_id_id", null: false
+    t.string "department_id", null: false
+    t.string "user_id", null: false
     t.string "report_type", null: false
     t.date "issue_date", null: false
     t.string "title"
@@ -507,16 +508,16 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
     t.text "cause"
     t.text "task"
     t.text "countermeasures"
-    t.string "customer_id_id", limit: 6
+    t.string "customer_id", limit: 6
     t.string "customer_name"
     t.string "customer_charge_name"
     t.text "disposition_contents"
     t.boolean "reported_flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id_id"], name: "index_t_reports_on_customer_id_id"
-    t.index ["department_id_id"], name: "index_t_reports_on_department_id_id"
-    t.index ["user_id_id"], name: "index_t_reports_on_user_id_id"
+    t.index ["customer_id"], name: "index_t_reports_on_customer_id"
+    t.index ["department_id"], name: "index_t_reports_on_department_id"
+    t.index ["user_id"], name: "index_t_reports_on_user_id"
   end
 
   create_table "t_returns", id: :serial, force: :cascade do |t|
@@ -695,16 +696,16 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   add_foreign_key "m_suppliers", "m_users", column: "input_user_id"
   add_foreign_key "m_users", "m_authorities", column: "authority_id"
   add_foreign_key "m_users", "m_departments", column: "department_id"
-  add_foreign_key "t_account_payables", "m_customers", column: "supplier_id_id"
+  add_foreign_key "t_account_payables", "m_customers", column: "supplier_id"
   add_foreign_key "t_account_receivables", "m_customers", column: "customer_id"
   add_foreign_key "t_account_receivables", "t_demands", column: "demand_id"
   add_foreign_key "t_demands", "m_customers", column: "customer_id"
   add_foreign_key "t_demands", "m_users", column: "user_id"
   add_foreign_key "t_demands", "t_receive_orders", column: "receive_order_id"
   add_foreign_key "t_demands", "t_sales", column: "sales_id"
-  add_foreign_key "t_deposits", "m_customers", column: "customer_id_id"
-  add_foreign_key "t_deposits", "t_account_receivables", column: "account_receivable_id_id"
-  add_foreign_key "t_deposits", "t_demands", column: "demand_id_id"
+  add_foreign_key "t_deposits", "m_customers", column: "customer_id"
+  add_foreign_key "t_deposits", "t_account_receivables", column: "account_receivable_id"
+  add_foreign_key "t_deposits", "t_demands", column: "demand_id"
   add_foreign_key "t_estimate_details", "m_makers", column: "maker_id"
   add_foreign_key "t_estimate_details", "m_products", column: "product_id"
   add_foreign_key "t_estimate_details", "m_suppliers", column: "supplier_id"
@@ -714,8 +715,8 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   add_foreign_key "t_estimates", "m_users", column: "authorizer_id"
   add_foreign_key "t_estimates", "m_users", column: "charge_id"
   add_foreign_key "t_estimates", "m_users", column: "issuer_id"
-  add_foreign_key "t_payments", "m_suppliers", column: "supplier_id_id"
-  add_foreign_key "t_payments", "t_account_payables", column: "account_payable_id_id"
+  add_foreign_key "t_payments", "m_suppliers", column: "supplier_id"
+  add_foreign_key "t_payments", "t_account_payables", column: "account_payable_id"
   add_foreign_key "t_purchase_details", "m_products", column: "product_id"
   add_foreign_key "t_purchase_details", "t_purchases", column: "purchase_id"
   add_foreign_key "t_purchase_details", "t_send_order_details", column: "send_order_details_id"
@@ -734,9 +735,9 @@ ActiveRecord::Schema.define(version: 2021_01_20_065008) do
   add_foreign_key "t_receive_orders", "m_users", column: "assistant_id"
   add_foreign_key "t_receive_orders", "m_users", column: "charge_id"
   add_foreign_key "t_receive_orders", "t_estimates", column: "estimate_id"
-  add_foreign_key "t_reports", "m_customers", column: "customer_id_id"
-  add_foreign_key "t_reports", "m_departments", column: "department_id_id"
-  add_foreign_key "t_reports", "m_users", column: "user_id_id"
+  add_foreign_key "t_reports", "m_customers", column: "customer_id"
+  add_foreign_key "t_reports", "m_departments", column: "department_id"
+  add_foreign_key "t_reports", "m_users", column: "user_id"
   add_foreign_key "t_returns", "m_customers", column: "customer_id"
   add_foreign_key "t_returns", "m_departments", column: "department_id"
   add_foreign_key "t_returns", "m_makers", column: "maker_id"

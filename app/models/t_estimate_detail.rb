@@ -1,3 +1,3 @@
 class TEstimateDetail < ApplicationRecord
-  belongs_to :t_estimate
+  belongs_to :estimate, class_name: "TEstimate", optional: true
 end
