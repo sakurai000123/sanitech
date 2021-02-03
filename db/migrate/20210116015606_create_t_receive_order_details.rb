@@ -1,13 +1,14 @@
 class CreateTReceiveOrderDetails < ActiveRecord::Migration[6.0]
   def change
     ##### 受注明細
-    create_table :t_receive_order_details do |t|
+    create_table :t_receive_order_details, id: false do |t|
+      t.integer :id, null: false, primary_key: true #受注明細ID
       t.string :create_user_name, null: false #作成者
       t.string :update_user_name, null: false #更新者
       t.references :receive_order, type: :string, null: false, foreign_key: {to_table: :t_receive_orders, primary_key: :id} #受注ID
       t.integer :line_number, null: false #行番号
       t.integer :sort_number, null: false #ソート番号
-      #t.references :order_category, type: :integer, null: false, foreign_key: {to_table: :, primary_key: :id} #受注区分ID
+      # t.references :order_category, type: :integer, null: false, foreign_key: {to_table: :, primary_key: :id} #受注区分ID
       t.string :order_category_name, null: false #受注区分名
       t.boolean :invalid_flag #無効フラグ
       t.references :maker, type: :string, limit: 4, null: false, foreign_key: {to_table: :m_makers, primary_key: :id} #メーカーID

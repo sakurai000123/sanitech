@@ -1,7 +1,8 @@
 class CreateTAccountReceivables < ActiveRecord::Migration[6.0]
   def change
     ##### 売掛帳
-    create_table :t_account_receivables do |t|
+    create_table :t_account_receivables, id: false do |t|
+      t.integer :id, null: false, primary_key: true #売掛帳ID
       t.string :create_user_name, null: false #作成者
       t.string :update_user_name, null: false #更新者
       t.date :billing_date, null: false #請求日
@@ -19,7 +20,7 @@ class CreateTAccountReceivables < ActiveRecord::Migration[6.0]
       t.integer :payment_fee, null: false #支払手数料
       t.integer :offset_amount, null: false #相殺額
       t.integer :balance, null: false #残高
-      t.references :demand, type: :string, null: false, foreign_key: {to_table: :t_demands, primary_key: :id} #請求ID
+      t.references :demand, type: :string, null: false, foreign_key: {to_table: :t_demands, primary_key: :id}
 
       t.timestamps
     end

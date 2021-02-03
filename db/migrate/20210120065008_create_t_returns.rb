@@ -1,7 +1,8 @@
 class CreateTReturns < ActiveRecord::Migration[6.0]
   def change
     ##### 返品
-    create_table :t_returns do |t|
+    create_table :t_returns, id: false do |t|
+      t.integer :id, null: false, primary_key: true #返品ID
       t.string :create_user_name, null: false #作成者
       t.string :update_user_name, null: false #更新者
       t.date :return_date, null: false #返品日

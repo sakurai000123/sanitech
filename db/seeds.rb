@@ -18,6 +18,16 @@
 
 # データ削除
 # ↓↓↓追記は1行目にする↓↓↓
+TSalesDetail.destroy_all # 出荷明細
+TSale.destroy_all # 出荷
+TPurchaseDetail.destroy_all # 入荷明細
+TPurchase.destroy_all # 入荷
+TSendOrderDetail.destroy_all # 発注明細
+TSendOrder.destroy_all # 発注
+TReceiveOrderDetail.destroy_all # 受注明細
+TReceiveOrder.destroy_all # 受注
+TEstimateDetail.destroy_all # 見積明細
+TEstimate.destroy_all # 見積
 MWarehouse.destroy_all # 倉庫
 MProduct.destroy_all # 商品
 MMaker.destroy_all # メーカー
@@ -189,3 +199,295 @@ end
     address2: "目黒#{n + 1}"
   )
 end
+
+# 見積
+3.times do |n|
+  TEstimate.create(
+    id: "00000#{n + 1}-1",
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    estimate_branch_number: 1,
+    estimate_date: Date.today,
+    department_id: "001",
+    charge_id: "0001",
+    issuer_id: "0002",
+    authorizer_id: "0003",
+    customer_id: "000001",
+    customer_name: "customer_name",
+    cus_department_name: "cus_department_name",
+    cus_charge_name: "cus_charge_name",
+    delivery_date_category_code: "1",
+    payment_category_code: "2",
+    delivery_place_code: "3",
+    estimate_expiration_code: "4",
+    estimate_name: "estimate_name",
+    note: "note",
+    estimate_amount: 100,
+    tax_amount: 200
+  )
+end
+
+# 見積明細
+3.times do |n|
+  TEstimateDetail.create(
+    id: n + 1,
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    estimate_id: "000001-1",
+    line_number: 1,
+    sort_number: 2,
+    order_category_code: 3,
+    order_category_name: "order_category_name",
+    maker_id: "0002",
+    maker_name: "maker_name",
+    supplier_id: "000001",
+    product_id: "00000001",
+    product_name: "product_name",
+    product_model_number: "product_model_number",
+    estimate_quantity: 4,
+    product_unit: "unit",
+    sale_unit_price: 100,
+    multiplication_rate: 10,
+    detail_estimate_amount: 200,
+    list_price: 300,
+    original_unit_price: 400,
+    cost_price: 500,
+    gross_profit_margin: 20,
+    detail_tax_amount: 600,
+    spec_detail: "spec_detail",
+    detail_note: "detail_note",
+    details_memo: "details_memo",
+    classification_code: "5"
+  )
+end
+
+# 受注
+3.times do |n|
+  TReceiveOrder.create(
+    id: "#{n + 1}",
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    receive_order_date: Date.today,
+    estimate_id: "000001-1",
+    department_id: "001",
+    charge_id: "0001",
+    assistant_id: "0002",
+    customer_id: "000001",
+    cus_department_name: "cus_department_name",
+    cus_charge_name: "cus_charge_name",
+    bill_id: "000002",
+    bill_name: "bill_name",
+    ship_id: "000003",
+    ship_charge_name: "ship_charge_name",
+    ship_post_code: "000-0001",
+    ship_prefecture: "ship_prefecture",
+    ship_address1: "ship_address1",
+    ship_address2: "ship_address2",
+    ship_phone_number: "00-0000-0001",
+    ship_fax_number: "00-0000-0002",
+    cus_order_number: "cus_order_number",
+    bulk_delivery_flag: false,
+    receive_order_name: "receive_order_name",
+    aggregate_category_code: "1",
+    receive_order_amount: 100,
+    tax_amount: 200
+  )
+end
+
+# 受注明細
+3.times do |n|
+  TReceiveOrderDetail.create(
+    id: n + 1,
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    receive_order_id: "1",
+    line_number: 2,
+    sort_number: 3,
+    # order_category_id: 4,
+    order_category_name: "order_category_name",
+    invalid_flag: false,
+    maker_id: "0001",
+    maker_name: "maker_name",
+    product_id: "00000001",
+    product_name: "product_name",
+    product_model_number: "product_model_number",
+    classification_name: "classification_name",
+    warehouse_id: "0001",
+    warehouse_name: "warehouse_name",
+    receive_order_quantity: 10,
+    product_unit: "unit",
+    unit_price_pending_flag: false,
+    cost_pending_flag: false,
+    sale_unit_price: 100,
+    multiplication_rate: 20,
+    receive_order_detail_amount: 200,
+    profit_rate: 30,
+    list_price: 300,
+    stock_date: Date.today,
+    original_unit_price: 400,
+    cost_price: 500,
+    supplier_id: "000001",
+    supplier_name: "supplier_name",
+    delivery_date: Date.today,
+    note: "note",
+    classification_code: 5,
+    spec_detail: "spec_detail",
+    detail_note: "detail_note",
+    detail_memo: "detail_memo",
+    pre_recorded: 600,
+    list_price_rate: 700,
+    special_order_flag: false
+  )
+end
+
+# 発注
+3.times do |n|
+  TSendOrder.create(
+    id: "#{n + 1}",
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    send_order_date: Date.today,
+    receive_order_id: "1",
+    department_id: "001",
+    user_id: "0001",
+    send_order_amount: 100,
+    tax_amount: 200
+  )
+end
+
+# 発注明細
+3.times do |n|
+  TSendOrderDetail.create(
+    id: n + 1,
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    send_order_id: "1",
+    receive_order_detail_id: 1,
+    maker_id: "0001",
+    maker_name: "maker_name",
+    product_id: "00000001",
+    product_name: "product_name",
+    product_model_number: "product_model_number",
+    send_order_quantity: 2,
+    product_unit: "unit",
+    purchase_unit_price: 100,
+    receive_order_detail_amount: 200,
+    supplier_id: "000001",
+    supplier_name: "supplier_name",
+    supplier_charge_name: "supplier_charge_name",
+    unit_price: 300,
+    delivery_deadline: Date.today,
+    send_direct_flag: false,
+    customer_id: "000002",
+    cus_charge_name: "cus_charge_name",
+    cus_post_code: "000-0001",
+    cus_prefecture: "cus_prefecture",
+    cus_address1: "cus_address1",
+    cus_address2: "cus_address2",
+    cus_phone_number: "00-0000-0001",
+    cus_fax_number: "00-0000-0002",
+    note: "note",
+    classification: "3",
+    bill_flag: false
+  )
+end
+
+# 入荷
+3.times do |n|
+  TPurchase.create(
+    id: n + 1,
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    purchase_date: Date.today,
+    supplier_id: "000001",
+    supplier_name: "supplier_name",
+    user_id: "0001",
+    send_order_id: "1",
+    purchase_amount: 100,
+    tax_amount: 200,
+    purchase_slip_date: Date.today
+  )
+end
+
+# 入荷明細
+3.times do |n|
+  TPurchaseDetail.create(
+    id: n + 1,
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    purchase_id: 1,
+    line_number: 2,
+    sort_number: 3,
+    send_order_details_id: 1,
+    product_id: "00000001",
+    product_name: "product_name",
+    product_model_number: "product_model_number",
+    purchase_unit_price: 100,
+    purchase_quantity: 4,
+    purchase_amount: 200,
+    receive_order_date: Date.today
+  )
+end
+
+# 出荷
+3.times do |n|
+  TSale.create(
+    id: n + 1,
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    receive_order_id: "1",
+    sales_date: Date.today,
+    close_date: Date.today,
+    department_id: "001",
+    charge_id: "0001",
+    assistant_id: "0002",
+    customer_id: "000001",
+    sales_amount: 100,
+    tax_amount: 200
+  )
+end
+
+# 出荷明細
+3.times do |n|
+  TSalesDetail.create(
+    id: n + 1,
+    create_user_name: "test#{n + 1}",
+    update_user_name: "test#{n + 1}",
+    sales_id: 1,
+    line_number: 2,
+    sort_number: 3,
+    receive_order_detail_id: 1,
+    product_id: "00000001",
+    product_name: "product_name",
+    product_model_number: "product_model_number",
+    supplier_id: "000001",
+    supplier_name: "supplier_name",
+    sale_unit_price: 100,
+    ship_quantity: 4,
+    product_unit: "200",
+    sales_detail_amount: 300,
+    sales_category: "5",
+    visible_maker_flag: false,
+    shipped_flag: false
+  )
+end
+
+# 返金
+# 3.times do |n|
+#   TReceiveOrder.create(
+#     id: "#{n + 1}",
+#     create_user_name: "test#{n + 1}",
+#     update_user_name: "test#{n + 1}",
+#     a
+#   )
+# end
+
+# 在庫
+# 3.times do |n|
+#   TReceiveOrder.create(
+#     id: "#{n + 1}",
+#     create_user_name: "test#{n + 1}",
+#     update_user_name: "test#{n + 1}",
+#     a
+#   )
+# end

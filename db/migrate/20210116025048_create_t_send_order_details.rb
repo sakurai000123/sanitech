@@ -1,7 +1,8 @@
 class CreateTSendOrderDetails < ActiveRecord::Migration[6.0]
   ##### 発注明細
   def change
-    create_table :t_send_order_details do |t|
+    create_table :t_send_order_details, id: false do |t|
+      t.integer :id, null: false, primary_key: true #発注明細ID
       t.string :create_user_name, null: false #作成者
       t.string :update_user_name, null: false #更新者
       t.references :send_order, type: :string, null: false, foreign_key: {to_table: :t_send_orders, primary_key: :id} #発注ID
