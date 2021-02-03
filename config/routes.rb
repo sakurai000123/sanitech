@@ -39,18 +39,29 @@ Rails.application.routes.draw do
   post 'supplier_masters/upsert/:id', to: 'supplier_masters#upsert'
   patch 'supplier_masters/upsert/:id', to: 'supplier_masters#upsert'
   # 請求書発行
-  resources :invoices
-
+  resources :invoices, only: [:index, :show]
+  post 'invoices/search', to: 'invoices#search'
+  post 'invoices/issue', to: 'invoices#issue'
+  post 'invoices/processing', to: 'invoices#processing'
 
   # 照会種別一覧
   resources :inquiry_managements
   # 担当別推移
-  resources :inquiry_charges
+  resources :inquiry_charges, only: [:index]
+  post 'inquiry_charges/search', to: 'inquiry_charges#search'
+  post 'inquiry_charges/clear', to: 'inquiry_charges#clear'
+  post 'inquiry_charges/preview', to: 'inquiry_charges#preview'
   # サンアイテック推移
-  resources :inquiry_inhouses
+  resources :inquiry_inhouses, only: [:index]
+  post 'inquiry_inhouses/search', to: 'inquiry_inhouses#search'
+  post 'inquiry_inhouses/clear', to: 'inquiry_inhouses#clear'
+  post 'inquiry_inhouses/preview', to: 'inquiry_inhouses#preview'
 
   # 未発注一覧
-  resources :not_orders
+  resources :not_orders, only: [:index, :edit, :create]
+  post 'not_orders/cancel', to: 'not_orders#cancel'
+  post 'not_orders/output', to: 'not_orders#output'
+
   # 出荷入力
   resources :shipments
   # 入荷入力

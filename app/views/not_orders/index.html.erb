@@ -1,5 +1,5 @@
 <% #エラーメッセージ呼び出し %>
-<%#= render "layouts/messages", errors: @???.errors %>
+<%= render "layouts/messages", flash: flash %>
 <div class="contents-wrap">
   <div class="contents-inner">
     <div class="gray-wrap">
@@ -260,10 +260,10 @@
       </div>
       <div class="page005_bottom_button">
         <ul class="bottom-button-list">
-          <li><button>登録</button></li>
-          <li><button>発注書</button></li>
-          <li><button>発注取り消し</button></li>
-          <li><button class="small">戻る</button></li>
+          <li><%= link_to not_orders_path, method: :post do %><button>登録</button><% end %></li>
+          <li><%= link_to not_orders_output_path, method: :post do %><button>発注書</button><% end %></li>
+          <li><%= link_to not_orders_cancel_path, method: :post do %><button>発注取り消し</button><% end %></li>
+          <li><%= link_to menus_path do %><button>戻る</button><% end %></li>
         </ul>
       </div>
     </div>
