@@ -229,27 +229,17 @@
         <% end %>
       </li>
       <% if params[:id].present? %>
-        <li>
-        <%= link_to estimate_path(params[:id]) do %>
-          <button>詳細</button>
-        <% end %>
-        </li>
-        <li>
-        <%= link_to "/estimates/copy/#{params[:id]}" do %>
-          <button>複製</button>
-        <% end %>
-        </li>
-        <li>
-        <%= link_to "/estimates/reissue/#{params[:id]}" do %>
-          <button>再見積</button>
-        <% end %>
-        </li>
+        <li><%= link_to estimate_path(params[:id]) do %><button>詳細</button><% end %></li>
+        <li><%= link_to "/estimates/copy/#{params[:id]}" do %><button>複製</button><% end %></li>
+        <li><%= link_to "/estimates/reissue/#{params[:id]}" do %><button>再見積</button><% end %></li>
       <% end %>
       <li><button>受注</button></li>
       <li><button class="small">無効</button></li>
       <li><button>状況区分変更</button></li>
-      <li><button>見積修正</button></li>
-      <li><button class="small">戻る</button></li>
+      <% if params[:id].present? %>
+        <li><%= link_to "/estimates/revise/#{params[:id]}" do %><button>見積修正</button><% end %></li>
+      <% end %>
+      <li><%= link_to menus_path do %><button class="small">戻る</button><% end %></li>
     </ul>
   </div>
 </div>

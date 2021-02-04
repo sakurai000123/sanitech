@@ -39,7 +39,6 @@ class EstimatesController < ApplicationController
 
   # 詳細
   def show
-    get_estimate_by_id(params[:id]) if params[:id].present?
   end
 
   # 見積選択
@@ -58,6 +57,11 @@ class EstimatesController < ApplicationController
   def reissue
   end
 
+  # 見積修正
+  def revise
+    get_estimate_by_id(params[:id]) if params[:id].present?
+  end
+
 
   # PDF出力
   def pdf
@@ -67,7 +71,7 @@ class EstimatesController < ApplicationController
         render pdf: '見積書',
           layout: 'pdf.html',
           encording: 'UTF-8',
-          template: 'estimates/pdf.html.erb'
+          template: 'estimates/show.html.erb'
       end
     end
   end

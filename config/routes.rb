@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   get 'estimates/copy/:id', to: 'estimates#copy'
   get 'estimates/reissue/:id', to: 'estimates#reissue'
+  get 'estimates/revise/:id', to: 'estimates#revise'
 
   # 受注
   resources :orders
