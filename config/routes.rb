@@ -10,8 +10,9 @@ Rails.application.routes.draw do
     # 見積明細
     resources :estimate_details
   end
-  post 'estimates/upsert', to: 'estimates#upsert'
-  patch 'estimates/upsert/:id', to: 'estimates#upsert'
+  get 'estimates/copy/:id', to: 'estimates#copy'
+  get 'estimates/reissue/:id', to: 'estimates#reissue'
+
   # 受注
   resources :orders
   post 'orders/upsert', to: 'orders#upsert'

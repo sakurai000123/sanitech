@@ -145,7 +145,7 @@
       </thead>
       <tbody>
         <% @estimates.each do |estimate| %>
-        <tr class="upper-row">
+        <tr class="upper-row" data-link="<%= edit_estimate_path(estimate.id) %>">
           <td rowspan="2"><%= estimate.id %>-<%= estimate.estimate_branch_number %></td>
           <td><%= estimate.estimate_branch_number %></td>
           <td rowspan="2"><%= estimate.estimate_date %></td>
@@ -228,9 +228,23 @@
           <button>新規作成</button>
         <% end %>
       </li>
-      <li><button>詳細</button></li>
-      <li><button>複製</button></li>
-      <li><button>再見積</button></li>
+      <% if params[:id].present? %>
+        <li>
+        <%= link_to estimate_path(params[:id]) do %>
+          <button>詳細</button>
+        <% end %>
+        </li>
+        <li>
+        <%= link_to "/estimates/copy/#{params[:id]}" do %>
+          <button>複製</button>
+        <% end %>
+        </li>
+        <li>
+        <%= link_to "/estimates/reissue/#{params[:id]}" do %>
+          <button>再見積</button>
+        <% end %>
+        </li>
+      <% end %>
       <li><button>受注</button></li>
       <li><button class="small">無効</button></li>
       <li><button>状況区分変更</button></li>
@@ -239,3 +253,15 @@
     </ul>
   </div>
 </div>
+
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>
+
+<style>
+  tr:hover {
+    background: gray;
+  }
+</style>

@@ -1,226 +1,476 @@
-<div id="pdf_estimates">
-  <div class="pdf-wrap">
-    <div class="pdf-innner">
-
-      <div class="flex-wrap">
-        <div class="w-one-third">
+<% #エラーメッセージ呼び出し %>
+<%= render "layouts/messages", flash: flash %>
+<div class="contents-wrap">
+  <div class="contents-inner">
+    <div class="gray-wrap">
+      <h1>見積入力</h1>
+      <%= form_for @estimate, url: {controller: :estimates, action: :create, id: @estimate.id} do |f| %>
+      <div class="top-edit">
+        <dl class="edit-wrap small">
+          <dt>見積番号</dt>
+          <dd>
+            <span class="input w100 not-edit"></span
+            ><span class="hyphen">−</span>
+            <span class="input w50 not-edit"></span>
+          </dd>
+          <dt>見積日</dt>
+          <dd>
+            <span class="input w100">
+                <%= f.date_field :estimate_date %>
+            </span>
+          </dd>
+          <dt>部門</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.select :department_id, departments_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <%= @department.id %>
+              <%= f.hidden_field :department_id, value: @department.id %>
+            </span>
+            <span class="input w-flex not-edit">
+              <%= @department.department_name %>
+            </span>
+<%
+=end%>
+          </dd>
+          <dt>担当者</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.select :charge_id, users_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <%= @current_user.id %>
+              <%= f.hidden_field :charge_id, value: @current_user.id %>
+            </span>
+            <span class="input w100 not-edit">
+              <%= @current_user.user_name %>
+            </span>
+<%
+=end%>
+          </dd>
+          <dt>発行者</dt>
+          <dd>
+            <span class="input contents-label" >
+              <%= @current_user.id %>
+            </span>
+            <span class="input w100 not-edit">
+              <%= @current_user.user_name %>
+            </span>
+          </dd>
+          <dt>承認者</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.select :authorizer_id, users_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <%= @current_user.id %>
+              <%= f.hidden_field :authorizer_id, value: @current_user.id %>
+            </span>
+            <span class="input w100 not-edit">
+              <%= @current_user.user_name %>
+            </span>
+<%
+=end%>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x2">
+          <dt>得意先</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.select :customer_id, customers_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <%= f.collection_select :customer_id, MCustomer.all, :id, :id, include_blank: select_blank %>
+            <span class="input w-flex">
+              <%= f.collection_select :customer_id, MCustomer.all, :id, :customer_name, include_blank: select_blank %>
+            </span>
+<%
+=end%>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x2">
+          <dt>得意先部署名</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.text_field :cus_department_name %>
+            </span>
+          </dd>
+          <dt>得意先担当者</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.text_field :cus_charge_name %>
+            </span>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x4">
+          <dt>納期</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.select :delivery_date_category_code, delivery_date_category_code_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label">
+              <input type="text" name="" id="" value="1"/>
+            </span>
+            <span class="input w-flex">
+              <input type="text" name="" id="" value="実働約２〜3日" />
+            </span>
+<%
+=end%>
+          </dd>
+          <dt>支払条件</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.select :payment_category_code, payment_category_code_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label"
+              ><input type="text" name="" id="" value="1"
+            /></span>
+            <span class="input w-flex">
+              <input type="text" name="" id="" value="実従来通り" />
+            </span>
+<%
+=end%>
+          </dd>
+          <dt>受渡場所</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.select :delivery_place_code, delivery_place_code_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label"
+              ><input type="text" name="" id="" value="1"
+            /></span>
+            <span class="input w-flex">
+              <input type="text" name="" id="" value="御社" />
+            </span> 
+<%
+=end%>
+          </dd>
+          <dt>有効期限</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.select :estimate_expiration_code, expiration_code_list, include_blank: select_blank %>
+            </span>
+            <%
+=begin%>
+ <span class="input contents-label"
+              ><input type="text" name="" id="" value="1"
+            /></span>
+            <span class="input w-flex">
+              <input type="text" name="" id="" value="1ヵ月" />
+            </span> 
+<%
+=end%>
+          </dd>
+        </dl>
+        <dl class="edit-wrap x2">
+          <dt>件名</dt>
+          <dd>
+            <span class="input w100per">
+              <%= f.text_field :estimate_name %>
+            </span>
+          </dd>
+        </dl>
+        <div class="top-edit-flex">
+          <dl class="edit-wrap small">
+            <dt class="w120">備考欄</dt>
+            <dd class="w-flex ml0">
+              <span class="input w100per">
+                <%= f.text_area :note %>
+              </span>
+            </dd>
+          </dl>
+          <ul class="top-button-list">
+            <li>
+              <%= f.button :type => "submit" do %>保存<% end %>
+            </li>
+            <li><button>読込</button></li>
+            <li><button>ソート</button></li>
+          </ul>
         </div>
-        <div class="w-one-third">
-          <h1 class="title">御見積書</h1>
-        </div>
-        <div class="w-one-third day">
-          <table class="mt-small">
-            <tr>
-              <td>No.</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>年 月 日</td>
-              <td>2020/11/1</td>
-            </tr>
-          </table>
-        </div>
+      <% end %>
       </div>
-
+    </div>
+  </div>
+  <div class="contents-inner">
+    <table>
+      <thead>
+        <tr>
+          <th>式</th>
+          <th>区</th>
+          <th>区分</th>
+          <th>メーカー</th>
+          <th>メーカー名</th>
+          <th>商品</th>
+          <th>商品名</th>
+          <th>型番</th>
+          <th>数量</th>
+          <th>単位</th>
+          <th>単価</th>
+          <th>掛率％</th>
+          <th>見積金額</th>
+          <th>定価</th>
+          <th>原単価</th>
+          <th>原価金額</th>
+          <th>粗利率％</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>0001</td>
+          <td>発注</td>
+          <td>1</td>
+          <td>三ツ星</td>
+          <td>00000000</td>
+          <td>ベルト（裏面センター）</td>
+          <td>NS82UG0/0W 100×2215E</td>
+          <td>2</td>
+          <td>本</td>
+          <td class="right">8,000</td>
+          <td>50%</td>
+          <td class="right">16,000</td>
+          <td></td>
+          <td class="right">4,000</td>
+          <td class="right">8,000</td>
+          <td>50%</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>0001</td>
+          <td>発注</td>
+          <td>1</td>
+          <td>三ツ星</td>
+          <td>00000000</td>
+          <td>ベルト（裏面センター）</td>
+          <td>NS82UG0/0W 100×2215E</td>
+          <td>2</td>
+          <td>本</td>
+          <td class="right">8,000</td>
+          <td>50%</td>
+          <td class="right">16,000</td>
+          <td></td>
+          <td class="right">4,000</td>
+          <td class="right">8,000</td>
+          <td>50%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="contents-inner">
+    <div class="gray-wrap">
       <div class="flex-wrap">
-        <div class="w50per">
-          <div class="bb pb-small">
-            <div class="ml-medium">
-                <span class="fs-large">株式会社スギヨ</span>
-            </div>
-            <div class="ml-large">
-                工務課
-            </div>
+        <div class="bottom-left-wrap">
+          <dl class="edit-wrap x1">
+            <dt>仕入先</dt>
+            <dd>
+              <span class="input contents-label"
+                ><input
+                  type="text"
+                  name=""
+                  id=""
+                  value="10001
+                                "
+              /></span>
+              <span class="input w-flex">
+                <input type="text" name="" id="" value="三ツ星ベルト販売" />
+              </span>
+            </dd>
+            <dt>仕様詳細</dt>
+            <dd>
+              <span class="input w100per">
+                <input type="text" name="" id="" value="表面センター付き" />
+              </span>
+            </dd>
+            <dt>明細備考</dt>
+            <dd>
+              <span class="input w100per">
+                <input type="text" name="" id="" value="エンドレス品" />
+              </span>
+            </dd>
+            <dt>明細メモ</dt>
+            <dd>
+              <span class="input w100per">
+                <input type="text" name="" id="" value="※次回より値上げ" />
+              </span>
+            </dd>
+            <dt>分類</dt>
+            <dd>
+              <span class="input w200">
+                <input type="text" name="" id="" value="ベルト" />
+              </span>
+            </dd>
+          </dl>
+        </div>
+        <div class="bottom-right-wrap">
+          <div class="yellow-wrap mb-medium">
+            <dl class="edit-wrap x2">
+              <dt>見積合計金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="80,000"
+                  />
+                </span>
+              </dd>
+              <dt>範囲内見積金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="18,000"
+                  />
+                </span>
+              </dd>
+              <dt>原価合計金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="30,000"
+                  />
+                </span>
+              </dd>
+              <dt>範囲内原価金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="8,000"
+                  />
+                </span>
+              </dd>
+              <dt>粗利合計金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="30,000"
+                  />
+                </span>
+              </dd>
+              <dt>範囲内粗利金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="8,000"
+                  />
+                </span>
+              </dd>
+              <dt>消費税金額</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="right"
+                    type="text"
+                    name=""
+                    id=""
+                    value="6,000"
+                  />
+                </span>
+              </dd>
+              <dt>範囲内粗利率</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="center"
+                    type="text"
+                    name=""
+                    id=""
+                    value="50%"
+                  />
+                </span>
+              </dd>
+              <dt>粗利率</dt>
+              <dd>
+                <span class="input w200">
+                  <input
+                    class="center"
+                    type="text"
+                    name=""
+                    id=""
+                    value="50%"
+                  />
+                </span>
+              </dd>
+            </dl>
           </div>
-          <div class="bb pb-small mt-small txt-right pr-medium">
-            御担当者：　係長　福田　　様
-          </div>
-        </div>
-
-        <div class="w10per">
-        </div>
-
-        <div class="w40per mt-large txt-right">
-          <div class="mb-small fs-medium">
-            株式会社 サンアイテック
-          </div>
-          <div class="fs-small">
-            〒302-0034 茨城県取手市戸頭4-21-24<br>
-            TEL 0297-70-2030　FAX 0297-70-2031
-          </div>
-        </div>
-      </div>
-
-      <div class="flex-wrap">
-        <div class="w50per">
-          <table class="p-zero">
-            <tr>
-              <td>件　名</td>
-              <td>三ツ星　ベルト</td>
-            </tr>
-            <tr>
-              <td>納　期</td>
-              <td>実働約2-3日</td>
-            </tr>
-            <tr>
-              <td>御支払条件</td>
-              <td>従来通り</td>
-            </tr>
-            <tr>
-              <td>受渡場所</td>
-              <td>御社</td>
-            </tr>
-            <tr>
-              <td>有効期限</td>
-              <td>1ヶ月</td>
-            </tr>
-          </table>
-        </div>
-
-        <div class="w20per">
-        </div>
-
-        <div class="w30per">
-          <table class="sign p-zero">
-            <tr>
-              <td class="square"></td>
-              <td class="square"></td>
-              <td class="square"></td>
-            </tr>
-            <tr>
-              <td>広瀬　愛未</td>
-              <td>広瀬　愛未</td>
-              <td></td>
-            </tr>
-            <tr class="b-none">
-              <td>担当者</td>
-              <td>発行者</td>
-              <td>承認</td>
-            </tr>
-          </table>
+          <ul class="checkbox-list x3">
+            <li>
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                value=""
+              />見積書の一式詳細を分類
+            </li>
+            <li>
+              <input type="checkbox" name="" id="" value="" />税込印字
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                value=""
+              />プレビューしないで印刷
+            </li>
+            <li>
+              <input type="checkbox" name="" id="" value="" />定価印字
+            </li>
+            <li>
+              <input type="checkbox" name="" id="" value="" />メーカー印字
+            </li>
+          </ul>
         </div>
       </div>
-
-      <div class="flex-wrap mb-none">
-        <table class="list">
-          <tr>
-            <th>メーカー</th>
-            <th>商　品　名<br>型　番</th>
-            <th>数　量<br>単　位</th>
-            <th>単　価<br>（定　価）</th>
-            <th>金額</th>
-            <th>仕　様　詳　細<br>明　細　備　考</th>
-          </tr>
-          <tr>
-            <td>三ツ星</td>
-            <td>ベルト（裏面センター）<br>NS82UG0/0W 100 × 2215E</td>
-            <td>2本</td>
-            <td>8,000</td>
-            <td>16,000</td>
-            <td>裏面センター付き<br>エンドレス品</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="sum-warp">
-        <div class="sum-txt">
-          合 計 金 額
-        </div>
-        <div class="sum">
-          ¥16,000（税込金額 ¥17,600）<br>
-          （消費税額　¥1,600）
-        </div>
-      </div>
-
-      <div class="flex-wrap">
-        <div class="w100per remarks">
-          【備考欄】<br>
-          ※エンドレス品でのお見積りとなります。
-        </div>
-      </div>
-
-      <div class="flex-wrap">
-        <div class="w30per">
-          株式会社 サンアイテック
-        </div>
-        <div class="w70per">
-          〒302-0034 茨城県取手市戸頭4-21-24　TEL 0297-70-2030　FAX 0297-70-2031
-        </div>
-      </div>
-
-
+      <ul class="bottom-button-list">
+        <li>
+          <button class="small">↑</button
+          ><button class="small ml-small">↓</button>
+        </li>
+        <li><button>前行追加</button></li>
+        <li><button>後行追加</button></li>
+        <li><button>行削除</button></li>
+        <li><button>行複写</button></li>
+        <li><button>登録</button></li>
+        <li><%= link_to "/estimates/1.pdf" do %><button>見積書</button><% end %></li>
+        <li><button class="small">戻る</button></li>
+      </ul>
     </div>
   </div>
 </div>
