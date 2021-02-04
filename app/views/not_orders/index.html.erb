@@ -152,7 +152,7 @@
           <% order.details.each do |detail| %>
             <tr>
               <td><input type="checkbox" name="" id="" /></td>
-              <td><%= order.id %></td>
+              <td><%= detail.receive_order_id %></td>
               <td><%= detail.line_number %></td>
               <td><%= detail.maker_id %></td>
               <td><%= detail.maker_name %></td>
