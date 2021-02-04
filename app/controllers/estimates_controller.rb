@@ -7,6 +7,13 @@ class EstimatesController < ApplicationController
     get_estimates
   end
 
+  # 検索
+  def search
+    flash[:success] = '検索ボタン'
+    get_estimates
+    render :index
+  end
+
   # 新規作成
   def new
     if params[:id].present?
@@ -38,7 +45,10 @@ class EstimatesController < ApplicationController
   end
 
   # 詳細
-  def show
+  def detail
+    # flash[:success] = '詳細ボタン'
+    # redirect_to estimates_path
+    get_estimate_by_id(params[:id]) if params[:id].present?
   end
 
   # 見積選択
@@ -51,10 +61,34 @@ class EstimatesController < ApplicationController
 
   # 複製
   def copy
+    # flash[:success] = '複製ボタン'
+    # redirect_to estimates_path
+    get_estimate_by_id(params[:id]) if params[:id].present?
   end
 
   # 再見積
   def reissue
+    # flash[:success] = '再見積ボタン'
+    # redirect_to estimates_path
+    get_estimate_by_id(params[:id]) if params[:id].present?
+  end
+
+  # 受注
+  def order
+    flash[:success] = '受注ボタン'
+    redirect_to estimates_path
+  end
+
+  # 無効
+  def invalid
+    flash[:success] = '無効ボタン'
+    redirect_to estimates_path
+  end
+
+  # 状況区分変更
+  def category
+    flash[:success] = '状況区分変更ボタン'
+    redirect_to estimates_path
   end
 
   # 見積修正
@@ -62,16 +96,15 @@ class EstimatesController < ApplicationController
     get_estimate_by_id(params[:id]) if params[:id].present?
   end
 
-
   # PDF出力
-  def pdf
+  def output
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: '見積書',
           layout: 'pdf.html',
           encording: 'UTF-8',
-          template: 'estimates/show.html.erb'
+          template: 'estimates/output.html.erb'
       end
     end
   end

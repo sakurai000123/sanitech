@@ -10,10 +10,15 @@ Rails.application.routes.draw do
     # 見積明細
     resources :estimate_details
   end
-  get 'estimates/copy/:id', to: 'estimates#copy'
-  get 'estimates/reissue/:id', to: 'estimates#reissue'
-  get 'estimates/revise/:id', to: 'estimates#revise'
-
+  post 'estimates/detail/:id', to: 'estimates#detail'
+  post 'estimates/copy/:id', to: 'estimates#copy'
+  post 'estimates/reissue/:id', to: 'estimates#reissue'
+  post 'estimates/revise/:id', to: 'estimates#revise'
+  post 'estimates/order', to: 'estimates#order'
+  post 'estimates/invalid', to: 'estimates#invalid'
+  post 'estimates/category', to: 'estimates#category'
+  get 'estimates/output/:id', to: 'estimates#output'
+  post 'estimates/search', to: 'estimates#search'
   # 受注
   resources :orders
   post 'orders/upsert', to: 'orders#upsert'

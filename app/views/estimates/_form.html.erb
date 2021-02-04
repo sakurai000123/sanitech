@@ -462,6 +462,6 @@
   <li><button>行削除</button></li>
   <li><button>行複写</button></li>
   <li><button>登録</button></li>
-  <li><%= link_to "/estimates/1.pdf" do %><button>見積書</button><% end %></li>
+  <li><%= link_to estimates_path + "/output/#{1}.pdf", target: :_blank do %><button>見積書</button><% end %></li>
   <li><%= link_to estimates_path do %><button class="small">戻る</button><% end %></li>
 </ul>
