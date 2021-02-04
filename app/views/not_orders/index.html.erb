@@ -6,7 +6,7 @@
       <%= form_tag(not_orders_search_path,:method => 'post') do %>
         <div class="heading-wrap">
           <h1>未発注一覧</h1>
-          <p class="top-caution-text">１件のデータが抽出されました</p>
+          <p class="top-caution-text"><%= @orders.present? ? "#{@orders.size}件のデータが抽出されました" : "" %></p>
         </div>
         <div class="top-edit">
           <dl class="edit-wrap small">
