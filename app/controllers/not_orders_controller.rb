@@ -1,6 +1,16 @@
 class NotOrdersController < ApplicationController
-  def index
+  before_action :logged_in_user
+  include NotOrdersHelper
 
+  def index
+    #@orders = params[:orders] if params[:orders].present?
+  end
+
+  def search
+    flash[:success] = '検索ボタン'
+    @orders = TReceiveOrder.not_order_search(params)
+    #redirect_to not_orders_path(orders: @orders)
+    render :index
   end
 
   def create
@@ -9,8 +19,15 @@ class NotOrdersController < ApplicationController
   end
 
   def output
-    flash[:success] = '発注書ボタン'
-    redirect_to not_orders_path
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: '発注書',
+          layout: 'pdf.html',
+          encording: 'UTF-8',
+          template: 'not_orders/output.html.erb'
+      end
+    end
   end
 
   def cancel

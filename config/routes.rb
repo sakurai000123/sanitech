@@ -62,7 +62,8 @@ Rails.application.routes.draw do
   # 未発注一覧
   resources :not_orders, only: [:index, :edit, :create]
   post 'not_orders/cancel', to: 'not_orders#cancel'
-  post 'not_orders/output', to: 'not_orders#output'
+  get 'not_orders/output/:id', to: 'not_orders#output'
+  post 'not_orders/search', to: 'not_orders#search'
 
   # 出荷入力
   resources :shipments

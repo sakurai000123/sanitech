@@ -68,8 +68,13 @@ class CustomerMastersController < ApplicationController
       :payment_category_code,
       :close_date_code,
       :payment_date_code,
-      :deposit_account_id,
-      :delete_flag
+      :deposit_account_name,
+      :deposit_account_category_code,
+      :deposit_account_number,
+      :deposit_account_type_code,
+      :deposit_account_holder,
+      :deposit_bank_code,
+      :deposit_branch_code
     )
   end
 
