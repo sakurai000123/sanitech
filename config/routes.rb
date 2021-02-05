@@ -85,11 +85,18 @@ Rails.application.routes.draw do
   post 'not_orders/search', to: 'not_orders#search'
 
   # 出荷入力
-  resources :shipments
+  resources :shipments, only: [:index, :create]
+  post 'shipments/search', to: 'shipments#search'
+  post 'shipments/on', to: 'shipments#on'
+  post 'shipments/off', to: 'shipments#off'
+  post 'shipments/trial_send', to: 'shipments#trial_send'
+  post 'shipments/no_preview', to: 'shipments#no_preview'
+
   # 入荷入力
-  resources :instocks
+  resources :instocks, only: [:index, :create]
   post 'instocks/search', to: 'instocks#search'
-  post 'instocks/upsert', to: 'instocks#upsert'
+  post 'instocks/on', to: 'instocks#on'
+  post 'instocks/off', to: 'instocks#off'
 
 
 end

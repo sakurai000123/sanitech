@@ -6,25 +6,24 @@ class InstocksController < ApplicationController
     get_instocks
   end
 
+  def create
+    flash[:success] = '登録ボタン'
+    render :index
+  end
+
   def search
     flash[:success] = '検索ボタン'
     get_instocks
     render :index
   end
 
-  def upsert
-    @instock = TPurchase.new(order_params)
+  def on
+    flash[:success] = 'ONボタン'
+    render :index
+  end
 
-    case params[:submit]
-      when 'save' then
-        flash[:success] = '登録ボタン'
-
-      when 'sort' then
-
-    else
-
-    end
-
+  def off
+    flash[:success] = 'OFFボタン'
     render :index
   end
 

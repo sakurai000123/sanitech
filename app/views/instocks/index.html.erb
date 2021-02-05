@@ -12,40 +12,38 @@
           <dl class="edit-wrap small">
             <dt>発注番号</dt>
             <dd>
-              <span class="input w200"
-                ><input type="text" name="" id="" /></span
-              ><span class="hyphen">　~　</span>
-
-              <span class="input w200"
-                ><input type="text" name="" id=""
-              /></span>
+              <span class="input w200">
+                <%= text_field_tag :id_from %>
+              </span>
+              <span class="hyphen">~</span>
+              <span class="input w200">
+                <%= text_field_tag :id_to %>
+              </span>
             </dd>
             <dt>仕入先</dt>
             <dd>
-              <span class="input contents-label w100"
-                ><input type="text" name="" id="" value="000000"
-              /></span>
-              <span class="input w200 not-edit"> </span>
+              <span class="input w200">
+                <%= select_tag :department_id, options_for_select(suppliers_list), include_blank: select_blank %>
+              </span>
             </dd>
             <dt>担当者</dt>
             <dd>
-              <span class="input contents-label w100"
-                ><input type="text" name="" id="" value="0005"
-              /></span>
-              <span class="input w200 not-edit"> 広瀬愛未 </span>
+              <span class="input w200">
+                <%= select_tag :charge_id, options_for_select(users_list), include_blank: select_blank %>
+              </span>
             </dd>
           </dl>
           <dl class="edit-wrap x2">
             <dt>受注番号</dt>
             <dd>
-              <span class="input"
-                ><input type="text" name="" id="" value="000002"
-              /></span>
+              <span class="input">
+                <%= text_field_tag :receive_order_id %>
+              </span>
             </dd>
             <dt>型番</dt>
             <dd>
               <span class="input w-flex">
-                <input type="text" name="" id="" />
+                <%= text_field_tag :product_model_number %>
               </span>
             </dd>
           </dl>
@@ -53,7 +51,7 @@
             <dt><strong>仕入伝票日付</strong></dt>
             <dd>
               <span class="input w150">
-                <input type="text" name="" id="" value="11/1/20" />
+                <%= date_field_tag :purchase_slip_date %>
               </span>
             </dd>
             <dt></dt>
@@ -104,13 +102,13 @@
       <div class="button-group border">
         <p class="title"><span class="inner">入荷</span></p>
         <ul class="bottom-button-list">
-          <li><button>全てON</button></li>
-          <li><button>全てOFF</button></li>
+          <li><%= link_to instocks_on_path, method: :post do %><button>全てON</button><% end %></li>
+          <li><%= link_to instocks_off_path, method: :post do %><button>全てOFF</button><% end %></li>
         </ul>
       </div>
       <div class="button-group">
         <ul class="bottom-button-list">
-          <li><button>登録</button></li>
+          <li><%= link_to instocks_path, method: :post do %><button>登録</button><% end %></li>
           <li><%= link_to :back do %><button>戻る</button><% end %></li>
         </ul>
       </div>

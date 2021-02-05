@@ -47,10 +47,8 @@ class EstimatesController < ApplicationController
   def upsert
     case params[:submit]
       when 'save' then
-        # @order.save
 
-      when 'detail_save' then
-        # @detail.save
+      when '' then
 
     else
       raise e
@@ -59,17 +57,10 @@ class EstimatesController < ApplicationController
     render :new
   end
 
-
-
-
-
-
-
   # 詳細
   def detail
-    # flash[:success] = '詳細ボタン'
-    # redirect_to estimates_path
     get_estimate_by_id(params[:id]) if params[:id].present?
+    # @detail =  @estimate.estimate_details.new(detail_params)
   end
 
   # 見積選択
@@ -215,6 +206,37 @@ class EstimatesController < ApplicationController
     )
   end
 
+  def detail_params
+    params.permit(
+      :create_user_name,
+      :update_user_name,
+      :estimate_id,
+      :line_number,
+      :sort_number,
+      :order_category_code,
+      :order_category_name,
+      :maker_id,
+      :maker_name,
+      :supplier_id,
+      :product_id,
+      :product_name,
+      :product_model_number,
+      :estimate_quantity,
+      :product_unit,
+      :sale_unit_price,
+      :multiplication_rate,
+      :detail_estimate_amount,
+      :list_price,
+      :original_unit_price,
+      :cost_price,
+      :gross_profit_margin,
+      :detail_tax_amount,
+      :spec_detail,
+      :detail_note,
+      :details_memo,
+      :classification_code
+    )
+  end
 
 
 

@@ -1,62 +1,61 @@
 <% #エラーメッセージ呼び出し %>
-<%#= render "layouts/messages", errors: @???.errors %>
+<%= render "layouts/messages", flash: flash %>
 <div class="contents-wrap">
   <div class="contents-inner">
-    <div class="gray-wrap">
-      <h1>出荷入力</h1>
-      <div class="top-edit">
-        <dl class="edit-wrap x2">
-          <dt>受注番号</dt>
-          <dd>
-            <span class="input w200"
-              ><input type="text" name="" id=""
-            /></span>
-          </dd>
-          <dt>出荷日</dt>
-          <dd>
-            <span class="input w200"
-              ><input type="text" name="" id=""
-            /></span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>部門</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="001"
-            /></span>
-            <span class="input w-flex not-edit"> 本社 </span>
-          </dd>
-          <dt>担当者</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="0005"
-            /></span>
-            <span class="input w-flex not-edit"> 広瀬愛未 </span>
-          </dd>
-          <dt>アシスタント</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="0002"
-            /></span>
-            <span class="input w-flex not-edit"> 太田足理子 </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x2">
-          <dt>得意先</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="000023"
-            /></span>
-            <span class="input w-flex not-edit"> 株式会社サンテック </span>
-          </dd>
-          <dt></dt>
-          <dd class="top-button-list">
-            <button>検索</button>
-          </dd>
-        </dl>
+    <%= form_tag(shipments_search_path,:method => 'post') do %>
+      <div class="gray-wrap">
+        <h1>出荷入力</h1>
+        <p class="top-caution-text"><%= @purchases.present? ? "#{@purchases.size}件のデータが抽出されました" : "" %></p>
+        <div class="top-edit">
+          <dl class="edit-wrap x2">
+            <dt>受注番号</dt>
+            <dd>
+              <span class="input w200">
+                <%= text_field_tag :id_from %>
+              </span>
+            </dd>
+            <dt>出荷日</dt>
+            <dd>
+              <span class="input w200">
+                <%= date_field_tag :sales_date %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>部門</dt>
+            <dd>
+              <span class="input w200">
+                <%= select_tag :department_id, options_for_select(departments_list), include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>担当者</dt>
+            <dd>
+              <span class="input w200">
+                <%= select_tag :charge_id, options_for_select(users_list), include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>アシスタント</dt>
+            <dd>
+              <span class="input w200">
+                <%= select_tag :assistant_id, options_for_select(users_list), include_blank: select_blank %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x2">
+            <dt>得意先</dt>
+            <dd>
+              <span class="input w200">
+                <%= select_tag :customer_id, options_for_select(customers_list), include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt></dt>
+            <dd class="top-button-list">
+              <button>検索</button>
+            </dd>
+          </dl>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
   <div class="contents-inner">
     <table>
@@ -94,11 +93,11 @@
   </div>
   <div class="contents-inner">
     <ul class="bottom-button-list">
-      <li><button>全てON</button></li>
-      <li><button>全てOFF</button></li>
-      <li><button>登録</button></li>
-      <li><button>仮送信</button></li>
-      <li><button>プレビューしないで印刷</button></li>
+      <li><%= link_to shipments_on_path, method: :post do %><button>全てON</button><% end %></li>
+      <li><%= link_to shipments_off_path, method: :post do %><button>全てOFF</button><% end %></li>
+      <li><%= link_to shipments_path, method: :post do %><button>登録</button><% end %></li>
+      <li><%= link_to shipments_trial_send_path, method: :post do %><button>仮送信</button><% end %></li>
+      <li><%= link_to shipments_no_preview_path, method: :post do %><button>プレビューしないで印刷</button><% end %></li>
       <li><%= link_to :back do %><button class="small">戻る</button><% end %></li>
     </ul>
   </div>
