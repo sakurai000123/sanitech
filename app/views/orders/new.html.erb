@@ -1,7 +1,26 @@
+<script>
+  function select_detail(obj){
+    // alert(obj);
+    // $('#select_detail').val(v);
+    return;
+  }
+</script>
+
 <% #エラーメッセージ呼び出し %>
 <%#= render "layouts/messages", errors: @???.errors %>
+param------------------------------------------------------------------------------------<br/>
+<% @param.each do |k,v| %>
+  key:<%= k %><br/>
+  val:<%= v %><br/>
+  <br/>
+<% end %>
+-----------------------------------------------------------------------------------------<br/>
 <div class="contents-wrap">
-  <%= form_for @order, url: {:controller => :orders, :action => :upsert, :id => @order.id } do |f| %>
+  <%= form_for @order, url: {:controller => :orders, :action => :upsert } do |f| %>
+    <%#= hidden_field_tag :order_bk, @order %>
+    <%= hidden_field_tag :select_detail, nil %>
+
+    <%#= f.hidden_field :receive_order_name_bk, value: @order.receive_order_name %>
     <div class="contents-inner">
       <div class="gray-wrap">
         <h1>受注入力</h1>
@@ -162,10 +181,10 @@
               </dd>
             </dl>
             <ul class="top-button-list">
-              <li><button>保存</button></li>
-              <li><button>読込</button></li>
-              <li><button>加工依頼</button></li>
-              <li><button>ソート</button></li>
+              <li><%= f.button :type => "submit", :name => 'submit', :value => 'save' do %>保存<% end %></li>
+              <li><%= f.button :type => "submit", :name => 'submit', :value => 'read' do %>読込<% end %></li>
+              <li><%= link_to orders_pdf_path, method: :post do %><button>加工依頼</button><% end %></li>
+              <li><%= f.button :type => "submit", :name => 'submit', :value => 'sort' do %>ソート<% end %></li>
             </ul>
           </div>
         </div>
@@ -195,108 +214,95 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td>0001</td>
-            <td>発注</td>
-            <td>1</td>
-            <td>三ツ星</td>
-            <td>00000000</td>
-            <td>ベルト（裏面センター）</td>
-            <td>NS82UG0/0W 100×2215E</td>
-            <td>2</td>
-            <td>本</td>
-            <td class="right">8,000</td>
-            <td>50%</td>
-            <td class="right">16,000</td>
-            <td></td>
-            <td class="right">4,000</td>
-            <td class="right">8,000</td>
-            <td>50%</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>0001</td>
-            <td>発注</td>
-            <td>1</td>
-            <td>三ツ星</td>
-            <td>00000000</td>
-            <td>ベルト（裏面センター）</td>
-            <td>NS82UG0/0W 100×2215E</td>
-            <td>2</td>
-            <td>本</td>
-            <td class="right">8,000</td>
-            <td>50%</td>
-            <td class="right">16,000</td>
-            <td></td>
-            <td class="right">4,000</td>
-            <td class="right">8,000</td>
-            <td>50%</td>
-          </tr>
+          <% @details.each do |od| %>
+            <tr>
+              <td><%= f.button :type => "submit", :name => 'submit', :value => 'detail_select', :class => 'small' do %>選択<% end %><%#= od. %></td>
+              <td><%#= od.order_category_code %></td>
+              <td><%= od.order_category_name %></td>
+              <td><%= od.maker_id %></td>
+              <td><%= od.maker_name %></td>
+              <td><%= od.product_id %></td>
+              <td><%= od.product_name %></td>
+              <td><%= od.product_model_number %></td>
+              <td><%= od.receive_order_quantity %></td>
+              <td><%= od.product_unit %></td>
+              <td class="right"><%= od.sale_unit_price %></td>
+              <td><%= od.multiplication_rate %>%</td>
+              <td class="right"><%= od.receive_order_detail_amount %></td>
+              <td><%= od.list_price %></td>
+              <td class="right"><%= od.original_unit_price %></td>
+              <td class="right"><%= od.cost_price %></td>
+              <td><%= od.profit_rate %>%</td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
-    <div class="contents-inner">
-      <div class="gray-wrap">
-        <div class="flex-wrap">
-          <div class="bottom-left-wrap">
-            <dl class="edit-wrap x1">
-              <dt>仕様詳細</dt>
-              <dd>
-                <span class="input w100per">
-                  <input type="text" name="" id="" value="※項目未作成">
-                </span>
-              </dd>
-              <dt>備考</dt>
-              <dd>
-                <span class="input w100per">
-                  <input type="text" name="" id="" value="※項目未作成">
-                </span>
-              </dd>
-              <dt>明細メモ</dt>
-              <dd>
-                <span class="input w100per">
-                  <input type="text" name="" id="" value="※項目未作成">
-                </span>
-              </dd>
-            </dl>
-          </div>
-          <div class="bottom-right-wrap">
-            <div class="yellow-wrap mb-medium">
+    <%= f.fields_for :t_receive_order_details, @detail do |d| %>
+      <div class="contents-inner">
+        <div class="gray-wrap">
+          <div class="flex-wrap">
+            <div class="bottom-left-wrap">
+              <dl class="edit-wrap x1">
+                <dt>仕様詳細</dt>
+                <dd>
+                  <span class="input w100per">
+                    <%= d.text_field :spec_detail %>
+                  </span>
+                </dd>
+                <dt>備考</dt>
+                <dd>
+                  <span class="input w100per">
+                    <%= d.text_field :detail_note %>
+                  </span>
+                </dd>
+                <dt>明細メモ</dt>
+                <dd>
+                  <span class="input w100per">
+                    <%= d.text_field :detail_memo %>
+                  </span>
+                </dd>
+              </dl>
+            </div>
+            <div class="bottom-right-wrap">
+              <div class="yellow-wrap mb-medium">
                 <dl class="edit-wrap x2">
-                    <dt>受注合計金額</dt>
-                    <dd>
-                      <span class="input w200">
-                        <%= f.text_field :receive_order_amount %>
-                      </span>
-                    </dd>
-                    <dt>消費税金額</dt>
-                    <dd>
-                      <span class="input w200">
-                        <%= f.text_field :tax_amount %>
-                      </span>
-                    </dd>
-                    <dt>仕入価/定価</dt>
-                    <dd>
-                        <span class="input w200">
-                            <input class="right" type="text" name="" id="" value="※項目未作成">
-                        </span>
-                    </dd>
-
+                  <dt>受注合計金額</dt>
+                  <dd>
+                    <span class="input w200">
+                      <%= f.text_field :receive_order_amount %>
+                    </span>
+                  </dd>
+                  <dt>消費税金額</dt>
+                  <dd>
+                    <span class="input w200">
+                      <%= f.text_field :tax_amount %>
+                    </span>
+                  </dd>
+                  <dt>仕入価/定価</dt>
+                  <dd>
+                    <span class="input w200">
+                      <input class="right" type="text" name="" id="" value="※項目未作成">
+                    </span>
+                  </dd>
                 </dl>
+              </div>
             </div>
           </div>
+          <ul class="bottom-button-list">
+            <li>
+              <%= f.button :type => "submit", :name => 'submit', :value => 'detail_lineup', :class => 'small' do %>↑<% end %>
+              <%= f.button :type => "submit", :name => 'submit', :value => 'detail_linedown', :class => 'small ml-small' do %>↓<% end %>
+            </li>
+            <li><%= f.button :type => "submit", :name => 'submit', :value => 'detail_addfront' do %>前行追加<% end %></li>
+            <li><%= f.button :type => "submit", :name => 'submit', :value => 'detail_addback' do %>後行追加<% end %></li>
+            <li><%= f.button :type => "submit", :name => 'submit', :value => 'detail_delete' do %>行削除<% end %></li>
+            <li><%= f.button :type => "submit", :name => 'submit', :value => 'detail_copy' do %>行複写<% end %></li>
+            <li><%= f.button :type => "submit", :name => 'submit', :value => 'detail_save' do %>登録<% end %></li>
+            <li><%= link_to orders_path do %><button class="small">戻る</button><% end %></li>
+          </ul>
         </div>
-        <ul class="bottom-button-list">
-          <li><button class="small">↑</button><button class="small ml-small">↓</button></li>
-          <li><button>前行追加</button></li>
-          <li><button>後行追加</button></li>
-          <li><button>行削除</button></li>
-          <li><button>行複写</button></li>
-          <li><button>登録</button></li>
-          <li><button class="small">戻る</button></li>
-        </ul>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>

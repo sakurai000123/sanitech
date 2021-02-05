@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :orders
   post 'orders/upsert', to: 'orders#upsert'
   post 'orders/upsert/:id', to: 'orders#upsert'
+  post 'orders/read', to: 'orders#read' #add id?, change get?
+  post 'orders/pdf', to: 'orders#pdf' #add id, change get?
   patch 'orders/upsert/:id', to: 'orders#upsert'
   # 売掛
   resources :receivables

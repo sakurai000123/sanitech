@@ -1,10 +1,19 @@
 module OrdersHelper
   def get_order_by_id(id)
-    @order = TReceiveOrder.find_by(id: id)
+    return TReceiveOrder.find_by(id: id)
   end
-  
+
   def get_orders
-    @orders = TReceiveOrder.all.order(id: 'ASC')
+    return TReceiveOrder.all.order(id: 'ASC')
+  end
+
+  def get_details(order_id)
+    # return TReceiveOrderDetail.where(receive_order_id: order_id).order(id: 'ASC')
+    return TReceiveOrderDetail.all.order(sort_number: 'ASC')
+  end
+
+  def get_detail_by_id(id)
+    return TReceiveOrderDetail.find_by(id: id)
   end
 
   def aggregate_category_code_list
