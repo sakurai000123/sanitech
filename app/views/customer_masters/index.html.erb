@@ -141,11 +141,49 @@
               </span>
             </dd>
           </dl>
-          <dl class="edit-wrap x2">
-            <dt>振込先</dt>
+          <dl class="edit-wrap x4">
+            <dt>入金口座名</dt>
             <dd>
               <span class="input w-flex">
-                <%#= f.select :deposit_account_id, deposit_accounts_list, include_blank: select_blank %>
+                <%= f.text_field :deposit_account_name %>
+              </span>
+            </dd>
+            <dt>口座区分</dt>
+            <dd>
+              <span class="input w-flex">
+                <%= f.select :deposit_account_category_code, account_category_code_list, include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>口座番号</dt>
+            <dd>
+              <span class="input w-flex">
+                <%= f.text_field :deposit_account_number %>
+              </span>
+            </dd>
+            <dt>口座種別</dt>
+            <dd>
+              <span class="input w-flex">
+                <%= f.select :deposit_account_type_code, account_type_code_list, include_blank: select_blank %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>口座名義</dt>
+            <dd>
+              <span class="input w-flex">
+                <%= f.text_field :deposit_account_holder %>
+              </span>
+            </dd>
+            <dt>銀行コード</dt>
+            <dd>
+              <span class="input w-flex">
+                <%= f.text_field :deposit_bank_code %>
+              </span>
+            </dd>
+            <dt>支店コード</dt>
+            <dd>
+              <span class="input w-flex">
+                <%= f.text_field :deposit_branch_code %>
               </span>
             </dd>
           </dl>

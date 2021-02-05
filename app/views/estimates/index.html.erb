@@ -3,117 +3,120 @@
 <div class="contents-wrap">
   <div class="contents-inner">
     <div class="gray-wrap">
+      <%= form_tag(estimates_search_path,:method => 'post') do %>
       <h1>見積一覧</h1>
-      <div class="top-edit">
-        <dl class="edit-wrap x2">
-          <dt>見積番号</dt>
-          <dd>
-            <span class="input w200"
-              ><input type="text" name="" id="" /></span
-            ><span class="hyphen">　~　</span>
+      <p class="top-caution-text"><%= @stimates.present? ? "#{@stimates.size}件のデータが抽出されました" : "" %></p>
+        <div class="top-edit">
+          <dl class="edit-wrap x2">
+            <dt>見積番号</dt>
+            <dd>
+              <span class="input w200"
+                ><input type="text" name="" id="" /></span
+              ><span class="hyphen">　~　</span>
 
-            <span class="input w200"
-              ><input type="text" name="" id=""
-            /></span>
-          </dd>
-          <dt>見積日</dt>
-          <dd>
-            <span class="input w200"
-              ><input type="text" name="" id="" /></span
-            ><span class="hyphen">　~　</span>
+              <span class="input w200"
+                ><input type="text" name="" id=""
+              /></span>
+            </dd>
+            <dt>見積日</dt>
+            <dd>
+              <span class="input w200"
+                ><input type="text" name="" id="" /></span
+              ><span class="hyphen">　~　</span>
 
-            <span class="input w200"
-              ><input type="text" name="" id=""
-            /></span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>部門</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="001"
-            /></span>
-            <span class="input w-flex not-edit"> 本社 </span>
-          </dd>
-          <dt>担当者</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="00005"
-            /></span>
-            <span class="input w-flex not-edit"> 広瀬愛未 </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>得意先</dt>
-          <dd class="x2">
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value=""
-            /></span>
-            <span class="input w-flex not-edit"></span
-            ><span class="hyphen">　~　</span>
+              <span class="input w200"
+                ><input type="text" name="" id=""
+              /></span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>部門</dt>
+            <dd>
+              <span class="input contents-label"
+                ><input type="text" name="" id="" value="001"
+              /></span>
+              <span class="input w-flex not-edit"> 本社 </span>
+            </dd>
+            <dt>担当者</dt>
+            <dd>
+              <span class="input contents-label"
+                ><input type="text" name="" id="" value="00005"
+              /></span>
+              <span class="input w-flex not-edit"> 広瀬愛未 </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>得意先</dt>
+            <dd class="x2">
+              <span class="input contents-label"
+                ><input type="text" name="" id="" value=""
+              /></span>
+              <span class="input w-flex not-edit"></span
+              ><span class="hyphen">　~　</span>
 
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value=""
-            /></span>
-            <span class="input w-flex not-edit"></span>
-          </dd>
-          <dt>得意先担当者</dt>
-          <dd>
-            <span class="input w-200">
-              <input type="text" name="" id="" />
-            </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>見積合計金額</dt>
-          <dd class="x2">
-            <span class="input w200"
-              ><input type="text" name="" id="" /></span
-            ><span class="hyphen">　~　</span>
+              <span class="input contents-label"
+                ><input type="text" name="" id="" value=""
+              /></span>
+              <span class="input w-flex not-edit"></span>
+            </dd>
+            <dt>得意先担当者</dt>
+            <dd>
+              <span class="input w-200">
+                <input type="text" name="" id="" />
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>見積合計金額</dt>
+            <dd class="x2">
+              <span class="input w200"
+                ><input type="text" name="" id="" /></span
+              ><span class="hyphen">　~　</span>
 
-            <span class="input w200"
-              ><input type="text" name="" id=""
-            /></span>
-          </dd>
-          <dt>仕入先</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value=""
-            /></span>
-            <span class="input w-flex not-edit"></span>
-          </dd>
-          <dt>状況区分</dt>
-          <dd>
-            <span class="input w100per not-edit"> 全て </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>メーカー名</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="" />
-            </span>
-          </dd>
-          <dt>商品名</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="" />
-            </span>
-          </dd>
-          <dt>型番</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="" />
-            </span>
-          </dd>
-          <dt></dt>
-          <dd>
-            <ul class="top-button-list">
-              <li><button>検索</button></li>
-            </ul>
-          </dd>
-        </dl>
-      </div>
+              <span class="input w200"
+                ><input type="text" name="" id=""
+              /></span>
+            </dd>
+            <dt>仕入先</dt>
+            <dd>
+              <span class="input contents-label"
+                ><input type="text" name="" id="" value=""
+              /></span>
+              <span class="input w-flex not-edit"></span>
+            </dd>
+            <dt>状況区分</dt>
+            <dd>
+              <span class="input w100per not-edit"> 全て </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>メーカー名</dt>
+            <dd>
+              <span class="input w100per">
+                <input type="text" name="" id="" value="" />
+              </span>
+            </dd>
+            <dt>商品名</dt>
+            <dd>
+              <span class="input w100per">
+                <input type="text" name="" id="" value="" />
+              </span>
+            </dd>
+            <dt>型番</dt>
+            <dd>
+              <span class="input w100per">
+                <input type="text" name="" id="" value="" />
+              </span>
+            </dd>
+            <dt></dt>
+            <dd>
+              <ul class="top-button-list">
+                <li><button>検索</button></li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="contents-inner">
@@ -145,7 +148,7 @@
       </thead>
       <tbody>
         <% @estimates.each do |estimate| %>
-        <tr class="upper-row">
+        <tr class="upper-row" data-link="<%= edit_estimate_path(estimate.id) %>">
           <td rowspan="2"><%= estimate.id %>-<%= estimate.estimate_branch_number %></td>
           <td><%= estimate.estimate_branch_number %></td>
           <td rowspan="2"><%= estimate.estimate_date %></td>
@@ -228,14 +231,30 @@
           <button>新規作成</button>
         <% end %>
       </li>
-      <li><button>詳細</button></li>
-      <li><button>複製</button></li>
-      <li><button>再見積</button></li>
-      <li><button>受注</button></li>
-      <li><button class="small">無効</button></li>
-      <li><button>状況区分変更</button></li>
-      <li><button>見積修正</button></li>
-      <li><button class="small">戻る</button></li>
+      <% if params[:id].present? %>
+        <li><%= link_to "/estimates/detail/#{params[:id]}", method: :post do %><button>詳細</button><% end %></li>
+        <li><%= link_to "/estimates/copy/#{params[:id]}", method: :post do %><button>複製</button><% end %></li>
+        <li><%= link_to "/estimates/reissue/#{params[:id]}", method: :post do %><button>再見積</button><% end %></li>
+      <% end %>
+      <li><%= link_to estimates_order_path, method: :post do %><button>受注</button><% end %></li>
+      <li><%= link_to estimates_invalid_path, method: :post do %><button class="small">無効</button><% end %></li>
+      <li><%= link_to estimates_category_path, method: :post do %><button>状況区分変更</button><% end %></li>
+      <% if params[:id].present? %>
+        <li><%= link_to "/estimates/revise/#{params[:id]}", method: :post do %><button>見積修正</button><% end %></li>
+      <% end %>
+      <li><%= link_to menus_path do %><button class="small">戻る</button><% end %></li>
     </ul>
   </div>
 </div>
+
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>
+
+<style>
+  tr:hover {
+    background: gray;
+  }
+</style>

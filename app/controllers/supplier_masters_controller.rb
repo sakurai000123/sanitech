@@ -69,7 +69,13 @@ class SupplierMastersController < ApplicationController
       :payment_category_code,
       :close_date_code,
       :payment_day_code,
-      :payment_account_id,
+      :payment_account_name,
+      :payment_account_category_code,
+      :payment_account_number_code,
+      :payment_account_type,
+      :payment_account_holder,
+      :payment_bank_code,
+      :payment_branch_code,
       :note
     )  
   end

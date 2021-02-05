@@ -1,5 +1,5 @@
 <% #エラーメッセージ呼び出し %>
-<%#= render "layouts/messages", errors: @???.errors %>
+<%= render "layouts/messages", flash: flash %>
 <div class="contents-wrap">
     <div class="contents-inner">
         <div class="gray-wrap">
@@ -31,8 +31,8 @@
                         </dd>
                     </dl>
                     <ul class="top-button-list">
-                        <li><button>検索</button></li>
-                        <li><button>クリア</button></li>
+                        <li><%= link_to inquiry_inhouses_search_path, method: :post do %><button>検索</button><% end %></li>
+                        <li><%= link_to inquiry_inhouses_clear_path, method: :post do %><button>クリア</button><% end %></li>
                     </ul>
                 </div>
             </div>
@@ -392,7 +392,7 @@
                                 </span>
                             </dd>
                         </dl>
-                        <div class="login-button"><button class="w200">プレビュー</button></div>
+                        <div class="login-button"><%= link_to inquiry_inhouses_preview_path, method: :post do %><button class="w200" >プレビュー</button><% end %></div>
                     </div>
                 </div>
             </div>

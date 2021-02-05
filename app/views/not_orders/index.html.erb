@@ -1,133 +1,136 @@
 <% #エラーメッセージ呼び出し %>
-<%#= render "layouts/messages", errors: @???.errors %>
+<%= render "layouts/messages", flash: flash %>
 <div class="contents-wrap">
   <div class="contents-inner">
     <div class="gray-wrap">
-      <div class="heading-wrap">
-        <h1>未発注一覧</h1>
-        <p class="top-caution-text">１件のデータが抽出されました</p>
-      </div>
-      <div class="top-edit">
-        <dl class="edit-wrap small">
-          <dt>受注番号</dt>
-          <dd>
-            <span class="input w100"
-              ><input type="text" name="" id="" value="000002" /></span
-            ><span class="hyphen">~</span>
-            <span class="input w100"
-              ><input type="text" name="" id="" value="000002"
-            /></span>
-          </dd>
-          <dt>発注日</dt>
-          <dd>
-            <span class="input w100"
-              ><input type="text" name="" id="" value="2020/10/2" /></span
-            ><span class="hyphen">~</span>
-            <span class="input w100"
-              ><input type="text" name="" id="" value="2020/10/2"
-            /></span>
-          </dd>
-          <dt>部門</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="001"
-            /></span>
-            <span class="input w-flex not-edit"> 本社 </span>
-          </dd>
-          <dt>担当者</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="0005"
-            /></span>
-            <span class="input w200 not-edit"> 広瀬　愛未 </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x2">
-          <dt>納品先</dt>
-          <dd>
-            <span class="input contents-label"
-              ><input type="text" name="" id="" value="000023"
-            /></span>
-            <span class="input w-flex not-edit">株式会社サンテック</span>
-          </dd>
-          <dt>納品先担当者</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="社長　横田" />
-            </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>納品先郵便番号</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="000-0000" />
-            </span>
-          </dd>
-          <dt>納品先都道府県</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="東京" />
-            </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x2">
-          <dt>納品先住所</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="" />
-            </span>
-          </dd>
-
-          <ul class="checkbox-list">
-            <li>
-              直送
-              <input
-                type="checkbox"
-                name=""
-                id=""
-                value=""
-              />（　直送する場合ON　）
-            </li>
-          </ul>
-        </dl>
-        <dl class="edit-wrap x4">
-          <dt>納品先TEL</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="三ツ星　ベルト" />
-            </span>
-          </dd>
-          <dt>納品先FAX</dt>
-          <dd>
-            <span class="input w100per">
-              <input type="text" name="" id="" value="三ツ星　ベルト" />
-            </span>
-          </dd>
-        </dl>
-        <div class="top-edit-flex">
+      <%= form_tag(not_orders_search_path,:method => 'post') do %>
+        <div class="heading-wrap">
+          <h1>未発注一覧</h1>
+          <p class="top-caution-text"><%= @orders.present? ? "#{@orders.size}件のデータが抽出されました" : "" %></p>
+        </div>
+        <div class="top-edit">
           <dl class="edit-wrap small">
-            <dt class="w120">備考欄</dt>
-            <dd class="w-flex ml0">
-              <span class="input w100per">
-                <textarea
-                  value="※エンドレス品での御見積となります。"
-                ></textarea>
+            <dt>受注番号</dt>
+            <dd>
+              <span class="input w100">
+                <%= text_field_tag :id_from %>
+              </span>
+              <span class="hyphen">~</span>
+              <span class="input w100">
+                <%= text_field_tag :id_to %>
+              </span>
+            </dd>
+            <dt>発注日</dt>
+            <dd>
+              <span class="input w100">
+                <%= date_field_tag :send_order_date_from %>
+              </span>
+              <span class="hyphen">~</span>
+              <span class="input w100">
+                <%= date_field_tag :send_order_date_to %>
+              </span>
+            </dd>
+            <dt>部門</dt>
+            <dd>
+              <span class="input w200">
+                <%= select_tag :department_id, options_for_select(departments_list), include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>担当者</dt>
+            <dd>
+              <span class="input w200">
+                <%= select_tag :charge_id, options_for_select(users_list), include_blank: select_blank %>
               </span>
             </dd>
           </dl>
-          <ul class="top-button-list">
-            <li><button>検索</button></li>
-          </ul>
+          <dl class="edit-wrap x2">
+            <dt>納品先</dt>
+            <dd>
+              <span class="input w-flex">
+                <%= select_tag :customer_id, options_for_select(customers_list), include_blank: select_blank %>
+              </span>
+            </dd>
+            <dt>納品先担当者</dt>
+            <dd>
+              <span class="input w100per">
+                <%= text_field_tag :ship_charge_name %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>納品先郵便番号</dt>
+            <dd>
+              <span class="input w100per">
+                <%= text_field_tag :ship_post_code %>
+              </span>
+            </dd>
+            <dt>納品先都道府県</dt>
+            <dd>
+              <span class="input w100per">
+                <%= text_field_tag :ship_prefecture %>
+              </span>
+            </dd>
+            <dt>納品先住所1</dt>
+            <dd>
+              <span class="input w100per">
+                <%= text_field_tag :ship_address1 %>
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x2">
+            <dt>納品先住所2</dt>
+            <dd>
+              <span class="input w100per">
+                <%= text_field_tag :ship_address2 %>
+              </span>
+            </dd>
+
+            <ul class="checkbox-list">
+              <li>
+                直送
+                <%= check_box_tag :send_direct_flag %>
+                （　直送する場合ON　）
+              </li>
+            </ul>
+          </dl>
+          <dl class="edit-wrap x4">
+            <dt>納品先TEL</dt>
+            <dd>
+              <span class="input w100per">
+                <%= text_field_tag :ship_phone_number %>
+              </span>
+            </dd>
+            <dt>納品先FAX</dt>
+            <dd>
+              <span class="input w100per">
+                <%= text_field_tag :ship_fax_number %>
+              </span>
+            </dd>
+          </dl>
+          <div class="top-edit-flex">
+            <dl class="edit-wrap small">
+              <dt class="w120">備考欄</dt>
+              <dd class="w-flex ml0">
+                <span class="input w100per">
+                  <textarea
+                    value="※エンドレス品での御見積となります。"
+                  >※項目未作成。検索に必要？</textarea>
+                </span>
+              </dd>
+            </dl>
+            <ul class="top-button-list">
+              <li><button>検索</button></li>
+            </ul>
+          </div>
         </div>
-      </div>
+      <% end %>  
     </div>
   </div>
   <div class="contents-inner">
     <table>
       <thead>
         <tr>
-          <th>洗濯</th>
+          <th>選択</th>
           <th>受注番号</th>
           <th>内番</th>
           <th>メーカー</th>
@@ -143,24 +146,30 @@
           <th>単価</th>
         </tr>
       </thead>
+      <% if @orders.present? %>
       <tbody>
-        <tr>
-          <td><input type="checkbox" name="" id="" /></td>
-          <td>000002</td>
-          <td>0</td>
-          <td>0008</td>
-          <td>エスケー化研</td>
-          <td>00000000</td>
-          <td>油性塗料住友グリーン</td>
-          <td>SR-425</td>
-          <td>3</td>
-          <td>缶</td>
-          <td class="right">7,000</td>
-          <td class="right">21,000</td>
-          <td>株式会社はがた</td>
-          <td class="right">10,000</td>
-        </tr>
+        <% @orders.each do |order| %>
+          <% order.details.each do |detail| %>
+            <tr>
+              <td><input type="checkbox" name="" id="" /></td>
+              <td><%= detail.receive_order_id %></td>
+              <td><%= detail.line_number %></td>
+              <td><%= detail.maker_id %></td>
+              <td><%= detail.maker_name %></td>
+              <td><%= detail.product_id %></td>
+              <td><%= detail.product_name %></td>
+              <td><%= detail.product_model_number %></td>
+              <td><%= detail.receive_order_quantity %></td>
+              <td><%= detail.product_unit %></td>
+              <td class="right"><%= detail.original_unit_price %></td>
+              <td class="right"><%= detail.receive_order_detail_amount %></td>
+              <td><%= detail.supplier_name %></td>
+              <td class="right"><%= detail.sale_unit_price %></td>
+            </tr>
+          <% end %>
+        <% end %>
       </tbody>
+      <% end %>
     </table>
   </div>
   <div class="contents-inner">
@@ -260,10 +269,10 @@
       </div>
       <div class="page005_bottom_button">
         <ul class="bottom-button-list">
-          <li><button>登録</button></li>
-          <li><button>発注書</button></li>
-          <li><button>発注取り消し</button></li>
-          <li><button class="small">戻る</button></li>
+          <li><%= link_to not_orders_path, method: :post do %><button>登録</button><% end %></li>
+          <li><%= link_to not_orders_path + "/output/#{1}.pdf", target: :_blank do %><button>発注書</button><% end %></li>
+          <li><%= link_to not_orders_cancel_path, method: :post do %><button>発注取り消し</button><% end %></li>
+          <li><%= link_to menus_path do %><button>戻る</button><% end %></li>
         </ul>
       </div>
     </div>
