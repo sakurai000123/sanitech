@@ -10,49 +10,46 @@
           <dl class="edit-wrap x2">
             <dt>見積番号</dt>
             <dd>
-              <span class="input w200"
-                ><input type="text" name="" id="" /></span
-              ><span class="hyphen">　~　</span>
-
-              <span class="input w200"
-                ><input type="text" name="" id=""
-              /></span>
+              <span class="input w200">
+                <%= text_field_tag :id_from %>
+              </span>
+              <span class="hyphen">~</span>
+              <span class="input w200">
+                <%= text_field_tag :id_to %>
+              </span>
             </dd>
             <dt>見積日</dt>
             <dd>
-              <span class="input w200"
-                ><input type="text" name="" id="" /></span
-              ><span class="hyphen">　~　</span>
-
-              <span class="input w200"
-                ><input type="text" name="" id=""
-              /></span>
+              <span class="input w200">
+                <%= date_field_tag :send_estimate_date_from %>
+              </span>
+              <span class="hyphen">~</span>
+              <span class="input w200">
+                <%= date_field_tag :send_estimate_date_to %>
+              </span>
             </dd>
           </dl>
           <dl class="edit-wrap x4">
             <dt>部門</dt>
             <dd>
-              <span class="input contents-label"
-                ><input type="text" name="" id="" value="001"
-              /></span>
-              <span class="input w-flex not-edit"> 本社 </span>
+              <span class="input w200">
+                <%= select_tag :department_id, options_for_select(departments_list), include_blank: select_blank %>
+              </span>
             </dd>
             <dt>担当者</dt>
             <dd>
-              <span class="input contents-label"
-                ><input type="text" name="" id="" value="00005"
-              /></span>
-              <span class="input w-flex not-edit"> 広瀬愛未 </span>
+              <span class="input w200">
+                <%= select_tag :charge_id, options_for_select(users_list), include_blank: select_blank %>
+              </span>
             </dd>
           </dl>
           <dl class="edit-wrap x4">
             <dt>得意先</dt>
             <dd class="x2">
-              <span class="input contents-label"
-                ><input type="text" name="" id="" value=""
-              /></span>
-              <span class="input w-flex not-edit"></span
-              ><span class="hyphen">　~　</span>
+              <span class="input w200">
+                <%= select_tag :charge_id, options_for_select(customers_list), include_blank: select_blank %>
+              </span>
+              <span class="hyphen">~</span>
 
               <span class="input contents-label"
                 ><input type="text" name="" id="" value=""
@@ -61,28 +58,27 @@
             </dd>
             <dt>得意先担当者</dt>
             <dd>
-              <span class="input w-200">
-                <input type="text" name="" id="" />
+              <span class="input w100per">
+                <%= text_field_tag :customer_name %>
               </span>
             </dd>
           </dl>
           <dl class="edit-wrap x4">
             <dt>見積合計金額</dt>
             <dd class="x2">
-              <span class="input w200"
-                ><input type="text" name="" id="" /></span
-              ><span class="hyphen">　~　</span>
-
-              <span class="input w200"
-                ><input type="text" name="" id=""
-              /></span>
+              <span class="input w200">
+                <%= text_field_tag :estimate_amount_from %>
+              </span>
+              <span class="hyphen">~</span>
+              <span class="input w200">
+                <%= text_field_tag :estimate_amount_to %>
+              </span>
             </dd>
             <dt>仕入先</dt>
             <dd>
-              <span class="input contents-label"
-                ><input type="text" name="" id="" value=""
-              /></span>
-              <span class="input w-flex not-edit"></span>
+              <span class="input w200">
+                <%= select_tag :department_id, options_for_select(suppliers_list), include_blank: select_blank %>
+              </span>
             </dd>
             <dt>状況区分</dt>
             <dd>
@@ -92,20 +88,20 @@
           <dl class="edit-wrap x4">
             <dt>メーカー名</dt>
             <dd>
-              <span class="input w100per">
-                <input type="text" name="" id="" value="" />
+              <span class="input w200">
+                <%= text_field_tag :maker_name %>
               </span>
             </dd>
             <dt>商品名</dt>
             <dd>
-              <span class="input w100per">
-                <input type="text" name="" id="" value="" />
+              <span class="input w200">
+                <%= text_field_tag :product_name %>
               </span>
             </dd>
             <dt>型番</dt>
             <dd>
               <span class="input w100per">
-                <input type="text" name="" id="" value="" />
+                <%= text_field_tag :product_model_number %>
               </span>
             </dd>
             <dt></dt>
@@ -226,11 +222,7 @@
   </div>
   <div class="contents-inner">
     <ul class="bottom-button-list">
-      <li>
-        <%= link_to new_estimate_path do %>
-          <button>新規作成</button>
-        <% end %>
-      </li>
+      <li><%= link_to new_estimate_path do %><button>新規作成</button><% end %></li>
       <% if params[:id].present? %>
         <li><%= link_to "/estimates/detail/#{params[:id]}", method: :post do %><button>詳細</button><% end %></li>
         <li><%= link_to "/estimates/copy/#{params[:id]}", method: :post do %><button>複製</button><% end %></li>

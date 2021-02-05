@@ -36,6 +36,14 @@ module ApplicationHelper
     return list
   end
 
+  # 仕入先選択リスト
+  def suppliers_list
+    data_list = MSupplier.all.order(id: 'ASC')
+    list = []
+    data_list.each{ |data| list.push([data.id + ':' + data.supplier_name, data.id]) }
+    return list
+  end
+
   # 支払条件選択リスト
   def payment_category_code_list
     return [['1:現金', '1'], ['2:従来通り', '2']]
@@ -73,7 +81,7 @@ module ApplicationHelper
     data_list.each{ |data| list.push([data.id + ':' + data.estimate_name, data.id]) }
     return list
   end
-  
+
   # 口座区分選択リスト
   def account_category_code_list
     return [['1:銀行', '1'], ['2:ゆうちょ', '2'], ['3:農協', '3']]
@@ -83,5 +91,5 @@ module ApplicationHelper
   def account_type_code_list
     return [['1:普通', '1'], ['2:当座', '2'], ['3:その他', '3']]
   end
-  
+
 end

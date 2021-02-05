@@ -8,14 +8,20 @@ Rails.application.routes.draw do
   # 見積
   resources :estimates, only: [:index, :new, :edit, :create], shallow: true do
     # 見積明細
-    resources :estimate_details, only: [:create]
-    post 'estimate_details/up', to: 'estimate_details#up'
-    post 'estimate_details/down', to: 'estimate_details#down'
-    post 'estimate_details/front_line', to: 'estimate_details#front_line'
-    post 'estimate_details/back_line', to: 'estimate_details#back_line'
-    post 'estimate_details/delete_row', to: 'estimate_details#delete_row'
-    post 'estimate_details/copy_row', to: 'estimate_details#copy_row'
+    resources :estimate_details, only: [:index]
+    post 'detail_create', to: 'estimates#detail_create'
+    post 'up', to: 'estimates#up'
+    post 'down', to: 'estimates#down'
+    post 'front_line', to: 'estimates#front_line'
+    post 'back_line', to: 'estimates#back_line'
+    post 'delete_row', to: 'estimates#delete_row'
+    post 'copy_row', to: 'estimates#copy_row'
   end
+  # post 'estimates/upsert', to: 'estimates#upsert'
+  # post 'estimates/upsert/:id', to: 'estimates#upsert'
+  # patch 'estimates/upsert/:id', to: 'estimates#upsert'
+  get 'estimates/output/:id', to: 'estimates#output'
+  post 'estimates/search', to: 'estimates#search'
   post 'estimates/detail/:id', to: 'estimates#detail'
   post 'estimates/copy/:id', to: 'estimates#copy'
   post 'estimates/reissue/:id', to: 'estimates#reissue'
@@ -23,8 +29,6 @@ Rails.application.routes.draw do
   post 'estimates/order', to: 'estimates#order'
   post 'estimates/invalid', to: 'estimates#invalid'
   post 'estimates/category', to: 'estimates#category'
-  get 'estimates/output/:id', to: 'estimates#output'
-  post 'estimates/search', to: 'estimates#search'
   post 'estimates/read', to: 'estimates#read'
   post 'estimates/sort', to: 'estimates#sort'
   # 受注
@@ -84,5 +88,8 @@ Rails.application.routes.draw do
   resources :shipments
   # 入荷入力
   resources :instocks
+  post 'instocks/search', to: 'instocks#search'
+  post 'instocks/upsert', to: 'instocks#upsert'
+
 
 end

@@ -1,66 +1,68 @@
 <% #エラーメッセージ呼び出し %>
-<%#= render "layouts/messages", errors: @???.errors %>
+<%= render "layouts/messages", flash: flash %>
 <div class="contents-wrap">
   <div class="contents-inner">
     <div class="gray-wrap">
-      <div class="heading-wrap">
-        <h1>入荷入力</h1>
-        <p class="top-caution-text">１件のデータが抽出されました</p>
-      </div>
-      <div class="top-edit">
-        <dl class="edit-wrap small">
-          <dt>発注番号</dt>
-          <dd>
-            <span class="input w200"
-              ><input type="text" name="" id="" /></span
-            ><span class="hyphen">　~　</span>
+      <%= form_tag(instocks_search_path,:method => 'post') do %>
+        <div class="heading-wrap">
+          <h1>入荷入力</h1>
+          <p class="top-caution-text"><%= @purchases.present? ? "#{@purchases.size}件のデータが抽出されました" : "" %></p>
+        </div>
+        <div class="top-edit">
+          <dl class="edit-wrap small">
+            <dt>発注番号</dt>
+            <dd>
+              <span class="input w200"
+                ><input type="text" name="" id="" /></span
+              ><span class="hyphen">　~　</span>
 
-            <span class="input w200"
-              ><input type="text" name="" id=""
-            /></span>
-          </dd>
-          <dt>仕入先</dt>
-          <dd>
-            <span class="input contents-label w100"
-              ><input type="text" name="" id="" value="000000"
-            /></span>
-            <span class="input w200 not-edit"> </span>
-          </dd>
-          <dt>担当者</dt>
-          <dd>
-            <span class="input contents-label w100"
-              ><input type="text" name="" id="" value="0005"
-            /></span>
-            <span class="input w200 not-edit"> 広瀬愛未 </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x2">
-          <dt>受注番号</dt>
-          <dd>
-            <span class="input"
-              ><input type="text" name="" id="" value="000002"
-            /></span>
-          </dd>
-          <dt>型番</dt>
-          <dd>
-            <span class="input w-flex">
-              <input type="text" name="" id="" />
-            </span>
-          </dd>
-        </dl>
-        <dl class="edit-wrap x2">
-          <dt><strong>仕入伝票日付</strong></dt>
-          <dd>
-            <span class="input w150">
-              <input type="text" name="" id="" value="11/1/20" />
-            </span>
-          </dd>
-          <dt></dt>
-          <dd class="top-button-list">
-            <button>検索</button>
-          </dd>
-        </dl>
-      </div>
+              <span class="input w200"
+                ><input type="text" name="" id=""
+              /></span>
+            </dd>
+            <dt>仕入先</dt>
+            <dd>
+              <span class="input contents-label w100"
+                ><input type="text" name="" id="" value="000000"
+              /></span>
+              <span class="input w200 not-edit"> </span>
+            </dd>
+            <dt>担当者</dt>
+            <dd>
+              <span class="input contents-label w100"
+                ><input type="text" name="" id="" value="0005"
+              /></span>
+              <span class="input w200 not-edit"> 広瀬愛未 </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x2">
+            <dt>受注番号</dt>
+            <dd>
+              <span class="input"
+                ><input type="text" name="" id="" value="000002"
+              /></span>
+            </dd>
+            <dt>型番</dt>
+            <dd>
+              <span class="input w-flex">
+                <input type="text" name="" id="" />
+              </span>
+            </dd>
+          </dl>
+          <dl class="edit-wrap x2">
+            <dt><strong>仕入伝票日付</strong></dt>
+            <dd>
+              <span class="input w150">
+                <input type="text" name="" id="" value="11/1/20" />
+              </span>
+            </dd>
+            <dt></dt>
+            <dd class="top-button-list">
+              <button>検索</button>
+            </dd>
+          </dl>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="contents-inner">

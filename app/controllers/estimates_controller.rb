@@ -44,6 +44,27 @@ class EstimatesController < ApplicationController
     end
   end
 
+  def upsert
+    case params[:submit]
+      when 'save' then
+        # @order.save
+
+      when 'detail_save' then
+        # @detail.save
+
+    else
+      raise e
+    end
+
+    render :new
+  end
+
+
+
+
+
+
+
   # 詳細
   def detail
     # flash[:success] = '詳細ボタン'
@@ -96,6 +117,22 @@ class EstimatesController < ApplicationController
     get_estimate_by_id(params[:id]) if params[:id].present?
   end
 
+# --------------------------------------
+# ▼見積明細
+# --------------------------------------
+
+  # 見積明細の読込
+  def read
+    flash[:success] = '読込ボタン'
+    redirect_to new_estimate_path
+  end
+
+  # 見積明細のソート
+  def sort
+    flash[:success] = 'ソートボタン'
+    redirect_to new_estimate_path
+  end
+
   # PDF出力
   def output
     respond_to do |format|
@@ -109,15 +146,45 @@ class EstimatesController < ApplicationController
     end
   end
 
-  # 見積明細の読込
-  def read
-    flash[:success] = '読込ボタン'
+  # 登録
+  def detail_create
+    flash[:success] = '登録ボタン'
     redirect_to new_estimate_path
   end
 
-  # 見積明細のソート
-  def sort
-    flash[:success] = 'ソートボタン'
+  # ↑
+  def up
+    flash[:success] = 'upボタン'
+    redirect_to new_estimate_path
+  end
+
+  # ↓
+  def down
+    flash[:success] = 'downボタン'
+    redirect_to new_estimate_path
+  end
+
+  # 前行追加
+  def front_line
+    flash[:success] = '前行追加ボタン'
+    redirect_to new_estimate_path
+  end
+
+  # 後行追加
+  def back_line
+    flash[:success] = '後行追加ボタン'
+    redirect_to new_estimate_path
+  end
+
+  # 行削除
+  def delete_row
+    flash[:success] = '行削除ボタン'
+    redirect_to new_estimate_path
+  end
+
+  # 行複写
+  def copy_row
+    flash[:success] = '行複写ボタン'
     redirect_to new_estimate_path
   end
 
