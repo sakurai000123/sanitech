@@ -109,6 +109,18 @@ class EstimatesController < ApplicationController
     end
   end
 
+  # 見積明細の読込
+  def read
+    flash[:success] = '読込ボタン'
+    redirect_to new_estimate_path
+  end
+
+  # 見積明細のソート
+  def sort
+    flash[:success] = 'ソートボタン'
+    redirect_to new_estimate_path
+  end
+
   private
   def estimate_params
     params.require(:t_estimate).permit(

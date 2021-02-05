@@ -6,9 +6,15 @@ Rails.application.routes.draw do
   # メニュー
   resources :menus
   # 見積
-  resources :estimates, shallow: true do
+  resources :estimates, only: [:index, :new, :edit, :create], shallow: true do
     # 見積明細
-    resources :estimate_details
+    resources :estimate_details, only: [:create]
+    post 'estimate_details/up', to: 'estimate_details#up'
+    post 'estimate_details/down', to: 'estimate_details#down'
+    post 'estimate_details/front_line', to: 'estimate_details#front_line'
+    post 'estimate_details/back_line', to: 'estimate_details#back_line'
+    post 'estimate_details/delete_row', to: 'estimate_details#delete_row'
+    post 'estimate_details/copy_row', to: 'estimate_details#copy_row'
   end
   post 'estimates/detail/:id', to: 'estimates#detail'
   post 'estimates/copy/:id', to: 'estimates#copy'
@@ -19,6 +25,8 @@ Rails.application.routes.draw do
   post 'estimates/category', to: 'estimates#category'
   get 'estimates/output/:id', to: 'estimates#output'
   post 'estimates/search', to: 'estimates#search'
+  post 'estimates/read', to: 'estimates#read'
+  post 'estimates/sort', to: 'estimates#sort'
   # 受注
   resources :orders
   post 'orders/upsert', to: 'orders#upsert'

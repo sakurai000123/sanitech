@@ -189,11 +189,9 @@
       </dd>
     </dl>
     <ul class="top-button-list">
-      <li>
-        <%= f.button :type => "submit" do %>保存<% end %>
-      </li>
-      <li><button>読込</button></li>
-      <li><button>ソート</button></li>
+      <li><button name="create">保存</button></li>
+      <li><%= link_to estimates_read_path, method: :post do %><button>読込</button><% end %></li>
+      <li><%= link_to estimates_sort_path, method: :post do %><button>ソート</button><% end %></li>
     </ul>
   </div>
 <% end %>
@@ -454,14 +452,14 @@
 </div>
 <ul class="bottom-button-list">
   <li>
-    <button class="small">↑</button
-    ><button class="small ml-small">↓</button>
+    <%= link_to estimate_estimate_details_up_path("#{1}"), method: :post do %><button class="small">↑</button><% end %>
+    <%= link_to estimate_estimate_details_down_path("#{1}"), method: :post do %><button class="small ml-small">↓</button><% end %>
   </li>
-  <li><button>前行追加</button></li>
-  <li><button>後行追加</button></li>
-  <li><button>行削除</button></li>
-  <li><button>行複写</button></li>
-  <li><button>登録</button></li>
+  <li><%= link_to estimate_estimate_details_front_line_path("#{1}"), method: :post do %><button>前行追加</button><% end %></li>
+  <li><%= link_to estimate_estimate_details_back_line_path("#{1}"), method: :post do %><button>後行追加</button><% end %></li>
+  <li><%= link_to estimate_estimate_details_delete_row_path("#{1}"), method: :post do %><button>行削除</button><% end %></li>
+  <li><%= link_to estimate_estimate_details_copy_row_path("#{1}"), method: :post do %><button>行複写</button><% end %></li>
+  <li><%= link_to estimate_estimate_details_path("#{1}"), method: :post do %><button>登録</button><% end %></li>
   <li><%= link_to estimates_path + "/output/#{1}.pdf", target: :_blank do %><button>見積書</button><% end %></li>
   <li><%= link_to estimates_path do %><button class="small">戻る</button><% end %></li>
 </ul>
