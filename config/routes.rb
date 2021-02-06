@@ -40,8 +40,12 @@ Rails.application.routes.draw do
   patch 'orders/upsert/:id', to: 'orders#upsert'
   # 売掛
   resources :receivables
+  post 'receivables/upsert', to: 'receivables#upsert'
+  get 'receivables/output/:id', to: 'receivables#output'
   # 買掛
   resources :payables
+  post 'payables/upsert', to: 'payables#upsert'
+  get 'payables/output/:id', to: 'payables#output'
   # マスタマネジメント
   resources :master_managements
   # 従業員入力
